@@ -15,13 +15,15 @@ datasource db {
 
 model Post {
   id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
   title     String   @db.VarChar(255)
   content   String?
   published Boolean  @default(false)
-  author    User     @relation(fields: [authorId], references: [id])
-  authorId  Int
+  creator   User     @relation("createdPosts", fields: [createdBy], references: [id])
+  createdBy Int
+  createdAt DateTime @default(now())
+  updater   User     @relation("updatedPosts", fields: [updatedBy], references: [id])
+  updatedBy Int
+  updatedAt DateTime @updatedAt
 }
 
 model Profile {
@@ -35,6 +37,7 @@ model User {
   id      Int      @id @default(autoincrement())
   email   String   @unique
   name    String?
-  posts   Post[]
+  createdPosts   Post[] @relation("createdPosts")
+  updatedPosts   Post[] @relation("updatedPosts")
   profile Profile?
 }
