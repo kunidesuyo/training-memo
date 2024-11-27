@@ -13,31 +13,24 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Post {
+model Exercise {
   id        Int      @id @default(autoincrement())
-  title     String   @db.VarChar(255)
-  content   String?
-  published Boolean  @default(false)
-  creator   User     @relation("createdPosts", fields: [createdBy], references: [id])
+  name      String   @db.VarChar(255)
+  weight    Int
+  rep       Int
+  date      DateTime
+  creator   User     @relation("createdExercises", fields: [createdBy], references: [id])
   createdBy Int
   createdAt DateTime @default(now())
-  updater   User     @relation("updatedPosts", fields: [updatedBy], references: [id])
+  updater   User     @relation("updatedExercises", fields: [updatedBy], references: [id])
   updatedBy Int
   updatedAt DateTime @updatedAt
-}
-
-model Profile {
-  id     Int     @id @default(autoincrement())
-  bio    String?
-  user   User    @relation(fields: [userId], references: [id])
-  userId Int     @unique
 }
 
 model User {
   id      Int      @id @default(autoincrement())
   email   String   @unique
   name    String?
-  createdPosts   Post[] @relation("createdPosts")
-  updatedPosts   Post[] @relation("updatedPosts")
-  profile Profile?
+  createdExercises   Exercise[] @relation("createdExercises")
+  updatedExercises   Exercise[] @relation("updatedExercises")
 }
