@@ -11,3 +11,13 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
   });
   return Response.json(exercise);
 }
+
+export async function DELETE(request: Request, { params }: { params: Promise<{ id: string }> }): Promise<Response> {
+  const id = (await params).id;
+  const exercise = await prisma.exercise.delete({
+    where: {
+      id: Number(id),
+    },
+  });
+  return Response.json(exercise);
+}
