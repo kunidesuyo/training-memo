@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -48,6 +49,7 @@ export default function CreateExercise() {
         </div>
         <button type="submit">登録</button>
       </form>
+      <Link href="/exercises">一覧戻る</Link>
     </div>
   );
 }

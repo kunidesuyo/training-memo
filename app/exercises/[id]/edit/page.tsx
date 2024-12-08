@@ -1,4 +1,5 @@
 import Form from '@/app/exercises/[id]/edit/form';
+import Link from 'next/link';
 
 export default async function EditExercise(props: { params: Promise<{ id: string }> }) {
   const params = await (props.params);
@@ -10,6 +11,7 @@ export default async function EditExercise(props: { params: Promise<{ id: string
     <div>
       <h1>エクササイズの編集</h1>
       <Form exercise={exercise}/>
+      <Link href="/exercises">一覧戻る</Link>
     </div>
   );
 }
