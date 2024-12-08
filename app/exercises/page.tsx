@@ -20,6 +20,7 @@ export default async function exercises() {
             <p>{exercise.date}</p>
             <Link href={`/exercises/${exercise.id}`}>詳細</Link>
             <DeleteButton id={exercise.id} />
+            <Link href={`/exercises/${exercise.id}/edit`}>編集</Link>
           </div>
         );
       })}
