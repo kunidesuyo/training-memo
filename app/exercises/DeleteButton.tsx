@@ -1,5 +1,6 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 
 export default function DeleteButton({ id }: { id: number }) {
@@ -17,6 +18,6 @@ export default function DeleteButton({ id }: { id: number }) {
   };
 
   return (
-    <button onClick={handleDelete}>削除</button>
+    <Button onClick={handleDelete}>削除</Button>
   );
 }
