@@ -19,3 +19,28 @@ npx prisma db seed
 npx prisma db push
 ```
 スキーマをDBに反映
+
+## スキーマ定義
+
+```mermaid
+erDiagram
+  workout ||--|{ exercise : has
+  exercise ||--o{ set : has
+  exercise ||--o{ rest : has
+  workout {
+    date date
+  }
+  exercise {
+    string name
+  }
+  set {
+    int weight
+    int rep
+    int order
+  }
+  rest {
+    int time
+    int order
+  }
+```
+
