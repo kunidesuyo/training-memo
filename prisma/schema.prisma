@@ -19,12 +19,8 @@ model Exercise {
   weight    Int
   rep       Int
   date      DateTime
-  creator   User     @relation("createdExercises", fields: [createdBy], references: [id])
-  createdBy Int
-  createdAt DateTime @default(now())
-  updater   User     @relation("updatedExercises", fields: [updatedBy], references: [id])
-  updatedBy Int
-  updatedAt DateTime @updatedAt
+  author    User     @relation("createdExercises", fields: [authorId], references: [id])
+  authorId Int
 }
 
 model User {
@@ -32,5 +28,4 @@ model User {
   email   String   @unique
   name    String?
   createdExercises   Exercise[] @relation("createdExercises")
-  updatedExercises   Exercise[] @relation("updatedExercises")
 }
