@@ -13,19 +13,46 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Exercise {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  weight    Int
-  rep       Int
+model Workout {
+  id        Int        @id @default(autoincrement())
   date      DateTime
-  author    User     @relation("createdExercises", fields: [authorId], references: [id])
-  authorId Int
+  author    User       @relation(fields: [authorId], references: [id])
+  authorId  Int
+  exercises Exercise[]
+}
+
+model Exercise {
+  id                Int     @id @default(autoincrement())
+  name              String  @db.VarChar(255)
+  workoutToExercise Workout @relation(fields: [workoutId], references: [id])
+  workoutId         Int
+  sets              Set[]
+  rests             Rest[]
+  author            User    @relation(fields: [authorId], references: [id])
+  authorId          Int
+}
+
+model Set {
+  id         Int      @id @default(autoincrement())
+  rep        Int
+  weight     String   @db.VarChar(255)
+  order      Int
+  exercise   Exercise @relation(fields: [exerciseId], references: [id])
+  exerciseId Int
+}
+
+model Rest {
+  id         Int      @id @default(autoincrement())
+  time       Int
+  order      Int
+  exercise   Exercise @relation(fields: [exerciseId], references: [id])
+  exerciseId Int
 }
 
 model User {
-  id      Int      @id @default(autoincrement())
-  email   String   @unique
-  name    String?
-  createdExercises   Exercise[] @relation("createdExercises")
+  id               Int        @id @default(autoincrement())
+  email            String     @unique
+  name             String?
+  createdWorkouts  Workout[]
+  createdExercises Exercise[]
 }
