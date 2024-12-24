@@ -15,10 +15,14 @@ datasource db {
 
 model Workout {
   id        Int        @id @default(autoincrement())
-  date      DateTime
+  year      Int
+  month     Int
+  day       Int
   author    User       @relation(fields: [authorId], references: [id])
   authorId  Int
   exercises Exercise[]
+
+  @@unique([year, month, day, authorId])
 }
 
 model Exercise {
