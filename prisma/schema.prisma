@@ -22,6 +22,7 @@ model Workout {
   authorId  Int
   exercises Exercise[]
 
+  // TODO: 複合ユニークキーの命名を行う
   @@unique([year, month, day, authorId])
 }
 

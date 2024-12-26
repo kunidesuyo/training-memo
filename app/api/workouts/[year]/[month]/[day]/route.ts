@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { time } from 'console';
 
 const prisma = new PrismaClient();
 
@@ -6,12 +7,37 @@ export async function GET(request: Request, { params }: { params: Promise<{ year
   const year = (await params).year;
   const month = (await params).month;
   const day = (await params).day;
-  const exercise = await prisma.exercise.findUnique({
+  console.log(month);
+  // TODO: ログインユーザのIDで取得するようにする
+  const currenUserId = 1;
+  const workout = await prisma.workout.findUnique({
     where: {
-      year: parseInt(year),
-      month: parseInt(month),
-      day: parseInt(day),
+      year_month_day_authorId: {
+        year: parseInt(year),
+        month: parseInt(month),
+        day: parseInt(day),
+        authorId: currenUserId,
+      }
+    },
+    include: {
+      exercises: {
+        include: {
+          sets: {
+            select: {
+              weight: true,
+              rep: true,
+              order: true
+            }
+          },
+          rests: {
+            select: {
+              time: true,
+              order: true
+            }
+          }
+        }
+      },
     },
   });
-  return Response.json(exercise);
+  return Response.json(workout);
 }
