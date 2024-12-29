@@ -7,7 +7,9 @@ export default async function workout({ params }: { params: { year: string, mont
     <div>
       <h2>{`${workout.year}年${workout.month}月${workout.day}日のワークアウト`}</h2>
       {workout.exercises.map((exercise) => (
-        <Link href={`/workouts/${year}/${month}/${day}/exercises/${exercise.id}`}>{exercise.name}</Link>
+        <Link 
+          className="text-blue-500 underline"
+          href={`/workouts/${year}/${month}/${day}/exercises/${exercise.id}`}>{exercise.name}</Link>
       ))}
     </div>
   );
