@@ -19,6 +19,7 @@ async function main() {
     data: {
       name: 'スクワット',
       workoutId: workout1.id,
+      order: 1,
       authorId: rootUser.id,
     }
   });
@@ -72,6 +73,7 @@ async function main() {
     data: {
       name: 'デッドリフト',
       workoutId: workout2.id,
+      order: 1,
       authorId: rootUser.id,
     }
   });

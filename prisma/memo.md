@@ -1,14 +1,9 @@
 # Prismaに関するメモ
 ## Prisma CLI
 ```
-npx prisma migrate reset
+npx prisma db push
 ```
-レコードを全て削除する。seederがあれば流してくれる。
-
-```
-npx prisma migrate dev --name {name}
-```
-(timestamp)+{name}でmigrationフォルダを作成(前回からの変更点の差分)
+schemaをDBに反映
 
 ```
 npx prisma db seed
@@ -16,9 +11,17 @@ npx prisma db seed
 ([こちら](https://www.prisma.io/docs/orm/prisma-migrate/workflows/seeding)を参考に作成)シーダーを流してくれる
 
 ```
-npx prisma db push
+npx prisma migrate reset
 ```
-スキーマをDBに反映
+migrationファイルを使ってテーブルを作り直す。レコードを全て削除され、seederがあれば流してくれる。
+
+```
+npx prisma migrate dev --name {name}
+```
+schemaからmigrationファイルを作成
+
+### スキーマ修正した後にやること
+
 
 ## スキーマ定義
 
