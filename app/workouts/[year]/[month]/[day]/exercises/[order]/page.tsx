@@ -1,20 +1,18 @@
 import Link from "next/link";
 
 // TODO: prismaから生成された型を使うように修正
-interface Set {
+type Set = {
   rep: number;
   weight: string;
   order: number;
-}
+};
 
-interface Rest {
+type Rest = {
   time: string;
   order: number;
-}
+};
 
-interface ExerciseItem extends Set, Rest {
-  type: 'set' | 'rest';
-}
+type ExerciseItem = (Set & {type: string}) | (Rest & {type: string});
 
 export default async function exercise({ params }: { params: { year: string, month: string, day: string, order: string } }) {
   const {year, month, day, order} = await params;
@@ -36,19 +34,21 @@ export default async function exercise({ params }: { params: { year: string, mon
       {sortedExerciseItems.map((item) => {
         if (item.type === 'set') {
           setCount++;
+          const setItem = item as Set;
           return (
-            <div className="mb-4 mt-4" key={item.order}>
-              <p>{`セット${setCount}: 重さ: ${item.weight}`}</p>
-              <p>{`回数: ${item.rep}`}</p>
-              <p>{item.order}</p>
+            <div className="mb-4 mt-4" key={setItem.order}>
+              <p>{`セット${setCount}: 重さ: ${setItem.weight}`}</p>
+              <p>{`回数: ${setItem.rep}`}</p>
+              <p>{setItem.order}</p>
             </div>
           );
         } else if (item.type === 'rest') {
           restCount++;
+          const restItem = item as Rest;
           return (
-            <div className="mb-4 mt-4" key={item.order}>
-              <p>{`レスト${restCount}: 時間: ${item.time}`}</p>
-              <p>{item.order}</p>
+            <div className="mb-4 mt-4" key={restItem.order}>
+              <p>{`レスト${restCount}: 時間: ${restItem.time}`}</p>
+              <p>{restItem.order}</p>
             </div>
           );
         } else {
