@@ -54,7 +54,7 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ ye
       order: parseInt(order),
     },
   });
-  const exerciseId = exercise.id;
+  const exerciseId = exercise?.id;
 
   // エクササイズに紐づくセットとレストを洗い替える
   await prisma.$transaction([
@@ -69,7 +69,7 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ ye
       },
     }),
     prisma.set.createMany({
-      data: data.sets.map((set) => {
+      data: data.sets.map((set: any) => {
         return {
           rep: set.rep,
           weight: set.weight,
@@ -79,7 +79,7 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ ye
       }),
     }),
     prisma.rest.createMany({
-      data: data.rests.map((rest) => {
+      data: data.rests.map((rest: any) => {
         return {
           time: rest.time,
           order: rest.order,
