@@ -75,6 +75,15 @@ export default function Form({ exercise, pathParams }:
     setExerciseItems(newExerciseItems);
   }; 
 
+  const deleteItem = (order: number) => {
+    const deletedExerciseItems = exerciseItems.filter((item) => item.order !== order);
+    const newExerciseItems = deletedExerciseItems.map((item, index) => {
+      item.order = index + 1;
+      return item;
+    });
+    setExerciseItems(newExerciseItems);
+  }
+
   return (
     <div>
       <h2>{exercise.name}</h2>
@@ -90,6 +99,7 @@ export default function Form({ exercise, pathParams }:
                 <p>回数: </p>
                 <input type="number" value={item.rep!} onChange={changeRep(item)} />
                 <p>{item.order}</p>
+                <button type="button" className="mx-2 text-blue-500 underline" onClick={() => deleteItem(item.order)}>削除</button>
               </div>
             );
           } else if (item.type === 'REST') {
@@ -100,6 +110,7 @@ export default function Form({ exercise, pathParams }:
                 <p>時間: </p>
                 <input type="number" value={item.time!} onChange={changeTime(item)} />
                 <p>{item.order}</p>
+                <button type="button" className="mx-2 text-blue-500 underline" onClick={() => deleteItem(item.order)}>削除</button>
               </div>
             );
           } else {
