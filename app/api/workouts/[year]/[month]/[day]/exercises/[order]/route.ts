@@ -18,19 +18,15 @@ export async function GET(request: Request, { params }: { params: Promise<{ year
       authorId: currenUserId,
     },
     include: {
-      sets: {
+      items: {
         select: {
+          type: true,
           weight: true,
           rep: true,
-          order: true
-        }
-      },
-      rests: {
-        select: {
           time: true,
           order: true
         }
-      }
+      },
     }
   });
   return Response.json(exercise);
