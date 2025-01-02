@@ -54,34 +54,23 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ ye
 
   // エクササイズに紐づくセットとレストを洗い替える
   await prisma.$transaction([
-    prisma.set.deleteMany({
+    prisma.exerciseItem.deleteMany({
       where: {
         exerciseId,
       },
     }),
-    prisma.rest.deleteMany({
-      where: {
-        exerciseId,
-      },
-    }),
-    prisma.set.createMany({
-      data: data.sets.map((set: any) => {
+    prisma.exerciseItem.createMany({
+      data: data.items.map((item: any) => {
         return {
-          rep: set.rep,
-          weight: set.weight,
-          order: set.order,
+          type: item.type,
+          rep: parseInt(item.rep),
+          weight: parseInt(item.weight),
+          time: parseInt(item.time),
+          order: parseInt(item.order),
           exerciseId,
+          authorId: currenUserId,
         }
       }),
-    }),
-    prisma.rest.createMany({
-      data: data.rests.map((rest: any) => {
-        return {
-          time: rest.time,
-          order: rest.order,
-          exerciseId,
-        }
-      })
     }),
   ]);
   
@@ -90,19 +79,15 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ ye
       id: exerciseId,
     },
     include: {
-      sets: {
+      items: {
         select: {
+          type: true,
           weight: true,
           rep: true,
-          order: true
-        }
-      },
-      rests: {
-        select: {
           time: true,
           order: true
         }
-      }
+      },
     }
   });
 
