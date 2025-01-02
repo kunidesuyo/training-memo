@@ -28,38 +28,39 @@ model Workout {
 
 // ユニーク制約追加
 model Exercise {
-  id        Int     @id @default(autoincrement())
-  name      String  @db.VarChar(255)
-  workout   Workout @relation(fields: [workoutId], references: [id])
+  id        Int            @id @default(autoincrement())
+  name      String         @db.VarChar(255)
+  workout   Workout        @relation(fields: [workoutId], references: [id])
   workoutId Int
   order     Int
-  sets      Set[]
-  rests     Rest[]
-  author    User    @relation(fields: [authorId], references: [id])
+  items     ExerciseItem[]
+  author    User           @relation(fields: [authorId], references: [id])
   authorId  Int
 }
 
-model Set {
-  id         Int      @id @default(autoincrement())
-  rep        Int
-  weight     String   @db.VarChar(255)
+model ExerciseItem {
+  id         Int              @id @default(autoincrement())
+  type       ExerciseItemType
+  weight     Int?
+  rep        Int?
+  time       Int?
   order      Int
-  exercise   Exercise @relation(fields: [exerciseId], references: [id])
+  exercise   Exercise         @relation(fields: [exerciseId], references: [id])
   exerciseId Int
+  author     User             @relation(fields: [authorId], references: [id])
+  authorId   Int
 }
 
-model Rest {
-  id         Int      @id @default(autoincrement())
-  time       Int
-  order      Int
-  exercise   Exercise @relation(fields: [exerciseId], references: [id])
-  exerciseId Int
+enum ExerciseItemType {
+  SET
+  REST
 }
 
 model User {
-  id               Int        @id @default(autoincrement())
-  email            String     @unique
-  name             String?
-  Workouts  Workout[]
-  Exercises Exercise[]
+  id            Int            @id @default(autoincrement())
+  email         String         @unique
+  name          String?
+  Workouts      Workout[]
+  Exercises     Exercise[]
+  ExerciseItems ExerciseItem[]
 }

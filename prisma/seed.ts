@@ -23,42 +23,52 @@ async function main() {
       authorId: rootUser.id,
     }
   });
-  const set1_1 = await prisma.set.create({
+  const set1_1 = await prisma.exerciseItem.create({
     data: {
-      weight: '60',
+      type: 'SET',
+      weight: 60,
       rep: 10,
       order: 1,
       exerciseId: exercise1_1.id,
+      authorId: rootUser.id,
     }
   });
-  const rest1_1 = await prisma.rest.create({
+  const rest1_1 = await prisma.exerciseItem.create({
     data: {
+      type: 'REST',
       time: 120,
       order: 2,
       exerciseId: exercise1_1.id,
+      authorId: rootUser.id,
     }
   });
-  const set1_2 = await prisma.set.create({
+  const set1_2 = await prisma.exerciseItem.create({
     data: {
-      weight: '80',
+      type: 'SET',
+      weight: 80,
       rep: 10,
       order: 3,
       exerciseId: exercise1_1.id,
+      authorId: rootUser.id,
     }
   });
-  const rest1_2 = await prisma.rest.create({
+  const rest1_2 = await prisma.exerciseItem.create({
     data: {
+      type: 'REST',
       time: 120,
       order: 4,
       exerciseId: exercise1_1.id,
+      authorId: rootUser.id,
     }
   });
-  const set1_3 = await prisma.set.create({
+  const set1_3 = await prisma.exerciseItem.create({
     data: {
-      weight: '100',
+      type: 'SET',
+      weight: 100,
       rep: 10,
       order: 5,
       exerciseId: exercise1_1.id,
+      authorId: rootUser.id,
     }
   });
   const workout2 = await prisma.workout.create({
@@ -77,42 +87,52 @@ async function main() {
       authorId: rootUser.id,
     }
   });
-  const set2_1 = await prisma.set.create({
+  const set2_1 = await prisma.exerciseItem.create({
     data: {
-      weight: '80',
+      type: 'SET',
+      weight: 80,
       rep: 10,
       order: 1,
       exerciseId: exercise2_1.id,
+      authorId: rootUser.id,
     }
   });
-  const rest2_1 = await prisma.rest.create({
+  const rest2_1 = await prisma.exerciseItem.create({
     data: {
+      type: 'REST',
       time: 120,
       order: 2,
       exerciseId: exercise2_1.id,
+      authorId: rootUser.id,
     }
   });
-  const set2_2 = await prisma.set.create({
+  const set2_2 = await prisma.exerciseItem.create({
     data: {
-      weight: '100',
+      type: 'SET',
+      weight: 100,
       rep: 10,
       order: 3,
       exerciseId: exercise2_1.id,
+      authorId: rootUser.id,
     }
   });
-  const rest2_2 = await prisma.rest.create({
+  const rest2_2 = await prisma.exerciseItem.create({
     data: {
+      type: 'REST',
       time: 120,
       order: 4,
       exerciseId: exercise2_1.id,
+      authorId: rootUser.id,
     }
   });
-  const set2_3 = await prisma.set.create({
+  const set2_3 = await prisma.exerciseItem.create({
     data: {
-      weight: '120',
+      type: 'SET',
+      weight: 120,
       rep: 10,
       order: 5,
       exerciseId: exercise2_1.id,
+      authorId: rootUser.id,
     }
   });
 }
