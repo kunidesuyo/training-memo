@@ -14,9 +14,6 @@ export default async function exercise({ params }: { params: { year: string, mon
   const {year, month, day, order} = await params;
   const exercise = await fetch(`http://localhost:3000/api/workouts/${year}/${month}/${day}/exercises/${order}`).then((res) => res.json());
 
-  let setCount = 0;
-  let restCount = 0;
-
   return (
     <div>
       <Form exercise={exercise} pathParams={await params}/>
