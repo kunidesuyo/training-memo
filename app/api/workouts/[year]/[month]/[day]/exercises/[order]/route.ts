@@ -2,6 +2,14 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+export type ExerciseItem = {
+  type: "WORK" | "REST";
+  weight: number | null;
+  rep: number | null;
+  time: number | null;
+  order: number;
+};
+
 export async function GET(request: Request, { params }: { params: Promise<{ year: string, month: string, day: string, order: string }> }): Promise<Response> {
   const { year, month, day, order } = await params;
   // TODO: ログインユーザのIDで取得するようにする
@@ -63,13 +71,13 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ ye
       },
     }),
     prisma.exerciseItem.createMany({
-      data: data.items.map((item: any) => {
+      data: data.items.map((item: ExerciseItem) => {
         return {
           type: item.type,
-          rep: parseInt(item.rep),
-          weight: parseInt(item.weight),
-          time: parseInt(item.time),
-          order: parseInt(item.order),
+          rep: item.rep,
+          weight: item.weight,
+          time: item.time,
+          order: item.order,
           exerciseId,
           authorId: currenUserId,
         }
@@ -96,4 +104,3 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ ye
 
   return Response.json(updatedExercise);
 }
-  

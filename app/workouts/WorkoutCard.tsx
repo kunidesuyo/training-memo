@@ -1,15 +1,26 @@
-export default function WorkoutCard({ workout }: any) {
-  const date = new Date(workout.date);
-  console.log(date);
-  const formattedDate = `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
+type Workout = {
+  id: number;
+  year: number;
+  month: number;
+  day: number;
+  exercises: Exercise[];
+}
+
+type Exercise = {
+  id: number;
+  name: string;
+}
+
+export default function WorkoutCard({ workout }: { workout: Workout }) {
+  const date = `${workout.year}年${workout.month + 1}月${workout.day}日`;
   return (
     <div>
-      <h2>{formattedDate}のワークアウト</h2>
+      <h2>{date}のワークアウト</h2>
       <p>ID: {workout.id}</p>
       <p>概要</p>
-      {workout.exercises.map((exercise: any, index: number) => {
+      {workout.exercises.map((exercise: Exercise, index: number) => {
         return (
-          <p>{index+1}: {exercise.name}</p>
+          <p key={index}>{index+1}: {exercise.name}</p>
         );
       })}
     </div>
