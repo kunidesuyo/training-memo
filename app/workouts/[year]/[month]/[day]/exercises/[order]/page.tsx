@@ -4,9 +4,9 @@ import Link from "next/link";
 // TODO: prismaから生成された型を使うように修正
 export type ExerciseItem = {
   type: "SET" | "REST";
-  weight: number;
-  rep: number;
-  time: number;
+  weight: number | null;
+  rep: number | null;
+  time: number | null;
   order: number;
 };
 

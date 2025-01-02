@@ -63,6 +63,18 @@ export default function Form({ exercise, pathParams }:
     }
   };
 
+  const addSet = () => {
+    const newOrder = exerciseItems.length + 1;
+    const newExerciseItems: ExerciseItem[] = [...exerciseItems, { type: 'SET', weight: 0, rep: 0, time: null, order: newOrder }];
+    setExerciseItems(newExerciseItems);
+  };
+
+  const addRest = () => {
+    const newOrder = exerciseItems.length + 1;
+    const newExerciseItems: ExerciseItem[] = [...exerciseItems, { type: 'REST', weight: null, rep: null, time: 0, order: newOrder }];
+    setExerciseItems(newExerciseItems);
+  }; 
+
   return (
     <div>
       <h2>{exercise.name}</h2>
@@ -74,9 +86,9 @@ export default function Form({ exercise, pathParams }:
               <div className="mb-4 mt-4" key={item.order}>
                 <p>{`セット${setCount}`}</p>
                 <p>重さ: </p>
-                <input type="number" value={item.weight} onChange={changeWeight(item)} />
+                <input type="number" value={item.weight!} onChange={changeWeight(item)} />
                 <p>回数: </p>
-                <input type="number" value={item.rep} onChange={changeRep(item)} />
+                <input type="number" value={item.rep!} onChange={changeRep(item)} />
                 <p>{item.order}</p>
               </div>
             );
@@ -86,7 +98,7 @@ export default function Form({ exercise, pathParams }:
               <div className="mb-4 mt-4" key={item.order}>
                 <p>{`レスト${restCount}`}</p>
                 <p>時間: </p>
-                <input type="number" value={item.time} onChange={changeTime(item)} />
+                <input type="number" value={item.time!} onChange={changeTime(item)} />
                 <p>{item.order}</p>
               </div>
             );
@@ -94,9 +106,9 @@ export default function Form({ exercise, pathParams }:
             return null;
           }
         })}
-        <button type="button">セット追加</button>
-        <button type="button">レスト追加</button>
-        <button type="submit">更新</button>
+        <button type="button" className="mx-2 text-blue-500 underline" onClick={addSet}>セット追加</button>
+        <button type="button" className="mx-2 text-blue-500 underline" onClick={addRest}>レスト追加</button>
+        <button type="submit" className="mx-2 text-blue-500 underline" >更新</button>
       </form>
     </div>
   );
