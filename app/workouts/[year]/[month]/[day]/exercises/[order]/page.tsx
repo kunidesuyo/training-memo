@@ -1,7 +1,8 @@
+import Form from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/form";
 import Link from "next/link";
 
 // TODO: prismaから生成された型を使うように修正
-type ExerciseItem = {
+export type ExerciseItem = {
   type: "SET" | "REST";
   weight: number;
   rep: number;
@@ -18,29 +19,7 @@ export default async function exercise({ params }: { params: { year: string, mon
 
   return (
     <div>
-      <h2>{exercise.name}</h2>
-      {exercise.items.map((item: ExerciseItem) => {
-        if (item.type === 'SET') {
-          setCount++;
-          return (
-            <div className="mb-4 mt-4" key={item.order}>
-              <p>{`セット${setCount}: 重さ: ${item.weight}`}</p>
-              <p>{`回数: ${item.rep}`}</p>
-              <p>{item.order}</p>
-            </div>
-          );
-        } else if (item.type === 'REST') {
-          restCount++;
-          return (
-            <div className="mb-4 mt-4" key={item.order}>
-              <p>{`レスト${restCount}: 時間: ${item.time}`}</p>
-              <p>{item.order}</p>
-            </div>
-          );
-        } else {
-          return null;
-        }
-      })}
+      <Form exercise={exercise} pathParams={await params}/>
       <Link 
         className="text-blue-500 underline"
         href={`/workouts/${year}/${month}/${day}`}>戻る</Link>
