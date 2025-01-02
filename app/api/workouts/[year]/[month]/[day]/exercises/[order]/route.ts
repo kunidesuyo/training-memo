@@ -25,7 +25,10 @@ export async function GET(request: Request, { params }: { params: Promise<{ year
           rep: true,
           time: true,
           order: true
-        }
+        },
+        orderBy: {
+          order: 'asc',
+        },
       },
     }
   });
