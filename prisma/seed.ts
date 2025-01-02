@@ -25,7 +25,7 @@ async function main() {
   });
   const set1_1 = await prisma.exerciseItem.create({
     data: {
-      type: 'SET',
+      type: 'WORK',
       weight: 60,
       rep: 10,
       order: 1,
@@ -44,7 +44,7 @@ async function main() {
   });
   const set1_2 = await prisma.exerciseItem.create({
     data: {
-      type: 'SET',
+      type: 'WORK',
       weight: 80,
       rep: 10,
       order: 3,
@@ -63,7 +63,7 @@ async function main() {
   });
   const set1_3 = await prisma.exerciseItem.create({
     data: {
-      type: 'SET',
+      type: 'WORK',
       weight: 100,
       rep: 10,
       order: 5,
@@ -89,7 +89,7 @@ async function main() {
   });
   const set2_1 = await prisma.exerciseItem.create({
     data: {
-      type: 'SET',
+      type: 'WORK',
       weight: 80,
       rep: 10,
       order: 1,
@@ -108,7 +108,7 @@ async function main() {
   });
   const set2_2 = await prisma.exerciseItem.create({
     data: {
-      type: 'SET',
+      type: 'WORK',
       weight: 100,
       rep: 10,
       order: 3,
@@ -127,7 +127,7 @@ async function main() {
   });
   const set2_3 = await prisma.exerciseItem.create({
     data: {
-      type: 'SET',
+      type: 'WORK',
       weight: 120,
       rep: 10,
       order: 5,

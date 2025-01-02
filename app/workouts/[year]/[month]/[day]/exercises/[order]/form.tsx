@@ -11,7 +11,7 @@ export default function Form({ exercise, pathParams }:
   const { year, month, day, order } = pathParams;
   const router = useRouter();
 
-  let setCount = 0;
+  let workCount = 0;
   let restCount = 0;
 
   const changeWeight = (item: ExerciseItem) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,9 +63,9 @@ export default function Form({ exercise, pathParams }:
     }
   };
 
-  const addSet = () => {
+  const addWork = () => {
     const newOrder = exerciseItems.length + 1;
-    const newExerciseItems: ExerciseItem[] = [...exerciseItems, { type: 'SET', weight: 0, rep: 0, time: null, order: newOrder }];
+    const newExerciseItems: ExerciseItem[] = [...exerciseItems, { type: 'WORK', weight: 0, rep: 0, time: null, order: newOrder }];
     setExerciseItems(newExerciseItems);
   };
 
@@ -80,11 +80,11 @@ export default function Form({ exercise, pathParams }:
       <h2>{exercise.name}</h2>
       <form onSubmit={handleSubmit}>
         {exerciseItems.map((item: ExerciseItem) => {
-          if (item.type === 'SET') {
-            setCount++;
+          if (item.type === 'WORK') {
+            workCount++;
             return (
               <div className="mb-4 mt-4" key={item.order}>
-                <p>{`セット${setCount}`}</p>
+                <p>{`ワーク${workCount}`}</p>
                 <p>重さ: </p>
                 <input type="number" value={item.weight!} onChange={changeWeight(item)} />
                 <p>回数: </p>
@@ -106,7 +106,7 @@ export default function Form({ exercise, pathParams }:
             return null;
           }
         })}
-        <button type="button" className="mx-2 text-blue-500 underline" onClick={addSet}>セット追加</button>
+        <button type="button" className="mx-2 text-blue-500 underline" onClick={addWork}>ワーク追加</button>
         <button type="button" className="mx-2 text-blue-500 underline" onClick={addRest}>レスト追加</button>
         <button type="submit" className="mx-2 text-blue-500 underline" >更新</button>
       </form>

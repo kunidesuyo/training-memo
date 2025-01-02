@@ -55,7 +55,7 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ ye
   });
   const exerciseId = exercise?.id;
 
-  // エクササイズに紐づくセットとレストを洗い替える
+  // エクササイズに紐づく要素を洗い替える
   await prisma.$transaction([
     prisma.exerciseItem.deleteMany({
       where: {

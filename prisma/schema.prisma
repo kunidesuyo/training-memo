@@ -52,7 +52,7 @@ model ExerciseItem {
 }
 
 enum ExerciseItemType {
-  SET
+  WORK
   REST
 }
 
