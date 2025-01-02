@@ -94,6 +94,8 @@ export default function Form({ exercise, pathParams }:
             return null;
           }
         })}
+        <button type="button">セット追加</button>
+        <button type="button">レスト追加</button>
         <button type="submit">更新</button>
       </form>
     </div>
