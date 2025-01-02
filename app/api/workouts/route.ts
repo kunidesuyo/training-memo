@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -7,7 +7,7 @@ export async function GET(): Promise<Response> {
     include: {
       exercises: {
         select: {
-          name: true
+          name: true,
         },
       },
     },

@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -10,7 +10,19 @@ export type ExerciseItem = {
   order: number;
 };
 
-export async function GET(request: Request, { params }: { params: Promise<{ year: string, month: string, day: string, order: string }> }): Promise<Response> {
+export async function GET(
+  request: Request,
+  {
+    params,
+  }: {
+    params: Promise<{
+      year: string;
+      month: string;
+      day: string;
+      order: string;
+    }>;
+  }
+): Promise<Response> {
   const { year, month, day, order } = await params;
   // TODO: ログインユーザのIDで取得するようにする
   const currenUserId = 1;
@@ -32,18 +44,30 @@ export async function GET(request: Request, { params }: { params: Promise<{ year
           weight: true,
           rep: true,
           time: true,
-          order: true
+          order: true,
         },
         orderBy: {
-          order: 'asc',
+          order: "asc",
         },
       },
-    }
+    },
   });
   return Response.json(exercise);
 }
 
-export async function PATCH(request: Request, { params }: { params: Promise<{ year: string, month: string, day: string, order: string }> }): Promise<Response> {
+export async function PATCH(
+  request: Request,
+  {
+    params,
+  }: {
+    params: Promise<{
+      year: string;
+      month: string;
+      day: string;
+      order: string;
+    }>;
+  }
+): Promise<Response> {
   const { year, month, day, order } = await params;
   // TODO: ログインユーザのIDで取得するようにする
   const currenUserId = 1;
@@ -80,11 +104,11 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ ye
           order: item.order,
           exerciseId,
           authorId: currenUserId,
-        }
+        };
       }),
     }),
   ]);
-  
+
   const updatedExercise = await prisma.exercise.findFirst({
     where: {
       id: exerciseId,
@@ -96,10 +120,10 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ ye
           weight: true,
           rep: true,
           time: true,
-          order: true
-        }
+          order: true,
+        },
       },
-    }
+    },
   });
 
   return Response.json(updatedExercise);

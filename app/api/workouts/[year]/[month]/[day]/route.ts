@@ -1,8 +1,11 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export async function GET(request: Request, { params }: { params: Promise<{ year: string, month: string, day: string}> }): Promise<Response> {
+export async function GET(
+  request: Request,
+  { params }: { params: Promise<{ year: string; month: string; day: string }> }
+): Promise<Response> {
   const year = (await params).year;
   const month = (await params).month;
   const day = (await params).day;
@@ -16,7 +19,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ year
         month: parseInt(month),
         day: parseInt(day),
         authorId: currenUserId,
-      }
+      },
     },
     include: {
       exercises: {
@@ -27,13 +30,13 @@ export async function GET(request: Request, { params }: { params: Promise<{ year
               weight: true,
               rep: true,
               time: true,
-              order: true
+              order: true,
             },
             orderBy: {
-              order: 'asc',
+              order: "asc",
             },
           },
-        }
+        },
       },
     },
   });

@@ -10,16 +10,25 @@ export type ExerciseItem = {
   order: number;
 };
 
-export default async function exercise({ params }: { params: { year: string, month: string, day: string, order: string } }) {
-  const {year, month, day, order} = await params;
-  const exercise = await fetch(`http://localhost:3000/api/workouts/${year}/${month}/${day}/exercises/${order}`).then((res) => res.json());
+export default async function exercise({
+  params,
+}: {
+  params: { year: string; month: string; day: string; order: string };
+}) {
+  const { year, month, day, order } = await params;
+  const exercise = await fetch(
+    `http://localhost:3000/api/workouts/${year}/${month}/${day}/exercises/${order}`
+  ).then((res) => res.json());
 
   return (
     <div>
-      <Form exercise={exercise} pathParams={await params}/>
-      <Link 
+      <Form exercise={exercise} pathParams={await params} />
+      <Link
         className="text-blue-500 underline"
-        href={`/workouts/${year}/${month}/${day}`}>戻る</Link>
+        href={`/workouts/${year}/${month}/${day}`}
+      >
+        戻る
+      </Link>
     </div>
   );
 }
