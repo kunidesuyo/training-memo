@@ -1,4 +1,4 @@
-import WorkoutCard from "@/app/workouts/WorkouCard";
+import WorkoutCard from "@/app/workouts/WorkoutCard";
 import Link from "next/link";
 
 export default async function workouts() {
