@@ -1,14 +1,40 @@
-import { PrismaClient } from "@prisma/client";
+import { Prisma, PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export type ExerciseItem = {
-  type: "WORK" | "REST";
-  weight: number | null;
-  rep: number | null;
-  time: number | null;
-  order: number;
-};
+// export type ExerciseItem = {
+//   type: "WORK" | "REST";
+//   weight: number | null;
+//   rep: number | null;
+//   time: number | null;
+//   order: number;
+// };
+
+const exerciseWithItems = Prisma.validator<Prisma.ExerciseDefaultArgs>()({
+  select: {
+    id: true,
+    name: true,
+    workoutId: true,
+    order: true,
+    items: {
+      select: {
+        type: true,
+        weight: true,
+        rep: true,
+        time: true,
+        order: true,
+      },
+      orderBy: {
+        order: "asc",
+      },
+    },
+  },
+});
+
+export type ExerciseWithItems = Prisma.ExerciseGetPayload<
+  typeof exerciseWithItems
+>;
+export type ExerciseItem = ExerciseWithItems["items"][number];
 
 export async function GET(
   request: Request,
@@ -37,20 +63,7 @@ export async function GET(
       order: parseInt(order),
       authorId: currenUserId,
     },
-    include: {
-      items: {
-        select: {
-          type: true,
-          weight: true,
-          rep: true,
-          time: true,
-          order: true,
-        },
-        orderBy: {
-          order: "asc",
-        },
-      },
-    },
+    select: exerciseWithItems.select,
   });
   return Response.json(exercise);
 }
