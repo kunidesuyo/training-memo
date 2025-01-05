@@ -13,7 +13,7 @@ npx prisma db seed
 ```
 npx prisma generate
 ```
-
+プリズマクライアント生成
 
 ```
 npx prisma migrate dev --name {name}
