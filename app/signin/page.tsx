@@ -1,6 +1,7 @@
-import { signIn, signOut } from "@/auth"
+import { auth, signIn, signOut } from "@/auth"
  
-export default function SignIn() {
+export default async function SignIn() {
+  const session = await auth();
   return (
     <div>
       <form
@@ -19,6 +20,7 @@ export default function SignIn() {
       >
         <button type="submit">Sign Out</button>
       </form>
+      <pre>{JSON.stringify(session, null, 2)}</pre>
     </div>
   )
 } 
