@@ -1,6 +1,6 @@
 "use client";
 
-import { ExerciseItem } from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/page";
+import { ExerciseItem } from "@/app/api/workouts/[year]/[month]/[day]/exercises/[order]/route";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 

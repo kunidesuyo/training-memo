@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import "./globals.css";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Next.js",
@@ -13,7 +14,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <header>
+          <Link href={"/api/auth/signout"}>ログアウト</Link>
+        </header>
+        {children}
+      </body>
     </html>
   );
 }
