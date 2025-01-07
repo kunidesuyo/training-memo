@@ -3,6 +3,15 @@
 import { ExerciseItem } from "@/app/api/workouts/[year]/[month]/[day]/exercises/[order]/route";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { z } from "zod";
+
+const ExerciseItemSchema = z.object({
+  order: z.number(),
+  time: z.number().nullable(),
+  type: z.enum(["WORK", "REST"]),
+  weight: z.number().nullable(),
+  rep: z.number().nullable(),
+});
 
 export default function Form({
   exercise,
@@ -56,6 +65,13 @@ export default function Form({
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    try {
+      ExerciseItemSchema.array().parse(exerciseItems);
+    } catch (e) {
+      alert(`Invalid input ${e}`);
+      return;
+    }
+    console.log('valid input');
     const response = await fetch(
       `http://localhost:3000/api/workouts/${year}/${month}/${day}/exercises/${order}`,
       {
