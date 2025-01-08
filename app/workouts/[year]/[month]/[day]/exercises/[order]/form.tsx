@@ -121,30 +121,26 @@ export default function Form({
     <div>
       <h2>{exercise.name}</h2>
       <form onSubmit={handleSubmit}>
-        {exerciseItems.map((item: ExerciseItem) => {
-          if (item.type === "WORK") {
-            return (
-              <WorkItem
-                key={item.order}
-                item={item}
-                changeWeight={changeWeight}
-                changeRep={changeRep}
-                deleteItem={deleteItem}
-              />
-            );
-          } else if (item.type === "REST") {
-            return (
-              <RestItem
-                key={item.order}
-                item={item}
-                changeTime={changeTime}
-                deleteItem={deleteItem}
-              />
-            );
-          } else {
-            return null;
-          }
-        })}
+      {exerciseItems.map((item: ExerciseItem) => {
+        return item.type === "WORK" ? (
+          <WorkItem
+            key={item.order}
+            item={item}
+            changeWeight={changeWeight}
+            changeRep={changeRep}
+            deleteItem={deleteItem}
+          />
+        ) : item.type === "REST" ? (
+          <RestItem
+            key={item.order}
+            item={item}
+            changeTime={changeTime}
+            deleteItem={deleteItem}
+          />
+        ) : (
+          null
+        );
+      })}
         <button
           type="button"
           className="mx-2 text-blue-500 underline"
