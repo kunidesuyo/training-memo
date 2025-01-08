@@ -26,11 +26,12 @@ export default function Form({
   const { year, month, day, order } = pathParams;
   const router = useRouter();
 
-  const changeWeight =
-    (item: ExerciseItem) => (event: React.ChangeEvent<HTMLInputElement>) => {
+  const updateExerciseItem =
+    (item: ExerciseItem, key: keyof ExerciseItem) =>
+    (event: React.ChangeEvent<HTMLInputElement>) => {
       const newExerciseItems = exerciseItems.map((exerciseItem) => {
         if (exerciseItem.order === item.order) {
-          return { ...exerciseItem, weight: Number(event.target.value) };
+          return { ...exerciseItem, [key]: Number(event.target.value) };
         } else {
           return exerciseItem;
         }
@@ -38,29 +39,10 @@ export default function Form({
       setExerciseItems(newExerciseItems);
     };
 
-  const changeRep =
-    (item: ExerciseItem) => (event: React.ChangeEvent<HTMLInputElement>) => {
-      const newExerciseItems = exerciseItems.map((exerciseItem) => {
-        if (exerciseItem.order === item.order) {
-          return { ...exerciseItem, rep: Number(event.target.value) };
-        } else {
-          return exerciseItem;
-        }
-      });
-      setExerciseItems(newExerciseItems);
-    };
-
-  const changeTime =
-    (item: ExerciseItem) => (event: React.ChangeEvent<HTMLInputElement>) => {
-      const newExerciseItems = exerciseItems.map((exerciseItem) => {
-        if (exerciseItem.order === item.order) {
-          return { ...exerciseItem, time: Number(event.target.value) };
-        } else {
-          return exerciseItem;
-        }
-      });
-      setExerciseItems(newExerciseItems);
-    };
+  const changeWeight = (item: ExerciseItem) =>
+    updateExerciseItem(item, "weight");
+  const changeRep = (item: ExerciseItem) => updateExerciseItem(item, "rep");
+  const changeTime = (item: ExerciseItem) => updateExerciseItem(item, "time");
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -121,26 +103,24 @@ export default function Form({
     <div>
       <h2>{exercise.name}</h2>
       <form onSubmit={handleSubmit}>
-      {exerciseItems.map((item: ExerciseItem) => {
-        return item.type === "WORK" ? (
-          <WorkItem
-            key={item.order}
-            item={item}
-            changeWeight={changeWeight}
-            changeRep={changeRep}
-            deleteItem={deleteItem}
-          />
-        ) : item.type === "REST" ? (
-          <RestItem
-            key={item.order}
-            item={item}
-            changeTime={changeTime}
-            deleteItem={deleteItem}
-          />
-        ) : (
-          null
-        );
-      })}
+        {exerciseItems.map((item: ExerciseItem) => {
+          return item.type === "WORK" ? (
+            <WorkItem
+              key={item.order}
+              item={item}
+              changeWeight={changeWeight}
+              changeRep={changeRep}
+              deleteItem={deleteItem}
+            />
+          ) : item.type === "REST" ? (
+            <RestItem
+              key={item.order}
+              item={item}
+              changeTime={changeTime}
+              deleteItem={deleteItem}
+            />
+          ) : null;
+        })}
         <button
           type="button"
           className="mx-2 text-blue-500 underline"
