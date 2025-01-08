@@ -1,6 +1,8 @@
 "use client";
 
 import { ExerciseItem } from "@/app/api/workouts/[year]/[month]/[day]/exercises/[order]/route";
+import RestItem from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/RestItem";
+import WorkItem from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/WorkItem";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { z } from "zod";
@@ -68,7 +70,7 @@ export default function Form({
       alert(`Invalid input ${e}`);
       return;
     }
-    console.log('valid input');
+    console.log("valid input");
     const response = await fetch(
       `http://localhost:3000/api/workouts/${year}/${month}/${day}/exercises/${order}`,
       {
@@ -122,49 +124,22 @@ export default function Form({
         {exerciseItems.map((item: ExerciseItem) => {
           if (item.type === "WORK") {
             return (
-              <div className="mb-4 mt-4" key={item.order}>
-                <p>{`ワーク`}</p>
-                <p>重さ: </p>
-                <input
-                  type="number"
-                  value={item.weight!}
-                  onChange={changeWeight(item)}
-                />
-                <p>回数: </p>
-                <input
-                  type="number"
-                  value={item.rep!}
-                  onChange={changeRep(item)}
-                />
-                <p>{item.order}</p>
-                <button
-                  type="button"
-                  className="mx-2 text-blue-500 underline"
-                  onClick={() => deleteItem(item.order)}
-                >
-                  削除
-                </button>
-              </div>
+              <WorkItem
+                key={item.order}
+                item={item}
+                changeWeight={changeWeight}
+                changeRep={changeRep}
+                deleteItem={deleteItem}
+              />
             );
           } else if (item.type === "REST") {
             return (
-              <div className="mb-4 mt-4" key={item.order}>
-                <p>{`レスト`}</p>
-                <p>時間: </p>
-                <input
-                  type="number"
-                  value={item.time!}
-                  onChange={changeTime(item)}
-                />
-                <p>{item.order}</p>
-                <button
-                  type="button"
-                  className="mx-2 text-blue-500 underline"
-                  onClick={() => deleteItem(item.order)}
-                >
-                  削除
-                </button>
-              </div>
+              <RestItem
+                key={item.order}
+                item={item}
+                changeTime={changeTime}
+                deleteItem={deleteItem}
+              />
             );
           } else {
             return null;
