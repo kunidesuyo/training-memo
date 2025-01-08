@@ -24,9 +24,6 @@ export default function Form({
   const { year, month, day, order } = pathParams;
   const router = useRouter();
 
-  let workCount = 0;
-  let restCount = 0;
-
   const changeWeight =
     (item: ExerciseItem) => (event: React.ChangeEvent<HTMLInputElement>) => {
       const newExerciseItems = exerciseItems.map((exerciseItem) => {
@@ -124,10 +121,9 @@ export default function Form({
       <form onSubmit={handleSubmit}>
         {exerciseItems.map((item: ExerciseItem) => {
           if (item.type === "WORK") {
-            workCount++;
             return (
               <div className="mb-4 mt-4" key={item.order}>
-                <p>{`ワーク${workCount}`}</p>
+                <p>{`ワーク`}</p>
                 <p>重さ: </p>
                 <input
                   type="number"
@@ -151,10 +147,9 @@ export default function Form({
               </div>
             );
           } else if (item.type === "REST") {
-            restCount++;
             return (
               <div className="mb-4 mt-4" key={item.order}>
-                <p>{`レスト${restCount}`}</p>
+                <p>{`レスト`}</p>
                 <p>時間: </p>
                 <input
                   type="number"
