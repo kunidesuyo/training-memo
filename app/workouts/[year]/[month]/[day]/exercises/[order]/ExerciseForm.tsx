@@ -15,7 +15,7 @@ const ExerciseItemSchema = z.object({
   rep: z.number().nullable(),
 });
 
-export default function Form({
+export default function ExerciseForm({
   exercise,
   pathParams,
 }: {

@@ -1,4 +1,4 @@
-import Form from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/form";
+import ExerciseForm from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/ExerciseForm";
 import Link from "next/link";
 
 export default async function exercise({
@@ -13,7 +13,7 @@ export default async function exercise({
 
   return (
     <div>
-      <Form exercise={exercise} pathParams={await params} />
+      <ExerciseForm exercise={exercise} pathParams={await params} />
       <Link
         className="text-blue-500 underline"
         href={`/workouts/${year}/${month}/${day}`}
