@@ -12,7 +12,7 @@ export default async function exercise({
   ).then((res) => res.json());
 
   return (
-    <div>
+    <div className="m-10">
       <ExerciseForm exercise={exercise} pathParams={await params} />
       <Link
         className="text-blue-500 underline"

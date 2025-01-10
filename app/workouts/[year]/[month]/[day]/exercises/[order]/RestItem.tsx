@@ -30,7 +30,7 @@ const RestItem: React.FC<RestItemProps> = ({
         <p>秒</p>
         <Button
           type="button"
-          className="mx-2 text-blue-500 underline"
+          className="mx-2 underline"
           onClick={() => deleteItem(item.order)}
         >
           削除

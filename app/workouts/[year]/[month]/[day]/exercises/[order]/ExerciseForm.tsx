@@ -125,19 +125,19 @@ export default function ExerciseForm({
         <div className="my-4">
           <Button
             type="button"
-            className="mx-2 text-blue-500 underline"
+            className="mx-2 underline"
             onClick={addWork}
           >
             ワーク追加
           </Button>
           <Button
             type="button"
-            className="mx-2 text-blue-500 underline"
+            className="mx-2 underline"
             onClick={addRest}
           >
             レスト追加
           </Button>
-          <Button type="submit" className="mx-2 text-blue-500 underline">
+          <Button type="submit" className="mx-2 underline">
             更新
           </Button>
         </div>
