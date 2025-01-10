@@ -3,6 +3,7 @@
 import { ExerciseItem } from "@/app/api/workouts/[year]/[month]/[day]/exercises/[order]/route";
 import RestItem from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/RestItem";
 import WorkItem from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/WorkItem";
+import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { z } from "zod";
@@ -121,23 +122,25 @@ export default function ExerciseForm({
             />
           ) : null;
         })}
-        <button
-          type="button"
-          className="mx-2 text-blue-500 underline"
-          onClick={addWork}
-        >
-          ワーク追加
-        </button>
-        <button
-          type="button"
-          className="mx-2 text-blue-500 underline"
-          onClick={addRest}
-        >
-          レスト追加
-        </button>
-        <button type="submit" className="mx-2 text-blue-500 underline">
-          更新
-        </button>
+        <div className="my-4">
+          <Button
+            type="button"
+            className="mx-2 text-blue-500 underline"
+            onClick={addWork}
+          >
+            ワーク追加
+          </Button>
+          <Button
+            type="button"
+            className="mx-2 text-blue-500 underline"
+            onClick={addRest}
+          >
+            レスト追加
+          </Button>
+          <Button type="submit" className="mx-2 text-blue-500 underline">
+            更新
+          </Button>
+        </div>
       </form>
     </div>
   );

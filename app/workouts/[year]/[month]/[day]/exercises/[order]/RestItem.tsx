@@ -1,5 +1,7 @@
 import React from "react";
 import { ExerciseItem } from "@/app/api/workouts/[year]/[month]/[day]/exercises/[order]/route";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 interface RestItemProps {
   item: ExerciseItem;
@@ -15,23 +17,23 @@ const RestItem: React.FC<RestItemProps> = ({
   deleteItem,
 }) => {
   return (
-    <div className="mb-4 mt-4" key={item.order}>
+    <div className="my-4 flex" key={item.order}>
       <p>{`レスト`}</p>
-      <p>時間: </p>
-      <input
+      <Input
+        className="mx-2 w-100"
         type="number"
         value={item.time ?? ""}
         onChange={changeTime(item)}
-        className="no-spinner"
       />
-      <p>{item.order}</p>
-      <button
+      <p>秒</p>
+      <Button
         type="button"
         className="mx-2 text-blue-500 underline"
         onClick={() => deleteItem(item.order)}
       >
         削除
-      </button>
+      </Button>
+      <p>{item.order}</p>
     </div>
   );
 };

@@ -21,17 +21,24 @@ const WorkItem: React.FC<WorkItemProps> = ({
   deleteItem,
 }) => {
   return (
-    <div className="mb-4 mt-4" key={item.order}>
+    <div className="my-4 flex" key={item.order}>
       <p>{`ワーク`}</p>
-      <p>重さ: </p>
       <Input
+        className="mx-2 w-100"
         type="number"
         value={item.weight ?? ""}
         onChange={changeWeight(item)}
+        placeholder="重さ"
       />
-      <p>回数: </p>
-      <Input type="number" value={item.rep ?? ""} onChange={changeRep(item)} />
-      <p>{item.order}</p>
+      <p>kg</p>
+      <Input
+        className="mx-2 w-100"
+        type="number"
+        value={item.rep ?? ""}
+        onChange={changeRep(item)}
+        placeholder="回数"
+      />
+      <p>回</p>
       <Button
         type="button"
         className="mx-2 text-blue-500 underline"
@@ -39,6 +46,7 @@ const WorkItem: React.FC<WorkItemProps> = ({
       >
         削除
       </Button>
+      <p>{item.order}</p>
     </div>
   );
 };
