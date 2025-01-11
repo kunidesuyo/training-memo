@@ -6,7 +6,6 @@ type Exercise = {
   name: string;
 };
 
-// TODO: エクササイズ追加時に画面を更新したい
 export default async function Workout({
   params,
 }: {
@@ -20,16 +19,20 @@ export default async function Workout({
   return (
     <div>
       <h2>{`${workout.year}年${workout.month}月${workout.day}日のワークアウト`}</h2>
-      {workout.exercises.map((exercise: Exercise) => (
-        <Link
-          key={exercise.id}
-          className="text-blue-500 underline"
-          href={`/workouts/${year}/${month}/${day}/exercises/${exercise.id}`}
-        >
-          {exercise.name}
-        </Link>
-      ))}
-      <AddExerciseForm pathParams={await params} />
+      <div className="flex flex-col">
+        {workout.exercises.map((exercise: Exercise) => (
+          <Link
+            key={exercise.id}
+            className="text-blue-500 underline mx-4 my-2"
+            href={`/workouts/${year}/${month}/${day}/exercises/${exercise.id}`}
+          >
+            {exercise.name}
+          </Link>
+        ))}
+      </div>
+      <div className="m-4">
+        <AddExerciseForm pathParams={await params} />
+      </div>
     </div>
   );
 }

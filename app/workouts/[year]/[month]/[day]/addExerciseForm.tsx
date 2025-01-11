@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function AddExerciseForm({
@@ -11,10 +12,11 @@ export default function AddExerciseForm({
 }) {
   const { year, month, day } = pathParams;
   const [exerciseName, setExerciseName] = useState("");
+  const router = useRouter();
 
   const addExercise = async (event: React.FormEvent) => {
     event.preventDefault();
-    await fetch(
+    const response = await fetch(
       `http://localhost:3000/api/workouts/${year}/${month}/${day}/exercises`,
       {
         method: "POST",
@@ -26,6 +28,12 @@ export default function AddExerciseForm({
         }),
       }
     );
+    if (response.ok) {
+      setExerciseName("");
+      router.push(`/workouts/${year}/${month}/${day}`);
+    } else {
+      alert("Failed to update exercise.");
+    }
   };
 
   return (
