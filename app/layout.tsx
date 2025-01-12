@@ -2,6 +2,12 @@ import { Metadata } from "next";
 import "./globals.css";
 import Link from "next/link";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Noto_Sans_JP } from "next/font/google";
+
+const notoSansJp = Noto_Sans_JP({
+  subsets: ["latin"],
+  variable: "--font-noto-sans-jp",
+});
 
 export const metadata: Metadata = {
   title: "Next.js",
@@ -14,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="ja" className={notoSansJp.variable} suppressHydrationWarning>
       <body>
         <header>
           <Link href={"/api/auth/signout"}>ログアウト</Link>
