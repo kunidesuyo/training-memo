@@ -1,6 +1,14 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
-async function main() {
+
+
+
+const createTodayWorkout = async () => {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = now.getMonth() + 1;
+  const day = now.getDate();
+  
   const rootUser = await prisma.user.create({
     data: {
       email: "test@example.com",
@@ -9,9 +17,9 @@ async function main() {
   });
   const workout1 = await prisma.workout.create({
     data: {
-      year: 2024,
-      month: 1,
-      day: 1,
+      year,
+      month,
+      day,
       authorId: rootUser.id,
     },
   });
@@ -135,9 +143,9 @@ async function main() {
       authorId: rootUser.id,
     },
   });
-}
+};
 
-main()
+createTodayWorkout()
   .then(async () => {
     await prisma.$disconnect();
   })
