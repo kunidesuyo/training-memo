@@ -1,20 +1,28 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
+type User = {
+  id: number;
+  email: string;
+  name: string;
+};
 
-
-const createTodayWorkout = async () => {
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = now.getMonth() + 1;
-  const day = now.getDate();
-  
+const createRootUser = async (): Promise<User> => {
   const rootUser = await prisma.user.create({
     data: {
       email: "test@example.com",
       name: "root_user",
     },
   });
+  return rootUser as User;
+};
+
+const createWorkout = async (
+  rootUser: User,
+  year: number,
+  month: number,
+  day: number
+) => {
   const workout1 = await prisma.workout.create({
     data: {
       year,
@@ -79,78 +87,35 @@ const createTodayWorkout = async () => {
       authorId: rootUser.id,
     },
   });
-  const workout2 = await prisma.workout.create({
-    data: {
-      year: 2024,
-      month: 2,
-      day: 2,
-      authorId: rootUser.id,
-    },
-  });
-  const exercise2_1 = await prisma.exercise.create({
-    data: {
-      name: "デッドリフト",
-      workoutId: workout2.id,
-      order: 1,
-      authorId: rootUser.id,
-    },
-  });
-  await prisma.exerciseItem.create({
-    data: {
-      type: "WORK",
-      weight: 80,
-      rep: 10,
-      order: 1,
-      exerciseId: exercise2_1.id,
-      authorId: rootUser.id,
-    },
-  });
-  await prisma.exerciseItem.create({
-    data: {
-      type: "REST",
-      time: 120,
-      order: 2,
-      exerciseId: exercise2_1.id,
-      authorId: rootUser.id,
-    },
-  });
-  await prisma.exerciseItem.create({
-    data: {
-      type: "WORK",
-      weight: 100,
-      rep: 10,
-      order: 3,
-      exerciseId: exercise2_1.id,
-      authorId: rootUser.id,
-    },
-  });
-  await prisma.exerciseItem.create({
-    data: {
-      type: "REST",
-      time: 120,
-      order: 4,
-      exerciseId: exercise2_1.id,
-      authorId: rootUser.id,
-    },
-  });
-  await prisma.exerciseItem.create({
-    data: {
-      type: "WORK",
-      weight: 120,
-      rep: 10,
-      order: 5,
-      exerciseId: exercise2_1.id,
-      authorId: rootUser.id,
-    },
-  });
 };
 
-createTodayWorkout()
-  .then(async () => {
-    await prisma.$disconnect();
-  })
-  .catch(async (e) => {
-    console.error(e);
-    await prisma.$disconnect();
-    process.exit(1);
-  });
+// const createTodayWorkout = async (rootUser: User) => {
+//   const now = new Date();
+//   const year = now.getFullYear();
+//   const month = now.getMonth() + 1;
+//   const day = now.getDate();
+//   createWorkout(rootUser, year, month, day);
+// };
+
+const createThisMonthWorkout = async (rootUser: User) => {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = now.getMonth() + 1;
+  const lastDay = new Date(year, month, 0).getDate();
+  for (let i = 1; i <= lastDay; i++) {
+    createWorkout(rootUser, year, month, i);
+  }
+};
+
+createRootUser().then(async (rootUser) => {
+  createThisMonthWorkout(rootUser);
+});
+
+// .then(async () => {
+//   await prisma.$disconnect();
+// })
+// .catch(async (e) => {
+//   console.error(e);
+//   await prisma.$disconnect();
+//   process.exit(1);
+// });
