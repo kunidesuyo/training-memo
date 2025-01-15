@@ -18,6 +18,8 @@ export async function GET(
     },
     select: {
       id: true,
+      year: true,
+      month: true,
       day: true,
     },
     orderBy: {
