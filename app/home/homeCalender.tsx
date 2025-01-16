@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Calendar } from "@/components/ui/calendar";
 
 import { Workout } from "@/app/home/page";
@@ -17,21 +17,21 @@ export default function HomeCalender({
   day: number;
   workouts: Workout[];
 }) {
-  const [date, setDate] = useState<Date | undefined>(
+  const [selectedDate, setDate] = useState<Date | undefined>(
     new Date(year, month - 1, day)
   );
 
-  useEffect(() => {
-    console.log("workouts:", workouts);
-  }, [workouts]);
+  const isSameDay = (date: Date, workout: Workout) => {
+    return (
+      date.getDate() === workout.day &&
+      date.getMonth() + 1 === workout.month &&
+      date.getFullYear() === workout.year
+    );
+  };
 
-  const matcher: Matcher = (d: Date) => {
+  const matcher: Matcher = (date: Date) => {
     return !workouts.some((workout: Workout) => {
-      return (
-        workout.day === d.getDate() &&
-        workout.month === d.getMonth() + 1 &&
-        workout.year === d.getFullYear()
-      );
+      return isSameDay(date, workout);
     });
   };
 
@@ -39,7 +39,7 @@ export default function HomeCalender({
     <div className="my-4 rounded-md border p-4">
       <Calendar
         mode="single"
-        selected={date}
+        selected={selectedDate}
         onSelect={setDate}
         disabled={matcher}
       />
