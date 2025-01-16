@@ -17,7 +17,7 @@ export default function HomeCalender({
   day: number;
   workouts: Workout[];
 }) {
-  const [selectedDate, setDate] = useState<Date | undefined>(
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(
     new Date(year, month - 1, day)
   );
 
@@ -40,7 +40,7 @@ export default function HomeCalender({
       <Calendar
         mode="single"
         selected={selectedDate}
-        onSelect={setDate}
+        onSelect={setSelectedDate}
         disabled={matcher}
       />
     </div>
