@@ -1,27 +1,21 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { Calendar } from "@/components/ui/calendar";
 
 import { Workout } from "@/app/home/page";
 import { Matcher } from "react-day-picker";
 
 export default function HomeCalender({
-  year,
-  month,
-  day,
   workouts,
+  selectedDate,
+  setSelectedDate,
 }: {
-  year: number;
-  month: number;
-  day: number;
   workouts: Workout[];
+  selectedDate: Date | undefined;
+  setSelectedDate: React.Dispatch<React.SetStateAction<Date | undefined>>;
 }) {
-  const [selectedDate, setSelectedDate] = useState<Date | undefined>(
-    new Date(year, month - 1, day)
-  );
-
-  const isSameDay = (date: Date, workout: Workout) => {
+  const isSameDay = (date: Date, workout: Workout): boolean => {
     return (
       date.getDate() === workout.day &&
       date.getMonth() + 1 === workout.month &&
