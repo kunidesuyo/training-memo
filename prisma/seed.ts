@@ -97,25 +97,29 @@ const createWorkout = async (
 //   createWorkout(rootUser, year, month, day);
 // };
 
-const createThisMonthWorkout = async (rootUser: User) => {
+// const createThisMonthWorkout = async (rootUser: User) => {
+//   const now = new Date();
+//   const year = now.getFullYear();
+//   const month = now.getMonth() + 1;
+//   const lastDay = new Date(year, month, 0).getDate();
+//   for (let i = 1; i <= lastDay; i++) {
+//     createWorkout(rootUser, year, month, i);
+//   }
+// };
+
+const createWorkouts = async (rootUser: User) => {
   const now = new Date();
   const year = now.getFullYear();
   const month = now.getMonth() + 1;
-  const lastDay = new Date(year, month, 0).getDate();
-  for (let i = 1; i <= lastDay; i++) {
+  for (let i = 10; i <= 15; i++) {
     createWorkout(rootUser, year, month, i);
   }
+}
+
+const main = async () => {
+  const rootUser = await createRootUser();
+  createWorkouts(rootUser);
+  // createThisMonthWorkout(rootUser);
 };
 
-createRootUser().then(async (rootUser) => {
-  createThisMonthWorkout(rootUser);
-});
-
-// .then(async () => {
-//   await prisma.$disconnect();
-// })
-// .catch(async (e) => {
-//   console.error(e);
-//   await prisma.$disconnect();
-//   process.exit(1);
-// });
+main();
