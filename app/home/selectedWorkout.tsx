@@ -1,3 +1,4 @@
+// サーバーコンポーネントにする
 "use client";
 
 import { Workout } from "@/app/home/page";
@@ -22,7 +23,7 @@ export default function SelectedWorkout({
     WorkoutWithExercise | undefined
   >(undefined);
 
-  // useEffect使っていいのか調べる
+  // サーバーコンポーネントにして、useEffectを使わないように
   useEffect(() => {
     const fetchWorkout = async () => {
       if (selectedDate) {
@@ -42,7 +43,7 @@ export default function SelectedWorkout({
 
   return (
     <div>
-      {/* {selectedDate ? (
+      {selectedDate ? (
         <div>
           <p>選択された日付</p>
           <p>{selectedDate.getFullYear()}年</p>
@@ -51,7 +52,7 @@ export default function SelectedWorkout({
         </div>
       ) : (
         <p>日付が選択されていません。</p>
-      )} */}
+      )}
       {selectedWorkout ? (
         <div>
           {/* <p>ワークアウトID: {selectedWorkout.id}</p> */}

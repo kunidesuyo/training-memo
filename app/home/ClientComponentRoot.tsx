@@ -16,6 +16,7 @@ export default function ClientComponentRoot({
   day: number;
   workouts: Workout[];
 }) {
+  // 選択した日付はsearchParamsで管理する
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(
     new Date(year, month - 1, day)
   );

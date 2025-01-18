@@ -7,6 +7,8 @@ export type Workout = {
   day: number;
 };
 
+// searchParamsから選択した日付を受け取る
+// 日付のデフォルト値は今日の日付
 export default async function Page() {
   const date = new Date();
   const year = date.getFullYear();
