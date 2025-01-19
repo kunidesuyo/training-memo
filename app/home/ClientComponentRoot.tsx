@@ -1,5 +1,3 @@
-"use client";
-
 import HomeCalender from "@/app/home/homeCalender";
 import { Workout } from "@/app/home/page";
 import SelectedWorkout from "@/app/home/selectedWorkout";
