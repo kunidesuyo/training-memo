@@ -1,5 +1,6 @@
 import HomeCalender from "@/app/home/homeCalender";
 import SelectedWorkout from "@/app/home/selectedWorkout";
+import { notFound } from "next/navigation";
 
 export type Workout = {
   id: number;
@@ -8,22 +9,42 @@ export type Workout = {
   day: number;
 };
 
-// 日付のデフォルト値は今日の日付
-export default async function Page(props: {
-  searchParams?: Promise<{
-    year?: string;
-    month?: string;
-    day?: string;
-  }>;
-}) {
+type SearchParams = { year?: string; month?: string; day?: string };
+
+export default async function Page(props: { searchParams?: Promise<SearchParams> }) {
   const searchParams = await props.searchParams;
-  const date = new Date();
-  const thisYear = date.getFullYear();
-  const thisMonth = date.getMonth() + 1;
-  const today = date.getDate();
-  const year = searchParams?.year ? parseInt(searchParams.year) : thisYear;
-  const month = searchParams?.month ? parseInt(searchParams.month) : thisMonth;
-  const day = searchParams?.day ? parseInt(searchParams.day) : today;
+  const isAllParamsSpecified = (searchParams?: SearchParams) => {
+    return searchParams?.year && searchParams?.month && searchParams?.day;
+  };
+  const isAllParamsNotSpecified = (searchParams?: SearchParams) => {
+    return !searchParams?.year && !searchParams?.month && !searchParams?.day;
+  };
+  const todayDate = () => {
+    const date = new Date();
+    return {
+      year: date.getFullYear(),
+      month: date.getMonth() + 1,
+      day: date.getDate(),
+    };
+  };
+  const initDate = (
+    searchParams?: SearchParams
+  ): { year: number; month: number; day: number } => {
+    if (isAllParamsSpecified(searchParams)) {
+      return {
+        year: parseInt(searchParams?.year!),
+        month: parseInt(searchParams?.month!),
+        day: parseInt(searchParams?.day!),
+      };
+    }
+    if (isAllParamsNotSpecified(searchParams)) {
+      return todayDate();
+    }
+    notFound();
+  };
+
+  const { year, month, day } = initDate(searchParams);
+
   const workouts: Workout[] = await fetch(
     `http://localhost:3000/api/workouts/${year}/${month}`
   ).then((res) => res.json());
