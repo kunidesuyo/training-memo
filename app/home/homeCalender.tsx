@@ -3,15 +3,14 @@ import { Calendar } from "@/components/ui/calendar";
 
 import { Workout } from "@/app/home/page";
 import { Matcher } from "react-day-picker";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function HomeCalender({
   workouts,
   selectedDate,
-  setSelectedDate,
 }: {
   workouts: Workout[];
   selectedDate: Date | undefined;
-  setSelectedDate: React.Dispatch<React.SetStateAction<Date | undefined>>;
 }) {
   const isSameDay = (date: Date, workout: Workout): boolean => {
     return (
@@ -27,12 +26,29 @@ export default function HomeCalender({
     });
   };
 
+  const pathname = usePathname();
+  const router = useRouter();
+  const showSelectedDateCalendar = (date: Date|undefined) => {
+    if (!date) return;
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const params = new URLSearchParams();
+    params.set("year", year.toString());
+    params.set("month", month.toString());
+    params.set("day", day.toString());
+    // ページ遷移
+    const url = `${pathname}?${params.toString()}`
+    router.push(url);
+  }; 
+
   return (
     <div className="my-4 rounded-md border p-4">
       <Calendar
         mode="single"
         selected={selectedDate}
-        onSelect={setSelectedDate}
+        // onSelect={setSelectedDate} // onSelect内でhome?year=XXXX&month=YY&day=ZZに遷移する
+        onSelect={showSelectedDateCalendar}
         disabled={matcher}
       />
     </div>
