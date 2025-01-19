@@ -12,7 +12,7 @@ export default function HomeCalender({
   selectedDate,
 }: {
   workouts: Workout[];
-  selectedDate: Date | undefined;
+  selectedDate: Date;
 }) {
   const isSameDay = (date: Date, workout: Workout): boolean => {
     return (
@@ -49,7 +49,6 @@ export default function HomeCalender({
       <Calendar
         mode="single"
         selected={selectedDate}
-        // onSelect={setSelectedDate} // onSelect内でhome?year=XXXX&month=YY&day=ZZに遷移する
         onSelect={showSelectedDateCalendar}
         disabled={matcher}
       />
