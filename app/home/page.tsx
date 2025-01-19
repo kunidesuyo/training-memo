@@ -1,4 +1,5 @@
-import ClientComponentRoot from "@/app/home/ClientComponentRoot";
+import HomeCalender from "@/app/home/homeCalender";
+import SelectedWorkout from "@/app/home/selectedWorkout";
 
 export type Workout = {
   id: number;
@@ -27,14 +28,12 @@ export default async function Page(props: {
   const workouts: Workout[] = await fetch(
     `http://localhost:3000/api/workouts/${year}/${month}`
   ).then((res) => res.json());
+  const selectedDate = new Date(year, month - 1, day);
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
-      <ClientComponentRoot
-        year={year}
-        month={month}
-        day={day}
-        workouts={workouts}
-      />
+      <HomeCalender workouts={workouts} selectedDate={selectedDate} />
+      <SelectedWorkout selectedDate={selectedDate} />
     </div>
   );
 }
