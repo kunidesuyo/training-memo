@@ -31,7 +31,7 @@ const createWorkout = async (
       authorId: rootUser.id,
     },
   });
-  const exercise1_1 = await prisma.exercise.create({
+  const exercise1 = await prisma.exercise.create({
     data: {
       name: "スクワット",
       workoutId: workout1.id,
@@ -45,7 +45,7 @@ const createWorkout = async (
       weight: 60,
       rep: 10,
       order: 1,
-      exerciseId: exercise1_1.id,
+      exerciseId: exercise1.id,
       authorId: rootUser.id,
     },
   });
@@ -54,7 +54,7 @@ const createWorkout = async (
       type: "REST",
       time: 120,
       order: 2,
-      exerciseId: exercise1_1.id,
+      exerciseId: exercise1.id,
       authorId: rootUser.id,
     },
   });
@@ -64,7 +64,7 @@ const createWorkout = async (
       weight: 80,
       rep: 10,
       order: 3,
-      exerciseId: exercise1_1.id,
+      exerciseId: exercise1.id,
       authorId: rootUser.id,
     },
   });
@@ -73,7 +73,7 @@ const createWorkout = async (
       type: "REST",
       time: 120,
       order: 4,
-      exerciseId: exercise1_1.id,
+      exerciseId: exercise1.id,
       authorId: rootUser.id,
     },
   });
@@ -83,7 +83,63 @@ const createWorkout = async (
       weight: 100,
       rep: 10,
       order: 5,
-      exerciseId: exercise1_1.id,
+      exerciseId: exercise1.id,
+      authorId: rootUser.id,
+    },
+  });
+  const exercise2 = await prisma.exercise.create({
+    data: {
+      name: "デッドリフト",
+      workoutId: workout1.id,
+      order: 1,
+      authorId: rootUser.id,
+    },
+  });
+  await prisma.exerciseItem.create({
+    data: {
+      type: "WORK",
+      weight: 60,
+      rep: 10,
+      order: 1,
+      exerciseId: exercise2.id,
+      authorId: rootUser.id,
+    },
+  });
+  await prisma.exerciseItem.create({
+    data: {
+      type: "REST",
+      time: 120,
+      order: 2,
+      exerciseId: exercise2.id,
+      authorId: rootUser.id,
+    },
+  });
+  await prisma.exerciseItem.create({
+    data: {
+      type: "WORK",
+      weight: 80,
+      rep: 10,
+      order: 3,
+      exerciseId: exercise2.id,
+      authorId: rootUser.id,
+    },
+  });
+  await prisma.exerciseItem.create({
+    data: {
+      type: "REST",
+      time: 120,
+      order: 4,
+      exerciseId: exercise2.id,
+      authorId: rootUser.id,
+    },
+  });
+  await prisma.exerciseItem.create({
+    data: {
+      type: "WORK",
+      weight: 100,
+      rep: 10,
+      order: 5,
+      exerciseId: exercise2.id,
       authorId: rootUser.id,
     },
   });
