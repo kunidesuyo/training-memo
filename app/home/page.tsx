@@ -11,14 +11,19 @@ export type Workout = {
 
 type SearchParams = { year?: string; month?: string; day?: string };
 
-export default async function Page(props: { searchParams?: Promise<SearchParams> }) {
+export default async function Page(props: {
+  searchParams?: Promise<SearchParams>;
+}) {
   const searchParams = await props.searchParams;
+
   const isAllParamsSpecified = (searchParams?: SearchParams) => {
     return searchParams?.year && searchParams?.month && searchParams?.day;
   };
+
   const isAllParamsNotSpecified = (searchParams?: SearchParams) => {
     return !searchParams?.year && !searchParams?.month && !searchParams?.day;
   };
+
   const todayDate = () => {
     const date = new Date();
     return {
@@ -27,15 +32,16 @@ export default async function Page(props: { searchParams?: Promise<SearchParams>
       day: date.getDate(),
     };
   };
+
   const initDate = (
     searchParams?: SearchParams
   ): { year: number; month: number; day: number } => {
     if (isAllParamsSpecified(searchParams)) {
       return {
-        year: parseInt(searchParams?.year!),
-        month: parseInt(searchParams?.month!),
-        day: parseInt(searchParams?.day!),
-      };
+        year: parseInt(searchParams!.year!),
+        month: parseInt(searchParams!.month!),
+        day: parseInt(searchParams!.day!),
+      }
     }
     if (isAllParamsNotSpecified(searchParams)) {
       return todayDate();
