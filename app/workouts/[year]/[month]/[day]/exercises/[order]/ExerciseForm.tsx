@@ -1,6 +1,6 @@
 "use client";
 
-import { ExerciseItem } from "@/app/api/workouts/[year]/[month]/[day]/exercises/[order]/route";
+import { ExerciseItem } from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/actions";
 import RestItem from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/RestItem";
 import WorkItem from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/WorkItem";
 import { Button } from "@/components/ui/button";
@@ -123,18 +123,10 @@ export default function ExerciseForm({
           ) : null;
         })}
         <div className="my-4">
-          <Button
-            type="button"
-            className="mx-2 underline"
-            onClick={addWork}
-          >
+          <Button type="button" className="mx-2 underline" onClick={addWork}>
             ワーク追加
           </Button>
-          <Button
-            type="button"
-            className="mx-2 underline"
-            onClick={addRest}
-          >
+          <Button type="button" className="mx-2 underline" onClick={addRest}>
             レスト追加
           </Button>
           <Button type="submit" className="mx-2 underline">
