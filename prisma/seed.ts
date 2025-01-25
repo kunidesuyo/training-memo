@@ -91,7 +91,7 @@ const createWorkout = async (
     data: {
       name: "デッドリフト",
       workoutId: workout1.id,
-      order: 1,
+      order: 2,
       authorId: rootUser.id,
     },
   });
