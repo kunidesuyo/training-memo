@@ -1,16 +1,10 @@
-import { Workout } from "@/app/home/actions";
+import {
+  Exercise,
+  getWorkoutWithExercise,
+  WorkoutWithExercises,
+} from "@/app/home/actions";
 import Link from "next/link";
 import React from "react";
-
-type WorkoutWithExercise = Workout & {
-  exercises: Exercise[];
-};
-
-type Exercise = {
-  id: number;
-  name: string;
-  order: number;
-};
 
 export default async function SelectedWorkout({
   selectedDate,
@@ -20,10 +14,11 @@ export default async function SelectedWorkout({
   const year = selectedDate.getFullYear();
   const month = selectedDate.getMonth() + 1;
   const day = selectedDate.getDate();
-  const response = await fetch(
-    `http://localhost:3000/api/workouts/${year}/${month}/${day}`
+  const selectedWorkout: WorkoutWithExercises = await getWorkoutWithExercise(
+    year,
+    month,
+    day
   );
-  const selectedWorkout: WorkoutWithExercise = await response.json();
 
   return (
     <div>
@@ -41,7 +36,7 @@ export default async function SelectedWorkout({
       {selectedWorkout ? (
         <div>
           <p>ワークアウトID: {selectedWorkout.id}</p>
-          {selectedWorkout.exercises.map(
+          {selectedWorkout.exercises?.map(
             (exercise: Exercise, index: number) => (
               <div key={exercise.id}>
                 <p>
@@ -58,7 +53,9 @@ export default async function SelectedWorkout({
       <Link
         href="/workouts/[year]/[month]/[day]"
         as={`/workouts/${year}/${month}/${day}`}
-      >詳細</Link>
+      >
+        詳細
+      </Link>
     </div>
   );
 }
