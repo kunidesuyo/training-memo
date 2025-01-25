@@ -1,13 +1,7 @@
+import { getWorkouts, Workout } from "@/app/home/actions";
 import HomeCalender from "@/app/home/homeCalender";
 import SelectedWorkout from "@/app/home/selectedWorkout";
 import { notFound } from "next/navigation";
-
-export type Workout = {
-  id: number;
-  year: number;
-  month: number;
-  day: number;
-};
 
 type SearchParams = { year?: string; month?: string; day?: string };
 
@@ -51,9 +45,7 @@ export default async function Page(props: {
 
   const { year, month, day } = initDate(searchParams);
 
-  const workouts: Workout[] = await fetch(
-    `http://localhost:3000/api/workouts/${year}/${month}`
-  ).then((res) => res.json());
+  const workouts: Workout[] = await getWorkouts(year, month);
   const selectedDate = new Date(year, month - 1, day);
 
   return (

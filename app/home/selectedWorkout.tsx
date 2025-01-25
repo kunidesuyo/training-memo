@@ -1,4 +1,4 @@
-import { Workout } from "@/app/home/page";
+import { Workout } from "@/app/home/actions";
 import Link from "next/link";
 import React from "react";
 

@@ -3,9 +3,9 @@
 import React from "react";
 import { Calendar } from "@/components/ui/calendar";
 
-import { Workout } from "@/app/home/page";
 import { Matcher } from "react-day-picker";
 import { usePathname, useRouter } from "next/navigation";
+import { Workout } from "@/app/home/actions";
 
 // TODO: 全ての日付は選択できるようにする
 //   ワークアウトが存在する日は色をかえる
