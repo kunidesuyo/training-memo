@@ -16,7 +16,7 @@ const ExerciseItemSchema = z.object({
   rep: z.number().nullable(),
 });
 
-// 更新処理をserverActionsで行うように修正する
+// TODO: 更新処理をserverActionsで行うように修正する
 export default function ExerciseForm({
   exercise,
   pathParams,
