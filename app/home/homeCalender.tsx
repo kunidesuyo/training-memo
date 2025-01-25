@@ -7,6 +7,8 @@ import { Workout } from "@/app/home/page";
 import { Matcher } from "react-day-picker";
 import { usePathname, useRouter } from "next/navigation";
 
+// TODO: 全ての日付は選択できるようにする
+//   ワークアウトが存在する日は色をかえる
 export default function HomeCalender({
   workouts,
   selectedDate,

@@ -53,6 +53,7 @@ export default async function SelectedWorkout({
         </div>
       ) : (
         <p>ワークアウトが見つかりませんでした。</p>
+        // TODO: 新しくワークアウトを作成できるようにする
       )}
       <Link
         href="/workouts/[year]/[month]/[day]"
