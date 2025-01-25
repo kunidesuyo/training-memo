@@ -1,4 +1,5 @@
 import { Workout } from "@/app/home/page";
+import Link from "next/link";
 import React from "react";
 
 type WorkoutWithExercise = Workout & {
@@ -28,14 +29,15 @@ export default async function SelectedWorkout({
     <div>
       {selectedDate ? (
         <div>
-          <p>選択された日付</p>
-          <p>{year}年</p>
-          <p>{month}月</p>
-          <p>{day}日</p>
+          <p>
+            選択された日付
+            {year}年{month}月{day}日
+          </p>
         </div>
       ) : (
-        <p>日付が選択されていません。</p>
+        <p>ワークアウトが存在する日付を選択してください。</p>
       )}
+
       {selectedWorkout ? (
         <div>
           <p>ワークアウトID: {selectedWorkout.id}</p>
@@ -52,6 +54,10 @@ export default async function SelectedWorkout({
       ) : (
         <p>ワークアウトが見つかりませんでした。</p>
       )}
+      <Link
+        href="/workouts/[year]/[month]/[day]"
+        as={`/workouts/${year}/${month}/${day}`}
+      >詳細</Link>
     </div>
   );
 }
