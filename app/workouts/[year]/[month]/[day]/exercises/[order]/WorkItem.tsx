@@ -10,13 +10,6 @@ interface WorkItemProps {
   year: number;
   month: number;
   day: number;
-  // changeWeight: (
-  //   item: ExerciseItem
-  // ) => (event: React.ChangeEvent<HTMLInputElement>) => void;
-  // changeRep: (
-  //   item: ExerciseItem
-  // ) => (event: React.ChangeEvent<HTMLInputElement>) => void;
-  // deleteItem: (order: number) => void;
 }
 
 const WorkItem: React.FC<WorkItemProps> = ({
@@ -24,9 +17,6 @@ const WorkItem: React.FC<WorkItemProps> = ({
   year,
   month,
   day,
-  // changeWeight,
-  // changeRep,
-  // deleteItem,
 }) => {
   const initialState: State = { message: null, errors: {} };
   const updateExerciseItemsWithIdentifier = updateExerciseItems.bind(null, year, month, day, item.order);
@@ -41,7 +31,6 @@ const WorkItem: React.FC<WorkItemProps> = ({
             className="mx-2 w-100"
             type="number"
             defaultValue={item.weight ?? ""}
-            // onChange={changeWeight(item)}
             placeholder="重さ"
           />
           <p>kg</p>
@@ -58,7 +47,6 @@ const WorkItem: React.FC<WorkItemProps> = ({
             className="mx-2 w-100"
             type="number"
             defaultValue={item.rep ?? ""}
-            // onChange={changeRep(item)}
             placeholder="回数"
           />
           <p>回</p>
@@ -73,10 +61,13 @@ const WorkItem: React.FC<WorkItemProps> = ({
           <Button
             type="submit"
             className="mx-2 underline"
-            // onClick={() => deleteItem(item.order)}
           >
             更新
           </Button>
+          {/* TODO: ボタン追加 */}
+          <p>
+            削除
+          </p>
           {/* <Button
             type="button"
             className="mx-2 underline"
@@ -84,7 +75,6 @@ const WorkItem: React.FC<WorkItemProps> = ({
           >
             削除
           </Button> */}
-          <p>{item.order}</p>
         </form>
       </CardContent>
     </Card>
