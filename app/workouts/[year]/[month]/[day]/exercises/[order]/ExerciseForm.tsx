@@ -3,18 +3,18 @@
 import { ExerciseItem } from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/actions";
 import RestItem from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/RestItem";
 import WorkItem from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/WorkItem";
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { z } from "zod";
 
-const ExerciseItemSchema = z.object({
-  order: z.number(),
-  time: z.number().nullable(),
-  type: z.enum(["WORK", "REST"]),
-  weight: z.number().nullable(),
-  rep: z.number().nullable(),
-});
+// const ExerciseItemSchema = z.object({
+//   order: z.number(),
+//   time: z.number().nullable(),
+//   type: z.enum(["WORK", "REST"]),
+//   weight: z.number().nullable(),
+//   rep: z.number().nullable(),
+// });
 
 // TODO: 更新処理をserverActionsで行うように修正する
 export default function ExerciseForm({
@@ -25,8 +25,9 @@ export default function ExerciseForm({
   pathParams: { year: string; month: string; day: string; order: string };
 }) {
   const [exerciseItems, setExerciseItems] = useState(exercise.items);
-  const { year, month, day, order } = pathParams;
-  const router = useRouter();
+  // const { year, month, day, order } = pathParams;
+  const { year, month, day } = pathParams;
+  // const router = useRouter();
 
   const updateExerciseItem =
     (item: ExerciseItem, key: keyof ExerciseItem) =>
@@ -41,54 +42,54 @@ export default function ExerciseForm({
       setExerciseItems(newExerciseItems);
     };
 
-  const changeWeight = (item: ExerciseItem) =>
-    updateExerciseItem(item, "weight");
-  const changeRep = (item: ExerciseItem) => updateExerciseItem(item, "rep");
+  // const changeWeight = (item: ExerciseItem) =>
+  //   updateExerciseItem(item, "weight");
+  // const changeRep = (item: ExerciseItem) => updateExerciseItem(item, "rep");
   const changeTime = (item: ExerciseItem) => updateExerciseItem(item, "time");
 
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-    try {
-      ExerciseItemSchema.array().parse(exerciseItems);
-    } catch (e) {
-      alert(`Invalid input ${e}`);
-      return;
-    }
-    console.log("valid input");
-    const response = await fetch(
-      `http://localhost:3000/api/workouts/${year}/${month}/${day}/exercises/${order}`,
-      {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ items: exerciseItems }),
-      }
-    );
-    if (response.ok) {
-      router.push(`/workouts/${year}/${month}/${day}/exercises/${order}`);
-    } else {
-      alert("Failed to update exercise.");
-    }
-  };
+  // const handleSubmit = async (event: React.FormEvent) => {
+  //   event.preventDefault();
+  //   try {
+  //     ExerciseItemSchema.array().parse(exerciseItems);
+  //   } catch (e) {
+  //     alert(`Invalid input ${e}`);
+  //     return;
+  //   }
+  //   console.log("valid input");
+  //   const response = await fetch(
+  //     `http://localhost:3000/api/workouts/${year}/${month}/${day}/exercises/${order}`,
+  //     {
+  //       method: "PATCH",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({ items: exerciseItems }),
+  //     }
+  //   );
+  //   if (response.ok) {
+  //     router.push(`/workouts/${year}/${month}/${day}/exercises/${order}`);
+  //   } else {
+  //     alert("Failed to update exercise.");
+  //   }
+  // };
 
-  const addWork = () => {
-    const newOrder = exerciseItems.length + 1;
-    const newExerciseItems: ExerciseItem[] = [
-      ...exerciseItems,
-      { type: "WORK", weight: 0, rep: 0, time: null, order: newOrder },
-    ];
-    setExerciseItems(newExerciseItems);
-  };
+  // const addWork = () => {
+  //   const newOrder = exerciseItems.length + 1;
+  //   const newExerciseItems: ExerciseItem[] = [
+  //     ...exerciseItems,
+  //     { type: "WORK", weight: 0, rep: 0, time: null, order: newOrder },
+  //   ];
+  //   setExerciseItems(newExerciseItems);
+  // };
 
-  const addRest = () => {
-    const newOrder = exerciseItems.length + 1;
-    const newExerciseItems: ExerciseItem[] = [
-      ...exerciseItems,
-      { type: "REST", weight: null, rep: null, time: 0, order: newOrder },
-    ];
-    setExerciseItems(newExerciseItems);
-  };
+  // const addRest = () => {
+  //   const newOrder = exerciseItems.length + 1;
+  //   const newExerciseItems: ExerciseItem[] = [
+  //     ...exerciseItems,
+  //     { type: "REST", weight: null, rep: null, time: 0, order: newOrder },
+  //   ];
+  //   setExerciseItems(newExerciseItems);
+  // };
 
   const deleteItem = (order: number) => {
     const deletedExerciseItems = exerciseItems.filter(
@@ -104,26 +105,26 @@ export default function ExerciseForm({
   return (
     <div>
       <h2>{exercise.name}</h2>
-      <form onSubmit={handleSubmit}>
-        {exerciseItems.map((item: ExerciseItem) => {
-          return item.type === "WORK" ? (
-            <WorkItem
-              key={item.order}
-              item={item}
-              changeWeight={changeWeight}
-              changeRep={changeRep}
-              deleteItem={deleteItem}
-            />
-          ) : item.type === "REST" ? (
-            <RestItem
-              key={item.order}
-              item={item}
-              changeTime={changeTime}
-              deleteItem={deleteItem}
-            />
-          ) : null;
-        })}
-        <div className="my-4">
+      {/* <form onSubmit={handleSubmit}> */}
+      {exerciseItems.map((item: ExerciseItem) => {
+        return item.type === "WORK" ? (
+          <WorkItem
+            key={item.order}
+            item={item}
+            year={parseInt(year)}
+            month={parseInt(month)}
+            day={parseInt(day)}
+          />
+        ) : item.type === "REST" ? (
+          <RestItem
+            key={item.order}
+            item={item}
+            changeTime={changeTime}
+            deleteItem={deleteItem}
+          />
+        ) : null;
+      })}
+      {/* <div className="my-4">
           <Button type="button" className="mx-2 underline" onClick={addWork}>
             ワーク追加
           </Button>
@@ -133,8 +134,8 @@ export default function ExerciseForm({
           <Button type="submit" className="mx-2 underline">
             更新
           </Button>
-        </div>
-      </form>
+        </div> */}
+      {/* </form> */}
     </div>
   );
 }

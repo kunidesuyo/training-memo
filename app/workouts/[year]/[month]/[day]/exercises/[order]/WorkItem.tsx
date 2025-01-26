@@ -1,54 +1,91 @@
-import React from "react";
+import React, { useActionState } from "react";
 import { ExerciseItem } from "@/app/api/workouts/[year]/[month]/[day]/exercises/[order]/route";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { State, updateExerciseItems } from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/actions";
 
 interface WorkItemProps {
   item: ExerciseItem;
-  changeWeight: (
-    item: ExerciseItem
-  ) => (event: React.ChangeEvent<HTMLInputElement>) => void;
-  changeRep: (
-    item: ExerciseItem
-  ) => (event: React.ChangeEvent<HTMLInputElement>) => void;
-  deleteItem: (order: number) => void;
+  year: number;
+  month: number;
+  day: number;
+  // changeWeight: (
+  //   item: ExerciseItem
+  // ) => (event: React.ChangeEvent<HTMLInputElement>) => void;
+  // changeRep: (
+  //   item: ExerciseItem
+  // ) => (event: React.ChangeEvent<HTMLInputElement>) => void;
+  // deleteItem: (order: number) => void;
 }
 
 const WorkItem: React.FC<WorkItemProps> = ({
   item,
-  changeWeight,
-  changeRep,
-  deleteItem,
+  year,
+  month,
+  day,
+  // changeWeight,
+  // changeRep,
+  // deleteItem,
 }) => {
+  const initialState: State = { message: null, errors: {} };
+  const updateExerciseItemsWithIdentifier = updateExerciseItems.bind(null, year, month, day, item.order);
+  const [state, formAction] = useActionState(updateExerciseItemsWithIdentifier, initialState);
   return (
     <Card className="my-4 w-[600px]" key={item.order}>
       <CardContent className="flex p-4">
         <p>{`ワーク`}</p>
-        <Input
-          className="mx-2 w-100"
-          type="number"
-          value={item.weight ?? ""}
-          onChange={changeWeight(item)}
-          placeholder="重さ"
-        />
-        <p>kg</p>
-        <Input
-          className="mx-2 w-100"
-          type="number"
-          value={item.rep ?? ""}
-          onChange={changeRep(item)}
-          placeholder="回数"
-        />
-        <p>回</p>
-        <Button
-          type="button"
-          className="mx-2 underline"
-          onClick={() => deleteItem(item.order)}
-        >
-          削除
-        </Button>
-        <p>{item.order}</p>
+        <form action={formAction}>
+          <Input
+            name="weight"
+            className="mx-2 w-100"
+            type="number"
+            defaultValue={item.weight ?? ""}
+            // onChange={changeWeight(item)}
+            placeholder="重さ"
+          />
+          <p>kg</p>
+          <div id="weight-error" aria-live="polite" aria-atomic="true">
+            {state.errors?.weight &&
+              state.errors.weight.map((error: string) => (
+                <p className="mt-2 text-sm text-red-500" key={error}>
+                  {error}
+                </p>
+              ))}
+          </div>
+          <Input
+            name="rep"
+            className="mx-2 w-100"
+            type="number"
+            defaultValue={item.rep ?? ""}
+            // onChange={changeRep(item)}
+            placeholder="回数"
+          />
+          <p>回</p>
+          <div id="weight-error" aria-live="polite" aria-atomic="true">
+            {state.errors?.rep &&
+              state.errors.rep.map((error: string) => (
+                <p className="mt-2 text-sm text-red-500" key={error}>
+                  {error}
+                </p>
+              ))}
+          </div>
+          <Button
+            type="submit"
+            className="mx-2 underline"
+            // onClick={() => deleteItem(item.order)}
+          >
+            更新
+          </Button>
+          {/* <Button
+            type="button"
+            className="mx-2 underline"
+            onClick={() => deleteItem(item.order)}
+          >
+            削除
+          </Button> */}
+          <p>{item.order}</p>
+        </form>
       </CardContent>
     </Card>
   );
