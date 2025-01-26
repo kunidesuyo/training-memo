@@ -4,8 +4,8 @@ import {
   ExerciseItem,
   ExerciseWithItems,
 } from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/actions";
-import RestItem from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/RestItem";
-import WorkItem from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/WorkItem";
+import RestItemForm from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/RestItemForm";
+import WorkItemForm from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/WorkItemForm";
 
 export default function ExerciseForm({
   exercise,
@@ -94,7 +94,7 @@ export default function ExerciseForm({
       <h2>{exercise.name}</h2>
       {exercise.items.map((item: ExerciseItem) => {
         return item.type === "WORK" ? (
-          <WorkItem
+          <WorkItemForm
             key={item.order}
             item={item}
             year={parseInt(year)}
@@ -103,7 +103,7 @@ export default function ExerciseForm({
             exerciseOrder={exercise.order}
           />
         ) : item.type === "REST" ? (
-          <RestItem
+          <RestItemForm
             key={item.order}
             item={item}
             year={parseInt(year)}

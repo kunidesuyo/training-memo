@@ -8,7 +8,7 @@ import {
 } from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/actions";
 import { Button } from "@/components/ui/button";
 
-interface RestItemProps {
+interface RestItemFormProps {
   item: ExerciseItem;
   year: number;
   month: number;
@@ -16,7 +16,7 @@ interface RestItemProps {
   exerciseOrder: number;
 }
 
-const RestItem: React.FC<RestItemProps> = ({
+const RestItemForm: React.FC<RestItemFormProps> = ({
   item,
   year,
   month,
@@ -70,4 +70,4 @@ const RestItem: React.FC<RestItemProps> = ({
   );
 };
 
-export default RestItem;
+export default RestItemForm;

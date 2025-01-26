@@ -3,9 +3,12 @@ import { ExerciseItem } from "@/app/api/workouts/[year]/[month]/[day]/exercises/
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { State, updateExerciseItems } from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/actions";
+import {
+  State,
+  updateExerciseItems,
+} from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/actions";
 
-interface WorkItemProps {
+interface WorkItemFormProps {
   item: ExerciseItem;
   year: number;
   month: number;
@@ -13,7 +16,7 @@ interface WorkItemProps {
   exerciseOrder: number;
 }
 
-const WorkItem: React.FC<WorkItemProps> = ({
+const WorkItemForm: React.FC<WorkItemFormProps> = ({
   item,
   year,
   month,
@@ -21,8 +24,18 @@ const WorkItem: React.FC<WorkItemProps> = ({
   exerciseOrder,
 }) => {
   const initialState: State = { message: null, errors: {} };
-  const updateExerciseItemsWithIdentifier = updateExerciseItems.bind(null, year, month, day, item.order, exerciseOrder);
-  const [state, formAction] = useActionState(updateExerciseItemsWithIdentifier, initialState);
+  const updateExerciseItemsWithIdentifier = updateExerciseItems.bind(
+    null,
+    year,
+    month,
+    day,
+    item.order,
+    exerciseOrder
+  );
+  const [state, formAction] = useActionState(
+    updateExerciseItemsWithIdentifier,
+    initialState
+  );
   return (
     <Card className="my-4 w-[600px]" key={item.order}>
       <CardContent className="flex p-4">
@@ -60,16 +73,11 @@ const WorkItem: React.FC<WorkItemProps> = ({
                 </p>
               ))}
           </div>
-          <Button
-            type="submit"
-            className="mx-2 underline"
-          >
+          <Button type="submit" className="mx-2 underline">
             更新
           </Button>
           {/* TODO: ボタン追加 */}
-          <p>
-            削除
-          </p>
+          <p>削除</p>
           {/* <Button
             type="button"
             className="mx-2 underline"
@@ -83,4 +91,4 @@ const WorkItem: React.FC<WorkItemProps> = ({
   );
 };
 
-export default WorkItem;
+export default WorkItemForm;
