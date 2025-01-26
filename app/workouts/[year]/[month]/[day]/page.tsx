@@ -26,7 +26,7 @@ export default async function Workout({
           <Link
             key={exercise.id}
             className="text-blue-500 underline mx-4 my-2"
-            href={`/workouts/${year}/${month}/${day}/exercises/${exercise.id}`}
+            href={`/workouts/${year}/${month}/${day}/exercises/${exercise.order}`}
           >
             {exercise.name}
           </Link>
