@@ -1,51 +1,38 @@
 "use client";
 
-import { ExerciseItem } from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/actions";
+import {
+  ExerciseItem,
+  ExerciseWithItems,
+} from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/actions";
 import RestItem from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/RestItem";
 import WorkItem from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/WorkItem";
-// import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { z } from "zod";
 
-// const ExerciseItemSchema = z.object({
-//   order: z.number(),
-//   time: z.number().nullable(),
-//   type: z.enum(["WORK", "REST"]),
-//   weight: z.number().nullable(),
-//   rep: z.number().nullable(),
-// });
-
-// TODO: 更新処理をserverActionsで行うように修正する
 export default function ExerciseForm({
   exercise,
   pathParams,
 }: {
-  exercise: { name: string; items: ExerciseItem[] };
+  exercise: ExerciseWithItems;
   pathParams: { year: string; month: string; day: string; order: string };
 }) {
-  const [exerciseItems, setExerciseItems] = useState(exercise.items);
-  // const { year, month, day, order } = pathParams;
   const { year, month, day } = pathParams;
-  // const router = useRouter();
 
-  const updateExerciseItem =
-    (item: ExerciseItem, key: keyof ExerciseItem) =>
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      const newExerciseItems = exerciseItems.map((exerciseItem) => {
-        if (exerciseItem.order === item.order) {
-          return { ...exerciseItem, [key]: Number(event.target.value) };
-        } else {
-          return exerciseItem;
-        }
-      });
-      setExerciseItems(newExerciseItems);
-    };
+  // const updateExerciseItem =
+  //   (item: ExerciseItem, key: keyof ExerciseItem) =>
+  //   (event: React.ChangeEvent<HTMLInputElement>) => {
+  //     const newExerciseItems = exerciseItems.map((exerciseItem) => {
+  //       if (exerciseItem.order === item.order) {
+  //         return { ...exerciseItem, [key]: Number(event.target.value) };
+  //       } else {
+  //         return exerciseItem;
+  //       }
+  //     });
+  //     setExerciseItems(newExerciseItems);
+  //   };
 
   // const changeWeight = (item: ExerciseItem) =>
   //   updateExerciseItem(item, "weight");
   // const changeRep = (item: ExerciseItem) => updateExerciseItem(item, "rep");
-  const changeTime = (item: ExerciseItem) => updateExerciseItem(item, "time");
+  // const changeTime = (item: ExerciseItem) => updateExerciseItem(item, "time");
 
   // const handleSubmit = async (event: React.FormEvent) => {
   //   event.preventDefault();
@@ -91,22 +78,21 @@ export default function ExerciseForm({
   //   setExerciseItems(newExerciseItems);
   // };
 
-  const deleteItem = (order: number) => {
-    const deletedExerciseItems = exerciseItems.filter(
-      (item) => item.order !== order
-    );
-    const newExerciseItems = deletedExerciseItems.map((item, index) => {
-      item.order = index + 1;
-      return item;
-    });
-    setExerciseItems(newExerciseItems);
-  };
+  // const deleteItem = (order: number) => {
+  //   const deletedExerciseItems = exerciseItems.filter(
+  //     (item) => item.order !== order
+  //   );
+  //   const newExerciseItems = deletedExerciseItems.map((item, index) => {
+  //     item.order = index + 1;
+  //     return item;
+  //   });
+  //   setExerciseItems(newExerciseItems);
+  // };
 
   return (
     <div>
       <h2>{exercise.name}</h2>
-      {/* <form onSubmit={handleSubmit}> */}
-      {exerciseItems.map((item: ExerciseItem) => {
+      {exercise.items.map((item: ExerciseItem) => {
         return item.type === "WORK" ? (
           <WorkItem
             key={item.order}
@@ -119,8 +105,10 @@ export default function ExerciseForm({
           <RestItem
             key={item.order}
             item={item}
-            changeTime={changeTime}
-            deleteItem={deleteItem}
+            year={parseInt(year)}
+            month={parseInt(month)}
+            day={parseInt(day)}
+            exerciseOrder={exercise.order}
           />
         ) : null;
       })}
@@ -135,7 +123,6 @@ export default function ExerciseForm({
             更新
           </Button>
         </div> */}
-      {/* </form> */}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-'use server';
+"use server";
 
 import { Prisma, PrismaClient } from "@prisma/client";
 import { revalidatePath } from "next/cache";
@@ -67,8 +67,8 @@ export type State = {
     weight?: string[];
     rep?: string[];
   };
-  message?: string|null;
-}
+  message?: string | null;
+};
 
 export async function updateExerciseItems(
   year: number,
@@ -83,12 +83,12 @@ export async function updateExerciseItems(
     weight: formData.get("weight"),
     rep: formData.get("rep"),
   });
-  
+
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      message: 'error',
-    }
+      message: "error",
+    };
   }
   const { weight, rep } = validatedFields.data;
 
@@ -119,4 +119,68 @@ export async function updateExerciseItems(
 
   revalidatePath(`/workouts/${year}/${month}/${day}/exercises/${order}`);
   redirect(`/workouts/${year}/${month}/${day}/exercises/${order}`);
+}
+
+const RestItemFormSchema = z.object({
+  time: z.coerce.number(),
+});
+
+export type RestItemState = {
+  errors?: {
+    time?: string[];
+  };
+  message?: string | null;
+};
+
+export async function updateRest(
+  year: number,
+  month: number,
+  day: number,
+  itemOrder: number,
+  exerciseOrder: number,
+  prevState: RestItemState,
+  formData: FormData
+) {
+  const currenUserId = 1;
+  const validatedFields = RestItemFormSchema.safeParse({
+    time: formData.get("time"),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: "error",
+    };
+  }
+  const { time } = validatedFields.data;
+
+  const targetExerciseItem = await prisma.exerciseItem.findFirstOrThrow({
+    where: {
+      exercise: {
+        workout: {
+          year: year,
+          month: month,
+          day: day,
+          authorId: currenUserId,
+        },
+        order: exerciseOrder,
+      },
+      order: itemOrder,
+    },
+  });
+  const targetExerciseItemId = targetExerciseItem.id;
+
+  await prisma.exerciseItem.update({
+    where: {
+      id: targetExerciseItemId,
+    },
+    data: {
+      time,
+    },
+  });
+
+  revalidatePath(
+    `/workouts/${year}/${month}/${day}/exercises/${exerciseOrder}`
+  );
+  redirect(`/workouts/${year}/${month}/${day}/exercises/${exerciseOrder}`);
 }
