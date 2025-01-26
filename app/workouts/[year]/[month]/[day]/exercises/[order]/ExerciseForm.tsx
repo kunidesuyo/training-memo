@@ -100,6 +100,7 @@ export default function ExerciseForm({
             year={parseInt(year)}
             month={parseInt(month)}
             day={parseInt(day)}
+            exerciseOrder={exercise.order}
           />
         ) : item.type === "REST" ? (
           <RestItem

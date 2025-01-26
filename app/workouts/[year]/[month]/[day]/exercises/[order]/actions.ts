@@ -75,6 +75,7 @@ export async function updateExerciseItems(
   month: number,
   day: number,
   order: number,
+  exerciseOrder: number,
   prevState: State,
   formData: FormData
 ) {
@@ -101,6 +102,7 @@ export async function updateExerciseItems(
           day: day,
           authorId: currenUserId,
         },
+        order: exerciseOrder,
       },
       order: order,
     },
@@ -117,8 +119,10 @@ export async function updateExerciseItems(
     },
   });
 
-  revalidatePath(`/workouts/${year}/${month}/${day}/exercises/${order}`);
-  redirect(`/workouts/${year}/${month}/${day}/exercises/${order}`);
+  revalidatePath(
+    `/workouts/${year}/${month}/${day}/exercises/${exerciseOrder}`
+  );
+  redirect(`/workouts/${year}/${month}/${day}/exercises/${exerciseOrder}`);
 }
 
 const RestItemFormSchema = z.object({

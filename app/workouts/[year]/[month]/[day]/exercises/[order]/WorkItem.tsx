@@ -10,6 +10,7 @@ interface WorkItemProps {
   year: number;
   month: number;
   day: number;
+  exerciseOrder: number;
 }
 
 const WorkItem: React.FC<WorkItemProps> = ({
@@ -17,9 +18,10 @@ const WorkItem: React.FC<WorkItemProps> = ({
   year,
   month,
   day,
+  exerciseOrder,
 }) => {
   const initialState: State = { message: null, errors: {} };
-  const updateExerciseItemsWithIdentifier = updateExerciseItems.bind(null, year, month, day, item.order);
+  const updateExerciseItemsWithIdentifier = updateExerciseItems.bind(null, year, month, day, item.order, exerciseOrder);
   const [state, formAction] = useActionState(updateExerciseItemsWithIdentifier, initialState);
   return (
     <Card className="my-4 w-[600px]" key={item.order}>
