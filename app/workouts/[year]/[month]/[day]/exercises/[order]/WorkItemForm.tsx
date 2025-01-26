@@ -7,6 +7,7 @@ import {
   State,
   updateExerciseItems,
 } from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/actions";
+import DeleteItemButton from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/DeleteItemButton";
 
 interface WorkItemFormProps {
   item: ExerciseItem;
@@ -76,15 +77,13 @@ const WorkItemForm: React.FC<WorkItemFormProps> = ({
           <Button type="submit" className="mx-2 underline">
             更新
           </Button>
-          {/* TODO: ボタン追加 */}
-          <p>削除</p>
-          {/* <Button
-            type="button"
-            className="mx-2 underline"
-            onClick={() => deleteItem(item.order)}
-          >
-            削除
-          </Button> */}
+          <DeleteItemButton
+            year={year}
+            month={month}
+            day={day}
+            exerciseOrder={exerciseOrder}
+            itemOrder={item.order}
+          />
         </form>
       </CardContent>
     </Card>

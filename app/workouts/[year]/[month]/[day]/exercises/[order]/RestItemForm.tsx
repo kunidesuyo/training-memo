@@ -7,6 +7,7 @@ import {
   updateRest,
 } from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/actions";
 import { Button } from "@/components/ui/button";
+import DeleteItemButton from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/DeleteItemButton";
 
 interface RestItemFormProps {
   item: ExerciseItem;
@@ -60,9 +61,13 @@ const RestItemForm: React.FC<RestItemFormProps> = ({
           <Button type="submit" className="mx-2 underline">
             更新
           </Button>
-          {/* <Button type="submit" className="mx-2 underline">
-            削除
-          </Button> */}
+          <DeleteItemButton
+            year={year}
+            month={month}
+            day={day}
+            exerciseOrder={exerciseOrder}
+            itemOrder={item.order}
+          />
           <p>{item.order}</p>
         </form>
       </CardContent>
