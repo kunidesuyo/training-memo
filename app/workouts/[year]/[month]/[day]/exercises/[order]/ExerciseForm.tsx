@@ -15,8 +15,7 @@ export default function ExerciseForm({
   exercise: ExerciseWithItems;
   pathParams: { year: string; month: string; day: string; order: string };
 }) {
-  // order使うように変更
-  const { year, month, day } = pathParams;
+  const { year, month, day, order } = pathParams;
 
   return (
     <div>
@@ -29,7 +28,7 @@ export default function ExerciseForm({
             year={parseInt(year)}
             month={parseInt(month)}
             day={parseInt(day)}
-            exerciseOrder={exercise.order}
+            exerciseOrder={parseInt(order)}
           />
         ) : item.type === "REST" ? (
           <RestItemForm
@@ -38,7 +37,7 @@ export default function ExerciseForm({
             year={parseInt(year)}
             month={parseInt(month)}
             day={parseInt(day)}
-            exerciseOrder={exercise.order}
+            exerciseOrder={parseInt(order)}
           />
         ) : null;
       })}
@@ -48,14 +47,14 @@ export default function ExerciseForm({
           year={parseInt(year)}
           month={parseInt(month)}
           day={parseInt(day)}
-          exerciseOrder={exercise.order}
+          exerciseOrder={parseInt(order)}
         />
         <AddItemButton
           type={"REST"}
           year={parseInt(year)}
           month={parseInt(month)}
           day={parseInt(day)}
-          exerciseOrder={exercise.order}
+          exerciseOrder={parseInt(order)}
         />
       </div>
     </div>
