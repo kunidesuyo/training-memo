@@ -18,7 +18,7 @@ export default function DeleteItemButton({
   itemOrder: number;
 }) {
   return (
-    <div>
+    <form>
       <Button
         formAction={() =>
           deleteItem(year, month, day, exerciseOrder, itemOrder)
@@ -26,6 +26,6 @@ export default function DeleteItemButton({
       >
         削除
       </Button>
-    </div>
+    </form>
   );
 }

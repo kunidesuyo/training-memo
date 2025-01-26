@@ -77,14 +77,14 @@ const WorkItemForm: React.FC<WorkItemFormProps> = ({
           <Button type="submit" className="mx-2 underline">
             更新
           </Button>
-          <DeleteItemButton
-            year={year}
-            month={month}
-            day={day}
-            exerciseOrder={exerciseOrder}
-            itemOrder={item.order}
-          />
         </form>
+        <DeleteItemButton
+          year={year}
+          month={month}
+          day={day}
+          exerciseOrder={exerciseOrder}
+          itemOrder={item.order}
+        />
       </CardContent>
     </Card>
   );
