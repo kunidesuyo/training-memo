@@ -4,6 +4,7 @@ import {
   ExerciseItem,
   ExerciseWithItems,
 } from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/actions";
+import AddItemButton from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/AddItemButton";
 import RestItemForm from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/RestItemForm";
 import WorkItemForm from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/WorkItemForm";
 
@@ -14,6 +15,7 @@ export default function ExerciseForm({
   exercise: ExerciseWithItems;
   pathParams: { year: string; month: string; day: string; order: string };
 }) {
+  // order使うように変更
   const { year, month, day } = pathParams;
 
   return (
@@ -40,17 +42,22 @@ export default function ExerciseForm({
           />
         ) : null;
       })}
-      {/* <div className="my-4">
-          <Button type="button" className="mx-2 underline" onClick={addWork}>
-            ワーク追加
-          </Button>
-          <Button type="button" className="mx-2 underline" onClick={addRest}>
-            レスト追加
-          </Button>
-          <Button type="submit" className="mx-2 underline">
-            更新
-          </Button>
-        </div> */}
+      <div className="my-4">
+        <AddItemButton
+          type={"WORK"}
+          year={parseInt(year)}
+          month={parseInt(month)}
+          day={parseInt(day)}
+          exerciseOrder={exercise.order}
+        />
+        <AddItemButton
+          type={"REST"}
+          year={parseInt(year)}
+          month={parseInt(month)}
+          day={parseInt(day)}
+          exerciseOrder={exercise.order}
+        />
+      </div>
     </div>
   );
 }
