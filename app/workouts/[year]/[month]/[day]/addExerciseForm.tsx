@@ -24,25 +24,29 @@ export default function AddExerciseForm({
   const [state, formAction] = useActionState(addExercise_, initialState);
 
   return (
-    <form action={formAction} className="flex items-center">
-      <Input
-        className="w-100"
-        type="text"
-        name="name"
-        placeholder="エクササイズ名"
-        defaultValue={""}
-      />
-      <div id="weight-error" aria-live="polite" aria-atomic="true">
-        {state.errors?.name &&
-          state.errors.name.map((error: string) => (
-            <p className="mt-2 text-sm text-red-500" key={error}>
-              {error}
-            </p>
-          ))}
+    <form action={formAction}>
+      <div className="flex">
+        <div>
+          <Input
+            className="w-[300px]"
+            type="text"
+            name="name"
+            placeholder="エクササイズ名"
+            defaultValue={""}
+          />
+          <div id="name-error" aria-live="polite" aria-atomic="true">
+            {state.errors?.name &&
+              state.errors.name.map((error: string) => (
+                <p className="mt-2 text-sm text-red-500" key={error}>
+                  {error}
+                </p>
+              ))}
+          </div>
+        </div>
+        <Button type="submit" className="mx-2 underline">
+          エクササイズ追加
+        </Button>
       </div>
-      <Button type="submit" className="mx-2 underline">
-        エクササイズ追加
-      </Button>
     </form>
   );
 }
