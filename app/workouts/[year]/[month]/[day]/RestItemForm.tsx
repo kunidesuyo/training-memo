@@ -8,7 +8,7 @@ import DeleteItemButton from "@/app/workouts/[year]/[month]/[day]/DeleteItemButt
 import {
   RestItemState,
   updateRest,
-} from "@/app/workouts/[year]/[month]/[day]/_actions/actions_";
+} from "@/app/workouts/[year]/[month]/[day]/_actions/updateRest";
 
 interface RestItemFormProps {
   item: ExerciseItem;
