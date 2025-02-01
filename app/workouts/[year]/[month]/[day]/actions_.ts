@@ -34,14 +34,14 @@ export type ExerciseWithItems = Prisma.ExerciseGetPayload<
 
 export type ExerciseItem = ExerciseWithItems["items"][number];
 
-export async function getExerciseWithItems(
+export async function getExercisesWithItems(
   year: number,
   month: number,
-  day: number,
-  order: number
-): Promise<ExerciseWithItems> {
+  day: number
+  // order: number
+): Promise<ExerciseWithItems[]> {
   const currenUserId = 1;
-  const exercise = await prisma.exercise.findFirstOrThrow({
+  const exercises = await prisma.exercise.findMany({
     where: {
       workout: {
         year,
@@ -49,12 +49,12 @@ export async function getExerciseWithItems(
         day,
         authorId: currenUserId,
       },
-      order,
+      // order,
       authorId: currenUserId,
     },
     select: exerciseWithItems.select,
   });
-  return exercise;
+  return exercises;
 }
 
 const WorkItemFormSchema = z.object({
@@ -119,10 +119,8 @@ export async function updateExerciseItems(
     },
   });
 
-  revalidatePath(
-    `/workouts/${year}/${month}/${day}/exercises/${exerciseOrder}`
-  );
-  redirect(`/workouts/${year}/${month}/${day}/exercises/${exerciseOrder}`);
+  revalidatePath(`/workouts/${year}/${month}/${day}`);
+  redirect(`/workouts/${year}/${month}/${day}`);
 }
 
 const RestItemFormSchema = z.object({
@@ -183,10 +181,8 @@ export async function updateRest(
     },
   });
 
-  revalidatePath(
-    `/workouts/${year}/${month}/${day}/exercises/${exerciseOrder}`
-  );
-  redirect(`/workouts/${year}/${month}/${day}/exercises/${exerciseOrder}`);
+  revalidatePath(`/workouts/${year}/${month}/${day}`);
+  redirect(`/workouts/${year}/${month}/${day}`);
 }
 
 export async function deleteItem(
@@ -220,10 +216,8 @@ export async function deleteItem(
     },
   });
 
-  revalidatePath(
-    `/workouts/${year}/${month}/${day}/exercises/${exerciseOrder}`
-  );
-  redirect(`/workouts/${year}/${month}/${day}/exercises/${exerciseOrder}`);
+  revalidatePath(`/workouts/${year}/${month}/${day}`);
+  redirect(`/workouts/${year}/${month}/${day}`);
 }
 
 export async function addItemToExercise(
@@ -267,6 +261,6 @@ export async function addItemToExercise(
     },
   });
 
-  revalidatePath(`/workouts/${year}/${month}/${day}/exercises/${exerciseOrder}`);
-  redirect(`/workouts/${year}/${month}/${day}/exercises/${exerciseOrder}`);
+  revalidatePath(`/workouts/${year}/${month}/${day}`);
+  redirect(`/workouts/${year}/${month}/${day}`);
 }

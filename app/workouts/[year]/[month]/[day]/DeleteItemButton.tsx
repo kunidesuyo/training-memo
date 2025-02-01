@@ -1,6 +1,6 @@
 "use client";
 
-import { deleteItem } from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/actions";
+import { deleteItem } from "@/app/workouts/[year]/[month]/[day]/actions_";
 import { Button } from "@/components/ui/button";
 import React from "react";
 

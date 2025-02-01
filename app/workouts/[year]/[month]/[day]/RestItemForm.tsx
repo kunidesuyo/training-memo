@@ -2,12 +2,13 @@ import React, { useActionState } from "react";
 import { ExerciseItem } from "@/app/api/workouts/[year]/[month]/[day]/exercises/[order]/route";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
+
+import { Button } from "@/components/ui/button";
+import DeleteItemButton from "@/app/workouts/[year]/[month]/[day]/DeleteItemButton";
 import {
   RestItemState,
   updateRest,
-} from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/actions";
-import { Button } from "@/components/ui/button";
-import DeleteItemButton from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/DeleteItemButton";
+} from "@/app/workouts/[year]/[month]/[day]/actions_";
 
 interface RestItemFormProps {
   item: ExerciseItem;

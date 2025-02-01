@@ -3,10 +3,10 @@
 import {
   ExerciseItem,
   ExerciseWithItems,
-} from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/actions";
-import AddItemButton from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/AddItemButton";
-import RestItemForm from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/RestItemForm";
-import WorkItemForm from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/WorkItemForm";
+} from "@/app/workouts/[year]/[month]/[day]/actions_";
+import AddItemButton from "@/app/workouts/[year]/[month]/[day]/AddItemButton";
+import RestItemForm from "@/app/workouts/[year]/[month]/[day]/RestItemForm";
+import WorkItemForm from "@/app/workouts/[year]/[month]/[day]/WorkItemForm";
 
 export default function ExerciseForm({
   exercise,

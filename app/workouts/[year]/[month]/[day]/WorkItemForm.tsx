@@ -3,11 +3,11 @@ import { ExerciseItem } from "@/app/api/workouts/[year]/[month]/[day]/exercises/
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import DeleteItemButton from "@/app/workouts/[year]/[month]/[day]/DeleteItemButton";
 import {
   State,
   updateExerciseItems,
-} from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/actions";
-import DeleteItemButton from "@/app/workouts/[year]/[month]/[day]/exercises/[order]/DeleteItemButton";
+} from "@/app/workouts/[year]/[month]/[day]/actions_";
 
 interface WorkItemFormProps {
   item: ExerciseItem;

@@ -1,9 +1,13 @@
 import {
-  Exercise,
   getWorkoutWithExercise,
   WorkoutWithExercises,
 } from "@/app/workouts/[year]/[month]/[day]/actions";
+import {
+  ExerciseWithItems,
+  getExercisesWithItems,
+} from "@/app/workouts/[year]/[month]/[day]/actions_";
 import AddExerciseForm from "@/app/workouts/[year]/[month]/[day]/addExerciseForm";
+import ExerciseForm from "@/app/workouts/[year]/[month]/[day]/ExerciseForm";
 import {
   Accordion,
   AccordionContent,
@@ -18,7 +22,14 @@ export default async function Workout({
   params: { year: string; month: string; day: string };
 }) {
   const { year, month, day } = await params;
+  // TODO: ワークアウトとそれに紐づくエクササイズを一度に取得する
   const workout: WorkoutWithExercises = await getWorkoutWithExercise(
+    parseInt(year),
+    parseInt(month),
+    parseInt(day)
+  );
+
+  const exercises: ExerciseWithItems[] = await getExercisesWithItems(
     parseInt(year),
     parseInt(month),
     parseInt(day)
@@ -29,8 +40,11 @@ export default async function Workout({
       <h2>{`${workout.year}年${workout.month}月${workout.day}日のワークアウト`}</h2>
       <div>
         <Accordion type="single" collapsible>
-          {workout.exercises?.map((exercise: Exercise) => (
-            <AccordionItem key={exercise.id.toString()} value={exercise.id.toString()}>
+          {exercises.map((exercise: ExerciseWithItems) => (
+            <AccordionItem
+              key={exercise.id.toString()}
+              value={exercise.id.toString()}
+            >
               <AccordionTrigger>{exercise.name}</AccordionTrigger>
               <AccordionContent>
                 <Link
@@ -40,6 +54,15 @@ export default async function Workout({
                 >
                   {exercise.name}
                 </Link>
+                <ExerciseForm
+                  exercise={exercise}
+                  pathParams={{
+                    year,
+                    month,
+                    day,
+                    order: exercise.order.toString(),
+                  }}
+                />
               </AccordionContent>
             </AccordionItem>
           ))}
