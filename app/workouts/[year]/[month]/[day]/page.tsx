@@ -1,7 +1,7 @@
 import {
   getWorkoutWithExercise,
   WorkoutWithExercises,
-} from "@/app/workouts/[year]/[month]/[day]/_actions/actions";
+} from "@/app/workouts/[year]/[month]/[day]/_actions/getWorkoutWithExercise";
 import {
   ExerciseWithItems,
   getExercisesWithItems,
