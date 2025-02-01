@@ -1,7 +1,5 @@
 import { getCurrentUser } from "@/app/_utils/getCurrentUser";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { prisma } from "@/prisma";
 
 export type Workout = {
   id: number;
