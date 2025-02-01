@@ -1,4 +1,4 @@
-import { addItemToExercise } from "@/app/workouts/[year]/[month]/[day]/actions_";
+import { addItemToExercise } from "@/app/workouts/[year]/[month]/[day]/_actions/actions_";
 import { Button } from "@/components/ui/button";
 import { ExerciseItemType } from "@prisma/client";
 import React from "react";

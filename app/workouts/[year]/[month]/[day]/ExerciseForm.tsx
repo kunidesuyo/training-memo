@@ -3,7 +3,7 @@
 import {
   ExerciseItem,
   ExerciseWithItems,
-} from "@/app/workouts/[year]/[month]/[day]/actions_";
+} from "@/app/workouts/[year]/[month]/[day]/_actions/actions_";
 import AddItemButton from "@/app/workouts/[year]/[month]/[day]/AddItemButton";
 import RestItemForm from "@/app/workouts/[year]/[month]/[day]/RestItemForm";
 import WorkItemForm from "@/app/workouts/[year]/[month]/[day]/WorkItemForm";

@@ -7,7 +7,7 @@ import DeleteItemButton from "@/app/workouts/[year]/[month]/[day]/DeleteItemButt
 import {
   State,
   updateExerciseItems,
-} from "@/app/workouts/[year]/[month]/[day]/actions_";
+} from "@/app/workouts/[year]/[month]/[day]/_actions/actions_";
 
 interface WorkItemFormProps {
   item: ExerciseItem;

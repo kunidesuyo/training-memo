@@ -1,11 +1,11 @@
 import {
   getWorkoutWithExercise,
   WorkoutWithExercises,
-} from "@/app/workouts/[year]/[month]/[day]/actions";
+} from "@/app/workouts/[year]/[month]/[day]/_actions/actions";
 import {
   ExerciseWithItems,
   getExercisesWithItems,
-} from "@/app/workouts/[year]/[month]/[day]/actions_";
+} from "@/app/workouts/[year]/[month]/[day]/_actions/actions_";
 import AddExerciseForm from "@/app/workouts/[year]/[month]/[day]/addExerciseForm";
 import ExerciseForm from "@/app/workouts/[year]/[month]/[day]/ExerciseForm";
 import {
