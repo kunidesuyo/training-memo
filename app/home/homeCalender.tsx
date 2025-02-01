@@ -1,9 +1,7 @@
-'use client';
+"use client";
 
 import React from "react";
 import { Calendar } from "@/components/ui/calendar";
-
-import { Matcher } from "react-day-picker";
 import { usePathname, useRouter } from "next/navigation";
 import { Workout } from "@/app/home/actions";
 
@@ -16,24 +14,14 @@ export default function HomeCalender({
   workouts: Workout[];
   selectedDate: Date;
 }) {
-  const isSameDay = (date: Date, workout: Workout): boolean => {
-    return (
-      date.getDate() === workout.day &&
-      date.getMonth() + 1 === workout.month &&
-      date.getFullYear() === workout.year
-    );
-  };
-
-  const matcher: Matcher = (date: Date) => {
-    return !workouts.some((workout: Workout) => {
-      return isSameDay(date, workout);
-    });
-  };
-
   const pathname = usePathname();
   const router = useRouter();
- 
-  const showSelectedDateCalendar = (date: Date|undefined) => {
+
+  const workoutDays = workouts.map(
+    (workout: Workout) => new Date(workout.year, workout.month - 1, workout.day)
+  );
+
+  const showSelectedDateCalendar = (date: Date | undefined) => {
     if (!date) return;
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
@@ -42,7 +30,7 @@ export default function HomeCalender({
     params.set("year", year.toString());
     params.set("month", month.toString());
     params.set("day", day.toString());
-    const url = `${pathname}?${params.toString()}`
+    const url = `${pathname}?${params.toString()}`;
     router.push(url);
   };
 
@@ -53,7 +41,8 @@ export default function HomeCalender({
         selected={selectedDate}
         onSelect={showSelectedDateCalendar}
         onMonthChange={showSelectedDateCalendar}
-        disabled={matcher}
+        modifiers={{ workoutDay: workoutDays }}
+        modifiersClassNames={{ workoutDay: "bg-red-900" }}
       />
     </div>
   );
