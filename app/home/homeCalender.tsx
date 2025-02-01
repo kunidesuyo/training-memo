@@ -41,10 +41,22 @@ export default function HomeCalender({
     params.set("year", year.toString());
     params.set("month", month.toString());
     params.set("day", day.toString());
-    // ページ遷移
     const url = `${pathname}?${params.toString()}`
     router.push(url);
-  }; 
+  };
+
+  const showSelectedMonthCalendar = (date: Date|undefined) => {
+    if (!date) return;
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const params = new URLSearchParams();
+    params.set("year", year.toString());
+    params.set("month", month.toString());
+    params.set("day", day.toString());
+    const url = `${pathname}?${params.toString()}`
+    router.push(url);
+  }
 
   return (
     <div className="my-4 rounded-md border p-4">
@@ -52,6 +64,7 @@ export default function HomeCalender({
         mode="single"
         selected={selectedDate}
         onSelect={showSelectedDateCalendar}
+        onMonthChange={showSelectedMonthCalendar}
         disabled={matcher}
       />
     </div>
