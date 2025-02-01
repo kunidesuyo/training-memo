@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { prisma } from "@/prisma";
+import { getCurrentUser } from "@/app/_utils/getCurrentUser";
 
 const RestItemFormSchema = z.object({
   time: z.coerce.number(),
@@ -25,7 +26,7 @@ export async function updateRest(
   prevState: RestItemState,
   formData: FormData
 ) {
-  const currenUserId = 1;
+  const { id: currentUserId } = getCurrentUser();
   const validatedFields = RestItemFormSchema.safeParse({
     time: formData.get("time"),
   });
@@ -45,7 +46,7 @@ export async function updateRest(
           year: year,
           month: month,
           day: day,
-          authorId: currenUserId,
+          authorId: currentUserId,
         },
         order: exerciseOrder,
       },

@@ -4,6 +4,7 @@ import { ExerciseItemType } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { prisma } from "@/prisma";
+import { getCurrentUser } from "@/app/_utils/getCurrentUser";
 
 
 export async function addItemToExercise(
@@ -13,7 +14,7 @@ export async function addItemToExercise(
   day: number,
   exerciseOrder: number
 ) {
-  const currenUserId = 1;
+  const { id: currentUserId } = getCurrentUser();
   const allExerciseItems = await prisma.exerciseItem.findMany({
     where: {
       exercise: {
@@ -21,7 +22,7 @@ export async function addItemToExercise(
           year,
           month,
           day,
-          authorId: currenUserId,
+          authorId: currentUserId,
         },
         order: exerciseOrder,
       },
@@ -43,7 +44,7 @@ export async function addItemToExercise(
       type,
       order: maxOrder + 1,
       exerciseId: targetExerciseId,
-      authorId: currenUserId,
+      authorId: currentUserId,
     },
   });
 

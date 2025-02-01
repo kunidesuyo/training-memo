@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { prisma } from "@/prisma";
+import { getCurrentUser } from "@/app/_utils/getCurrentUser";
 
 export async function deleteItem(
   year: number,
@@ -11,8 +12,7 @@ export async function deleteItem(
   exerciseOrder: number,
   itemOrder: number
 ) {
-  const currenUserId = 1;
-
+  const { id: currentUserId } = getCurrentUser();
   const targetExerciseItem = await prisma.exerciseItem.findFirstOrThrow({
     where: {
       exercise: {
@@ -20,7 +20,7 @@ export async function deleteItem(
           year: year,
           month: month,
           day: day,
-          authorId: currenUserId,
+          authorId: currentUserId,
         },
         order: exerciseOrder,
       },

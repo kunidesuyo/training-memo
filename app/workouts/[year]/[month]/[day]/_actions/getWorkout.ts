@@ -1,3 +1,4 @@
+import { getCurrentUser } from "@/app/_utils/getCurrentUser";
 import { prisma } from "@/prisma";
 import { Prisma } from "@prisma/client";
 
@@ -38,15 +39,14 @@ export async function getWorkout(
   month: number,
   day: number
 ): Promise<Workout> {
-  // TODO: ログインユーザのIDで取得するようにする
-  const currenUserId = 1;
+  const { id: currentUserId } = getCurrentUser();
   const workout = await prisma.workout.findUniqueOrThrow({
     where: {
       year_month_day_authorId: {
         year,
         month,
         day,
-        authorId: currenUserId,
+        authorId: currentUserId,
       },
     },
     select: workoutValidator.select,

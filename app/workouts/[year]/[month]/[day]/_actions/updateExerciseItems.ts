@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { prisma } from "@/prisma";
+import { getCurrentUser } from "@/app/_utils/getCurrentUser";
 
 const WorkItemFormSchema = z.object({
   weight: z.coerce.number(),
@@ -27,7 +28,7 @@ export async function updateExerciseItems(
   prevState: State,
   formData: FormData
 ) {
-  const currenUserId = 1;
+  const { id: currentUserId } = getCurrentUser();
   const validatedFields = WorkItemFormSchema.safeParse({
     weight: formData.get("weight"),
     rep: formData.get("rep"),
@@ -48,7 +49,7 @@ export async function updateExerciseItems(
           year: year,
           month: month,
           day: day,
-          authorId: currenUserId,
+          authorId: currentUserId,
         },
         order: exerciseOrder,
       },

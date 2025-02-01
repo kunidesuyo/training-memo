@@ -4,6 +4,7 @@ import { z } from "zod";
 import { prisma } from "@/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { getCurrentUser } from "@/app/_utils/getCurrentUser";
 
 export type State = {
   errors?: {
@@ -23,7 +24,7 @@ export async function addExercise(
   prevState: State,
   formData: FormData
 ) {
-  const currenUserId = 1;
+  const { id: currentUserId } = getCurrentUser();
   const validatedFields = ExerciseFormSchema.safeParse({
     name: formData.get("name"),
   });
@@ -41,7 +42,7 @@ export async function addExercise(
       year: year,
       month: month,
       day: day,
-      authorId: currenUserId,
+      authorId: currentUserId,
     },
     select: {
       id: true,
@@ -63,7 +64,7 @@ export async function addExercise(
       name: name,
       workoutId,
       order: newOrder,
-      authorId: currenUserId,
+      authorId: currentUserId,
     },
   });
   revalidatePath(`/workouts/${year}/${month}/${day}`);
