@@ -38,7 +38,7 @@ const WorkItemForm: React.FC<WorkItemFormProps> = ({
     initialState
   );
   return (
-    <Card className="my-4 w-[600px]" key={item.order}>
+    <Card className="my-4" key={item.order}>
       <CardContent className="flex p-4">
         <p>{`ワーク`}</p>
         <form action={formAction} className="flex">

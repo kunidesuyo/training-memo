@@ -40,7 +40,7 @@ const RestItemForm: React.FC<RestItemFormProps> = ({
   );
 
   return (
-    <Card className="my-4 w-[600px]" key={item.order}>
+    <Card className="my-4" key={item.order}>
       <CardContent className="flex p-4">
         <p>{`レスト`}</p>
         <form action={formAction} className="flex">
@@ -62,7 +62,6 @@ const RestItemForm: React.FC<RestItemFormProps> = ({
           <Button type="submit" className="mx-2 underline">
             更新
           </Button>
-          <p>{item.order}</p>
         </form>
         <DeleteItemButton
           year={year}
