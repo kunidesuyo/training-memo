@@ -5,8 +5,6 @@ import { Calendar } from "@/components/ui/calendar";
 import { usePathname, useRouter } from "next/navigation";
 import { Workout } from "@/app/home/actions";
 
-// TODO: 全ての日付は選択できるようにする
-//   ワークアウトが存在する日は色をかえる
 export default function HomeCalender({
   workouts,
   selectedDate,
