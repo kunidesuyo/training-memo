@@ -14,7 +14,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import Link from "next/link";
 
 export default async function Workout({
   params,
@@ -47,13 +46,6 @@ export default async function Workout({
             >
               <AccordionTrigger>{exercise.name}</AccordionTrigger>
               <AccordionContent>
-                <Link
-                  key={exercise.id}
-                  className="text-blue-500 underline mx-4 my-2"
-                  href={`/workouts/${year}/${month}/${day}/exercises/${exercise.order}`}
-                >
-                  {exercise.name}
-                </Link>
                 <ExerciseForm
                   exercise={exercise}
                   pathParams={{
