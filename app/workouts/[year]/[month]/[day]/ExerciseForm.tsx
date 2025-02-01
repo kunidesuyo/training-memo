@@ -19,7 +19,6 @@ export default function ExerciseForm({
 
   return (
     <div>
-      <h2>{exercise.name}</h2>
       {exercise.items.map((item: ExerciseItem) => {
         return item.type === "WORK" ? (
           <WorkItemForm
