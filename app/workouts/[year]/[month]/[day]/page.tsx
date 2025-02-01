@@ -30,7 +30,7 @@ export default async function Workout({
       <div>
         <Accordion type="single" collapsible>
           {workout.exercises?.map((exercise: Exercise) => (
-            <AccordionItem value={exercise.id.toString()}>
+            <AccordionItem key={exercise.id.toString()} value={exercise.id.toString()}>
               <AccordionTrigger>{exercise.name}</AccordionTrigger>
               <AccordionContent>
                 <Link
