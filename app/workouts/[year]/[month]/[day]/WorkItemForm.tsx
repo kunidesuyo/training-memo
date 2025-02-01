@@ -1,5 +1,4 @@
 import React, { useActionState } from "react";
-import { ExerciseItem } from "@/app/api/workouts/[year]/[month]/[day]/exercises/[order]/route";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -8,6 +7,7 @@ import {
   State,
   updateExerciseItems,
 } from "@/app/workouts/[year]/[month]/[day]/_actions/updateExerciseItems";
+import { ExerciseItem } from "@/app/workouts/[year]/[month]/[day]/_actions/getWorkout";
 
 interface WorkItemFormProps {
   item: ExerciseItem;
