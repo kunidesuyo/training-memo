@@ -48,9 +48,9 @@ export async function getWorkoutWithExercise(
   year: number,
   month: number,
   day: number
-): Promise<WorkoutWithExercises> {
+): Promise<WorkoutWithExercises|null> {
   const { id: currentUserId } = getCurrentUser();
-  const workout = await prisma.workout.findUniqueOrThrow({
+  const workout = await prisma.workout.findUnique({
     where: {
       year_month_day_authorId: {
         year,

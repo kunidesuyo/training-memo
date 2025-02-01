@@ -14,11 +14,8 @@ export default async function SelectedWorkout({
   const year = selectedDate.getFullYear();
   const month = selectedDate.getMonth() + 1;
   const day = selectedDate.getDate();
-  const selectedWorkout: WorkoutWithExercises = await getWorkoutWithExercise(
-    year,
-    month,
-    day
-  );
+  const selectedWorkout: WorkoutWithExercises | null =
+    await getWorkoutWithExercise(year, month, day);
 
   return (
     <div>
@@ -42,6 +39,12 @@ export default async function SelectedWorkout({
                 <p>
                   エクササイズ{index + 1}: {exercise.name}
                 </p>
+                <Link
+                  href="/workouts/[year]/[month]/[day]"
+                  as={`/workouts/${year}/${month}/${day}`}
+                >
+                  詳細
+                </Link>
               </div>
             )
           )}
@@ -50,12 +53,6 @@ export default async function SelectedWorkout({
         <p>ワークアウトが見つかりませんでした。</p>
         // TODO: 新しくワークアウトを作成できるようにする
       )}
-      <Link
-        href="/workouts/[year]/[month]/[day]"
-        as={`/workouts/${year}/${month}/${day}`}
-      >
-        詳細
-      </Link>
     </div>
   );
 }
