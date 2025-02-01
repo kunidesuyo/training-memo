@@ -43,7 +43,7 @@ const RestItemForm: React.FC<RestItemFormProps> = ({
     <Card className="my-4 w-[600px]" key={item.order}>
       <CardContent className="flex p-4">
         <p>{`レスト`}</p>
-        <form action={formAction}>
+        <form action={formAction} className="flex">
           <Input
             name="time"
             className="mx-2 w-100"

@@ -41,7 +41,7 @@ export default function ExerciseForm({
           />
         ) : null;
       })}
-      <div className="my-4">
+      <div className="my-4 flex">
         <AddItemButton
           type={"WORK"}
           year={parseInt(year)}

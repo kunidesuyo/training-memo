@@ -41,7 +41,7 @@ const WorkItemForm: React.FC<WorkItemFormProps> = ({
     <Card className="my-4 w-[600px]" key={item.order}>
       <CardContent className="flex p-4">
         <p>{`ワーク`}</p>
-        <form action={formAction}>
+        <form action={formAction} className="flex">
           <Input
             name="weight"
             className="mx-2 w-100"
