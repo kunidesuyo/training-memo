@@ -5,7 +5,7 @@ import {
 import {
   ExerciseWithItems,
   getExercisesWithItems,
-} from "@/app/workouts/[year]/[month]/[day]/_actions/actions_";
+} from "@/app/workouts/[year]/[month]/[day]/_actions/getExercisesWithItems";
 import AddExerciseForm from "@/app/workouts/[year]/[month]/[day]/addExerciseForm";
 import ExerciseForm from "@/app/workouts/[year]/[month]/[day]/ExerciseForm";
 import {
