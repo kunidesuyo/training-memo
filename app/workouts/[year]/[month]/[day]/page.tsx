@@ -1,11 +1,3 @@
-import {
-  getWorkoutWithExercise,
-  WorkoutWithExercises,
-} from "@/app/workouts/[year]/[month]/[day]/_actions/getWorkoutWithExercise";
-import {
-  ExerciseWithItems,
-  getExercisesWithItems,
-} from "@/app/workouts/[year]/[month]/[day]/_actions/getExercisesWithItems";
 import AddExerciseForm from "@/app/workouts/[year]/[month]/[day]/addExerciseForm";
 import ExerciseForm from "@/app/workouts/[year]/[month]/[day]/ExerciseForm";
 import {
@@ -14,6 +6,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { getWorkout } from "@/app/workouts/[year]/[month]/[day]/_actions/getWorkout";
+import type {
+  ExerciseWithItems,
+  Workout,
+} from "@/app/workouts/[year]/[month]/[day]/_actions/getWorkout";
 
 export default async function Workout({
   params,
@@ -21,14 +18,7 @@ export default async function Workout({
   params: { year: string; month: string; day: string };
 }) {
   const { year, month, day } = await params;
-  // TODO: ワークアウトとそれに紐づくエクササイズを一度に取得する
-  const workout: WorkoutWithExercises = await getWorkoutWithExercise(
-    parseInt(year),
-    parseInt(month),
-    parseInt(day)
-  );
-
-  const exercises: ExerciseWithItems[] = await getExercisesWithItems(
+  const workout_: Workout = await getWorkout(
     parseInt(year),
     parseInt(month),
     parseInt(day)
@@ -36,10 +26,10 @@ export default async function Workout({
 
   return (
     <div>
-      <h2>{`${workout.year}年${workout.month}月${workout.day}日のワークアウト`}</h2>
+      <h2>{`${year}年${month}月${day}日のワークアウト`}</h2>
       <div>
         <Accordion type="single" collapsible>
-          {exercises.map((exercise: ExerciseWithItems) => (
+          {workout_.exercises.map((exercise: ExerciseWithItems) => (
             <AccordionItem
               key={exercise.id.toString()}
               value={exercise.id.toString()}
