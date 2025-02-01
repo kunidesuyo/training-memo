@@ -32,6 +32,7 @@ export default function HomeCalender({
 
   const pathname = usePathname();
   const router = useRouter();
+ 
   const showSelectedDateCalendar = (date: Date|undefined) => {
     if (!date) return;
     const year = date.getFullYear();
@@ -45,26 +46,13 @@ export default function HomeCalender({
     router.push(url);
   };
 
-  const showSelectedMonthCalendar = (date: Date|undefined) => {
-    if (!date) return;
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-    const params = new URLSearchParams();
-    params.set("year", year.toString());
-    params.set("month", month.toString());
-    params.set("day", day.toString());
-    const url = `${pathname}?${params.toString()}`
-    router.push(url);
-  }
-
   return (
     <div className="my-4 rounded-md border p-4">
       <Calendar
         mode="single"
         selected={selectedDate}
         onSelect={showSelectedDateCalendar}
-        onMonthChange={showSelectedMonthCalendar}
+        onMonthChange={showSelectedDateCalendar}
         disabled={matcher}
       />
     </div>
