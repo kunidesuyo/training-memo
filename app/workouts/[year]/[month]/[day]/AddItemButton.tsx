@@ -16,25 +16,25 @@ export default function AddItemButton({
   day: number;
   exerciseOrder: number;
 }) {
+  const buttonLabel = () => {
+    switch (type) {
+      case "WORK":
+      return "ワーク";
+      case "REST":
+      return "レスト";
+      default:
+      return "";
+    }
+  }
   return (
     <form>
-      {type === "WORK" ? (
-        <Button
-          formAction={() =>
-            addItemToExercise(type, year, month, day, exerciseOrder)
-          }
-        >
-          ワーク追加
-        </Button>
-      ) : type === "REST" ? (
-        <Button
-          formAction={() =>
-            addItemToExercise(type, year, month, day, exerciseOrder)
-          }
-        >
-          レスト追加
-        </Button>
-      ) : null}
+      <Button
+        formAction={() =>
+          addItemToExercise(type, year, month, day, exerciseOrder)
+        }
+      >
+        {buttonLabel() + "追加"}
+      </Button>
     </form>
   );
 }
