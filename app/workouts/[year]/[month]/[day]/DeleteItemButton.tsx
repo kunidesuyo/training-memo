@@ -18,14 +18,8 @@ export default function DeleteItemButton({
   itemOrder: number;
 }) {
   return (
-    <form>
-      <Button
-        formAction={() =>
-          deleteItem(year, month, day, exerciseOrder, itemOrder)
-        }
-      >
-        削除
-      </Button>
+    <form action={() => deleteItem(year, month, day, exerciseOrder, itemOrder)}>
+      <Button type="submit">削除</Button>
     </form>
   );
 }
