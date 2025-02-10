@@ -18,7 +18,7 @@ export default async function Workout({
   params: { year: string; month: string; day: string };
 }) {
   const { year, month, day } = await params;
-  const workout_: Workout = await getWorkout(
+  const workout: Workout = await getWorkout(
     parseInt(year),
     parseInt(month),
     parseInt(day)
@@ -29,7 +29,7 @@ export default async function Workout({
       <h2>{`${year}年${month}月${day}日のワークアウト`}</h2>
       <div>
         <Accordion type="single" collapsible>
-          {workout_.exercises.map((exercise: ExerciseWithItems) => (
+          {workout.exercises.map((exercise: ExerciseWithItems) => (
             <AccordionItem
               key={exercise.id.toString()}
               value={exercise.id.toString()}
