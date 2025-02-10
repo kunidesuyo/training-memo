@@ -6,7 +6,6 @@ import { redirect } from "next/navigation";
 import { prisma } from "@/prisma";
 import { getCurrentUser } from "@/app/_utils/getCurrentUser";
 
-
 export async function addItemToExercise(
   type: ExerciseItemType,
   year: number,
@@ -15,35 +14,29 @@ export async function addItemToExercise(
   exerciseOrder: number
 ) {
   const { id: currentUserId } = getCurrentUser();
-  const allExerciseItems = await prisma.exerciseItem.findMany({
+  const targetExercise = await prisma.exercise.findFirstOrThrow({
     where: {
-      exercise: {
-        workout: {
-          year,
-          month,
-          day,
-          authorId: currentUserId,
-        },
-        order: exerciseOrder,
+      workout: {
+        year,
+        month,
+        day,
+        authorId: currentUserId,
       },
+      order: exerciseOrder,
     },
     select: {
-      exerciseId: true,
-      order: true,
-    },
-    orderBy: {
-      order: "desc",
+      id: true,
+      items: true,
     },
   });
 
-  const maxOrder = allExerciseItems[0].order;
-  const targetExerciseId = allExerciseItems[0].exerciseId;
+  const newItemOrder = targetExercise.items.length + 1;
 
   await prisma.exerciseItem.create({
     data: {
       type,
-      order: maxOrder + 1,
-      exerciseId: targetExerciseId,
+      order: newItemOrder,
+      exerciseId: targetExercise.id,
       authorId: currentUserId,
     },
   });

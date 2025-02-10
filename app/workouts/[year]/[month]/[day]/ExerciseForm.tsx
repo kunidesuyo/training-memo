@@ -10,13 +10,17 @@ import WorkItemForm from "@/app/workouts/[year]/[month]/[day]/WorkItemForm";
 
 export default function ExerciseForm({
   exercise,
-  pathParams,
+  year,
+  month,
+  day,
+  exerciseOrder,
 }: {
   exercise: ExerciseWithItems;
-  pathParams: { year: string; month: string; day: string; order: string };
+  year: number;
+  month: number;
+  day: number;
+  exerciseOrder: number;
 }) {
-  const { year, month, day, order } = pathParams;
-
   return (
     <div>
       {exercise.items.map((item: ExerciseItem) => {
@@ -24,36 +28,36 @@ export default function ExerciseForm({
           <WorkItemForm
             key={item.order}
             item={item}
-            year={parseInt(year)}
-            month={parseInt(month)}
-            day={parseInt(day)}
-            exerciseOrder={parseInt(order)}
+            year={year}
+            month={month}
+            day={day}
+            exerciseOrder={exerciseOrder}
           />
         ) : item.type === "REST" ? (
           <RestItemForm
             key={item.order}
             item={item}
-            year={parseInt(year)}
-            month={parseInt(month)}
-            day={parseInt(day)}
-            exerciseOrder={parseInt(order)}
+            year={year}
+            month={month}
+            day={day}
+            exerciseOrder={exerciseOrder}
           />
         ) : null;
       })}
       <div className="my-4 flex">
         <AddItemButton
           type={"WORK"}
-          year={parseInt(year)}
-          month={parseInt(month)}
-          day={parseInt(day)}
-          exerciseOrder={parseInt(order)}
+          year={year}
+          month={month}
+          day={day}
+          exerciseOrder={exerciseOrder}
         />
         <AddItemButton
           type={"REST"}
-          year={parseInt(year)}
-          month={parseInt(month)}
-          day={parseInt(day)}
-          exerciseOrder={parseInt(order)}
+          year={year}
+          month={month}
+          day={day}
+          exerciseOrder={exerciseOrder}
         />
       </div>
     </div>

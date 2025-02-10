@@ -45,12 +45,10 @@ export default async function Workout({
                 />
                 <ExerciseForm
                   exercise={exercise}
-                  pathParams={{
-                    year,
-                    month,
-                    day,
-                    order: exercise.order.toString(),
-                  }}
+                  year={parseInt(year)}
+                  month={parseInt(month)}
+                  day={parseInt(day)}
+                  exerciseOrder={exercise.order}
                 />
               </AccordionContent>
             </AccordionItem>
