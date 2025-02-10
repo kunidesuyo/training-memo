@@ -3,6 +3,7 @@ import {
   getWorkoutWithExercise,
   WorkoutWithExercises,
 } from "@/app/home/actions";
+import CreateWorkoutButton from "@/app/home/createWorkoutButton";
 import Link from "next/link";
 import React from "react";
 
@@ -27,7 +28,7 @@ export default async function SelectedWorkout({
           </p>
         </div>
       ) : (
-        <p>ワークアウトが存在する日付を選択してください。</p>
+        <p>日付を選択してください。</p>
       )}
 
       {selectedWorkout ? (
@@ -46,8 +47,10 @@ export default async function SelectedWorkout({
           </Link>
         </div>
       ) : (
-        <p>ワークアウトが見つかりませんでした。</p>
-        // TODO: 新しくワークアウトを作成できるようにする
+        <div>
+          <p>ワークアウトが見つかりませんでした。</p>
+          <CreateWorkoutButton selectedDate={selectedDate} />
+        </div>
       )}
     </div>
   );
