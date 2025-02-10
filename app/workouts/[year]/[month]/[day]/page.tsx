@@ -11,6 +11,7 @@ import type {
   ExerciseWithItems,
   Workout,
 } from "@/app/workouts/[year]/[month]/[day]/_actions/getWorkout";
+import DeleteExercise from "@/app/workouts/[year]/[month]/[day]/deleteExercise";
 
 export default async function Workout({
   params,
@@ -36,6 +37,12 @@ export default async function Workout({
             >
               <AccordionTrigger>{exercise.name}</AccordionTrigger>
               <AccordionContent>
+                <DeleteExercise
+                  year={parseInt(year)}
+                  month={parseInt(month)}
+                  day={parseInt(day)}
+                  order={exercise.order}
+                />
                 <ExerciseForm
                   exercise={exercise}
                   pathParams={{
