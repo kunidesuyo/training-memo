@@ -12,6 +12,7 @@ import type {
   Workout,
 } from "@/app/workouts/[year]/[month]/[day]/_actions/getWorkout";
 import DeleteExercise from "@/app/workouts/[year]/[month]/[day]/deleteExercise";
+import Link from "next/link";
 
 export default async function Workout({
   params,
@@ -43,6 +44,11 @@ export default async function Workout({
                   day={parseInt(day)}
                   order={exercise.order}
                 />
+                <Link
+                  href={`/workouts/${year}/${month}/${day}/exercise/${exercise.order}`}
+                >
+                  詳細
+                </Link>
                 <ExerciseForm
                   exercise={exercise}
                   year={parseInt(year)}
