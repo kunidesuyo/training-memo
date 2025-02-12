@@ -11,7 +11,6 @@ export default async function Page({
   params: { year: string; month: string; day: string; exerciseOrder: string };
 }) {
   const { year, month, day, exerciseOrder } = await params;
-  // TODO: propsで受け取る
   const exercise: Exercise = await getExercise(
     parseInt(year),
     parseInt(month),
@@ -20,10 +19,12 @@ export default async function Page({
   );
 
   return (
-    <div>
-      <Link href={`/workouts/${year}/${month}/${day}`}>戻る</Link>
-      <h2>{exercise.name}</h2>
-      <div>
+    <div className="m-4">
+      <Link className="m-4" href={`/workouts/${year}/${month}/${day}`}>
+        戻る
+      </Link>
+      <h2 className="m-4">{exercise.name}</h2>
+      <div className="m-4">
         <ExerciseForm
           exercise={exercise}
           year={parseInt(year)}
