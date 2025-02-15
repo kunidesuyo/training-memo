@@ -5,6 +5,7 @@ import {
   ExerciseItem,
 } from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/getExercise";
 import AddItemButton from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/AddItemButton";
+import DeleteExercise from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/deleteExercise";
 import RestItemForm from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/RestItemForm";
 import WorkItemForm from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/WorkItemForm";
 
@@ -54,6 +55,14 @@ export default function ExerciseForm({
         />
         <AddItemButton
           type={"REST"}
+          year={year}
+          month={month}
+          day={day}
+          exerciseOrder={exerciseOrder}
+        />
+      </div>
+      <div>
+        <DeleteExercise
           year={year}
           month={month}
           day={day}

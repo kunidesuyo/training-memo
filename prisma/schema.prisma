@@ -45,7 +45,7 @@ model ExerciseItem {
   rep        Int?
   time       Int?
   order      Int
-  exercise   Exercise         @relation(fields: [exerciseId], references: [id])
+  exercise   Exercise         @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
   exerciseId Int
   author     User             @relation(fields: [authorId], references: [id])
   authorId   Int
