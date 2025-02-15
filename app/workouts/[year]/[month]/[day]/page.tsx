@@ -1,5 +1,4 @@
 import AddExerciseForm from "@/app/workouts/[year]/[month]/[day]/addExerciseForm";
-import ExerciseForm from "@/app/workouts/[year]/[month]/[day]/ExerciseForm";
 import {
   Accordion,
   AccordionContent,
@@ -13,6 +12,7 @@ import type {
 } from "@/app/workouts/[year]/[month]/[day]/_actions/getWorkout";
 import DeleteExercise from "@/app/workouts/[year]/[month]/[day]/deleteExercise";
 import Link from "next/link";
+import ExerciseDetail from "@/app/workouts/[year]/[month]/[day]/ExerciseDetail";
 
 export default async function Workout({
   params,
@@ -49,13 +49,7 @@ export default async function Workout({
                 >
                   詳細
                 </Link>
-                <ExerciseForm
-                  exercise={exercise}
-                  year={parseInt(year)}
-                  month={parseInt(month)}
-                  day={parseInt(day)}
-                  exerciseOrder={exercise.order}
-                />
+                <ExerciseDetail exercise={exercise} />
               </AccordionContent>
             </AccordionItem>
           ))}
