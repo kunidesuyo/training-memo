@@ -3,6 +3,7 @@ import "./globals.css";
 import Link from "next/link";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Noto_Sans_JP } from "next/font/google";
+import { House } from "lucide-react";
 
 const notoSansJp = Noto_Sans_JP({
   subsets: ["latin"],
@@ -23,7 +24,13 @@ export default function RootLayout({
     <html lang="ja" className={notoSansJp.variable} suppressHydrationWarning>
       <body>
         <header>
-          <Link href={"/api/auth/signout"}>ログアウト</Link>
+          <div className="flex justify-end p-4">
+            <Link href={"/home"} className="mx-6">
+              <House />
+            </Link>
+            {/* アカウント表示 */}
+            <Link href={"/api/auth/signout"}>ログアウト</Link>
+          </div>
         </header>
         <ThemeProvider
           attribute="class"
