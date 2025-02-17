@@ -51,6 +51,5 @@ export async function getWorkout(
     },
     select: workoutValidator.select,
   });
-  console.log(workout);
   return workout;
 }
