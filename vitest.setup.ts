@@ -4,9 +4,11 @@ import {
   PostgreSqlContainer,
   StartedPostgreSqlContainer,
 } from "@testcontainers/postgresql";
+import * as _prisma from "@/prisma";
+import * as _getCurrentUser from "@/app/_utils/getCurrentUser";
 
-export let container: StartedPostgreSqlContainer;
-export let testPrisma: PrismaClient;
+let container: StartedPostgreSqlContainer;
+let prisma: PrismaClient;
 
 export async function setupTestDBContainer() {
   container = await new PostgreSqlContainer("postgres:latest").start();
@@ -25,7 +27,7 @@ export async function setupTestDBContainer() {
     `DATABASE_URL=${databaseUrl} npx prisma migrate dev --skip-generate`
   );
 
-  testPrisma = new PrismaClient({
+  prisma = new PrismaClient({
     datasources: {
       db: {
         url: databaseUrl,
@@ -36,13 +38,32 @@ export async function setupTestDBContainer() {
 
 beforeAll(async () => {
   console.log("Start Global setup");
+
+  console.log("Setup Test DB Container");
   await setupTestDBContainer();
+
+  console.log("Setup Prisma Client Mock");
+  vi.spyOn(_prisma, "prisma", "get").mockImplementation(() => {
+    return prisma;
+  });
+
+  console.log("Create Current User");
+  const currentUser = await prisma.user.create({
+    data: {
+      email: "test@example.com",
+    },
+  });
+  console.log("Setup Get Current User Mock");
+  vi.spyOn(_getCurrentUser, "getCurrentUser").mockImplementation(() => {
+    return { id: currentUser.id };
+  });
+
   console.log("End Global setup");
 });
 
 afterAll(async () => {
   console.log("Start Global teardown");
-  await testPrisma.$disconnect();
+  await prisma.$disconnect();
   await container.stop();
   console.log("End Global teardown");
 });
