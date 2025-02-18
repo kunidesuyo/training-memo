@@ -19,4 +19,24 @@ describe("getWorkout test", () => {
     const fetchedWorkout = await getWorkout(year, month, day);
     expect(fetchedWorkout.id).toBe(workout.id);
   });
+
+  it("Workoutが存在しない場合、例外を返す", async () => {
+    const year = 2025;
+    const month = 1;
+    const day = 1;
+    const currentUser = getCurrentUser();
+    await prisma.workout.delete({
+      where: {
+        year_month_day_authorId: {
+          year,
+          month,
+          day,
+          authorId: currentUser.id,
+        },
+      },
+    });
+    await expect(getWorkout(year, month, day)).rejects.toThrow(
+      "No Workout found"
+    );
+  });
 });
