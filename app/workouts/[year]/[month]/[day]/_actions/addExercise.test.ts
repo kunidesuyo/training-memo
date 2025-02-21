@@ -1,15 +1,19 @@
 import { getCurrentUser } from "@/app/_utils/getCurrentUser";
 import { addExercise } from "@/app/workouts/[year]/[month]/[day]/_actions/addExercise";
 import { prisma } from "@/prisma";
+import { faker } from "@faker-js/faker/locale/ja";
 
 describe("validaition error test", () => {
   it("nameが空の場合、エラーを返す", async () => {
     const formData = new FormData();
     formData.append("name", "");
+    const year = faker.date.anytime().getFullYear();
+    const month = faker.date.future().getMonth();
+    const day = faker.date.future().getDate();
     const result = await addExercise(
-      2025,
-      1,
-      1,
+      year,
+      month,
+      day,
       { errors: {}, message: null },
       formData
     );
@@ -21,9 +25,9 @@ describe("validaition error test", () => {
 
 describe("addExercise test", () => {
   it("WorkoutにExerciseを追加できる", async () => {
-    const year = 2025;
-    const month = 1;
-    const day = 1;
+    const year = faker.date.anytime().getFullYear();
+    const month = faker.date.future().getMonth();
+    const day = faker.date.future().getDate();
     const currentUser = getCurrentUser();
     const workout = await prisma.workout.create({
       data: {
@@ -42,7 +46,7 @@ describe("addExercise test", () => {
       { errors: {}, message: null },
       formData
     );
-    // revalidatePathをモック化
+
     vi.mock("next/cache", () => {
       return {
         revalidatePath: () => {
