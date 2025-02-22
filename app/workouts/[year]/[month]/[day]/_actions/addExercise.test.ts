@@ -73,22 +73,40 @@ describe("addExercise test", () => {
   });
 
   it("Workoutが存在しない場合、例外を返す", async () => {
-    //   const year = 2025;
-    //   const month = 1;
-    //   const day = 1;
-    //   const currentUser = getCurrentUser();
-    //   await prisma.workout.delete({
-    //     where: {
-    //       year_month_day_authorId: {
-    //         year,
-    //         month,
-    //         day,
-    //         authorId: currentUser.id,
-    //       },
-    //     },
-    //   });
-    //   await expect(getWorkout(year, month, day)).rejects.toThrow(
-    //     "No Workout found"
-    // );
+    const year = faker.date.anytime().getFullYear();
+    const month = faker.date.future().getMonth();
+    const day = faker.date.future().getDate();
+    const currentUser = getCurrentUser();
+    await prisma.workout.create({
+      data: {
+        year,
+        month,
+        day,
+        authorId: currentUser.id,
+      },
+    });
+
+    const formData = new FormData();
+    formData.append("name", "test");
+
+    vi.mock("next/cache", () => {
+      return {
+        revalidatePath: () => {
+          return;
+        },
+      };
+    });
+
+    vi.mock("next/navigation", () => {
+      return {
+        redirect: () => {
+          return;
+        },
+      };
+    });
+
+    await expect(
+      addExercise(year + 1, month, day, { errors: {}, message: null }, formData)
+    ).rejects.toThrow("No Workout found");
   });
 });
