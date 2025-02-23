@@ -23,11 +23,14 @@ beforeEach(() => {
 
 describe("validaition error test", () => {
   it("nameが空の場合、エラーを返す", async () => {
+    // Arrange
     const formData = new FormData();
     formData.append("name", "");
     const year = faker.date.anytime().getFullYear();
     const month = faker.date.future().getMonth();
     const day = faker.date.future().getDate();
+
+    // Act
     const result = await addExercise(
       year,
       month,
@@ -35,6 +38,8 @@ describe("validaition error test", () => {
       { errors: {}, message: null },
       formData
     );
+
+    // Assert
     expect(result.errors?.name).toEqual([
       "String must contain at least 1 character(s)",
     ]);
@@ -43,6 +48,7 @@ describe("validaition error test", () => {
 
 describe("addExercise test", () => {
   it("WorkoutにExerciseを追加できる", async () => {
+    // Arrange
     const year = faker.date.anytime().getFullYear();
     const month = faker.date.future().getMonth();
     const day = faker.date.future().getDate();
@@ -57,6 +63,8 @@ describe("addExercise test", () => {
     });
     const formData = new FormData();
     formData.append("name", "test");
+
+    // Act
     await addExercise(
       year,
       month,
@@ -65,6 +73,7 @@ describe("addExercise test", () => {
       formData
     );
 
+    // Assert
     const exercises = await prisma.exercise.findMany({
       where: {
         workoutId: workout.id,
@@ -75,6 +84,7 @@ describe("addExercise test", () => {
   });
 
   it("Workoutが存在しない場合、例外を返す", async () => {
+    // Arrange
     const year = faker.date.anytime().getFullYear();
     const month = faker.date.future().getMonth();
     const day = faker.date.future().getDate();
@@ -91,6 +101,7 @@ describe("addExercise test", () => {
     const formData = new FormData();
     formData.append("name", "test");
 
+    // Act & Assert
     await expect(
       addExercise(year + 1, month, day, { errors: {}, message: null }, formData)
     ).rejects.toThrow("No Workout found");
