@@ -3,6 +3,24 @@ import { addExercise } from "@/app/workouts/[year]/[month]/[day]/_actions/addExe
 import { prisma } from "@/prisma";
 import { faker } from "@faker-js/faker/locale/ja";
 
+beforeEach(() => {
+  vi.mock("next/cache", () => {
+    return {
+      revalidatePath: () => {
+        return;
+      },
+    };
+  });
+
+  vi.mock("next/navigation", () => {
+    return {
+      redirect: () => {
+        return;
+      },
+    };
+  });
+});
+
 describe("validaition error test", () => {
   it("nameが空の場合、エラーを返す", async () => {
     const formData = new FormData();
@@ -47,22 +65,6 @@ describe("addExercise test", () => {
       formData
     );
 
-    vi.mock("next/cache", () => {
-      return {
-        revalidatePath: () => {
-          return;
-        },
-      };
-    });
-
-    vi.mock("next/navigation", () => {
-      return {
-        redirect: () => {
-          return;
-        },
-      };
-    });
-
     const exercises = await prisma.exercise.findMany({
       where: {
         workoutId: workout.id,
@@ -88,22 +90,6 @@ describe("addExercise test", () => {
 
     const formData = new FormData();
     formData.append("name", "test");
-
-    vi.mock("next/cache", () => {
-      return {
-        revalidatePath: () => {
-          return;
-        },
-      };
-    });
-
-    vi.mock("next/navigation", () => {
-      return {
-        redirect: () => {
-          return;
-        },
-      };
-    });
 
     await expect(
       addExercise(year + 1, month, day, { errors: {}, message: null }, formData)
