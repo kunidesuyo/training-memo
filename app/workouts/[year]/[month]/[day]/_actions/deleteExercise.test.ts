@@ -62,7 +62,18 @@ describe("動作テスト", () => {
     expect(deletedExercise).toBeNull();
   });
 
-  it("対象のWorkout(Exerciseの親)が存在しない場合、例外を返す", async () => {});
+  it("対象のWorkout(Exerciseの親)が存在しない場合、例外を返す", async () => {
+    // Arrange
+    const year = faker.date.anytime().getFullYear();
+    const month = faker.date.future().getMonth();
+    const day = faker.date.future().getDate();
+    const exerciseOrder = 1;
+
+    // Act & Assert
+    await expect(
+      deleteExercise(year, month, day, exerciseOrder)
+    ).rejects.toThrow("No Exercise found");
+  });
 
   it("対象のWorkoutは存在するが、対象のExerciseが存在しない場合、例外を返す", async () => {});
 });
