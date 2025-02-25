@@ -75,5 +75,25 @@ describe("動作テスト", () => {
     ).rejects.toThrow("No Exercise found");
   });
 
-  it("対象のWorkoutは存在するが、対象のExerciseが存在しない場合、例外を返す", async () => {});
+  it("対象のWorkoutは存在するが、対象のExerciseが存在しない場合、例外を返す", async () => {
+    // Arrange
+    const year = faker.date.anytime().getFullYear();
+    const month = faker.date.future().getMonth();
+    const day = faker.date.future().getDate();
+    const exerciseOrder = 1;
+    const currentUser = getCurrentUser();
+    await prisma.workout.create({
+      data: {
+        year,
+        month,
+        day,
+        authorId: currentUser.id,
+      },
+    });
+
+    // Act & Assert
+    await expect(
+      deleteExercise(year, month, day, exerciseOrder)
+    ).rejects.toThrow("No Exercise found");
+  });
 });
