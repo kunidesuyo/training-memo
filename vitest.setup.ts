@@ -61,6 +61,14 @@ beforeAll(async () => {
   console.log("End Global setup");
 });
 
+afterEach(async () => {
+  console.log("datebase cleanup");
+  await prisma.exerciseItem.deleteMany();
+  await prisma.exercise.deleteMany();
+  await prisma.workout.deleteMany();
+  console.log("End database cleanup");
+});
+
 afterAll(async () => {
   console.log("Start Global teardown");
   await prisma.$disconnect();
