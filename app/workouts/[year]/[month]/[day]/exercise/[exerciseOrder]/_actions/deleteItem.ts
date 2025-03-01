@@ -10,7 +10,7 @@ export async function deleteItem(
   month: number,
   day: number,
   exerciseOrder: number,
-  itemOrder: number
+  itemOrder: number,
 ) {
   const { id: currentUserId } = getCurrentUser();
   const targetExerciseItem = await prisma.exerciseItem.findFirstOrThrow({
