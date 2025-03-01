@@ -23,7 +23,7 @@ export default async function Workout({
   const workout: Workout = await getWorkout(
     parseInt(year),
     parseInt(month),
-    parseInt(day)
+    parseInt(day),
   );
 
   return (

@@ -8,7 +8,7 @@ export async function deleteExercise(
   year: number,
   month: number,
   day: number,
-  exerciseOrder: number
+  exerciseOrder: number,
 ) {
   // TODO: Exerciseスキーマにユニーク制約を追加して直接削除できるように修正する
 

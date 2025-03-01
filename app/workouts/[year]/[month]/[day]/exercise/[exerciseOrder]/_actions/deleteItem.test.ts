@@ -88,7 +88,7 @@ describe("deleteItem test", () => {
 
     // Act & Assert
     await expect(
-      deleteItem(year, month, day, exerciseOrder, itemOrder)
+      deleteItem(year, month, day, exerciseOrder, itemOrder),
     ).rejects.toThrow("No ExerciseItem found");
   });
 
@@ -111,7 +111,7 @@ describe("deleteItem test", () => {
 
     // Act & Assert
     await expect(
-      deleteItem(year, month, day, exerciseOrder, itemOrder)
+      deleteItem(year, month, day, exerciseOrder, itemOrder),
     ).rejects.toThrow("No ExerciseItem found");
   });
 
@@ -143,7 +143,7 @@ describe("deleteItem test", () => {
 
     // Act & Assert
     await expect(
-      deleteItem(year, month, day, exerciseOrder, itemOrder)
+      deleteItem(year, month, day, exerciseOrder, itemOrder),
     ).rejects.toThrow("No ExerciseItem found");
   });
 });

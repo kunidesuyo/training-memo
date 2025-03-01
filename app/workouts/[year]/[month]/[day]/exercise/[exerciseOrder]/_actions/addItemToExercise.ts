@@ -11,7 +11,7 @@ export async function addItemToExercise(
   year: number,
   month: number,
   day: number,
-  exerciseOrder: number
+  exerciseOrder: number,
 ) {
   const { id: currentUserId } = getCurrentUser();
   const targetExercise = await prisma.exercise.findFirstOrThrow({

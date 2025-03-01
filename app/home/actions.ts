@@ -20,7 +20,7 @@ export type WorkoutWithExercises = Workout & {
 
 export async function getWorkouts(
   year: number,
-  month: number
+  month: number,
 ): Promise<Workout[]> {
   const { id: currentUserId } = getCurrentUser();
   const workouts = await prisma.workout.findMany({
@@ -45,8 +45,8 @@ export async function getWorkouts(
 export async function getWorkoutWithExercise(
   year: number,
   month: number,
-  day: number
-): Promise<WorkoutWithExercises|null> {
+  day: number,
+): Promise<WorkoutWithExercises | null> {
   const { id: currentUserId } = getCurrentUser();
   const workout = await prisma.workout.findUnique({
     where: {

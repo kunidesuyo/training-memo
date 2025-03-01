@@ -4,9 +4,11 @@ import { Card, CardContent } from "@/components/ui/card";
 
 import { Button } from "@/components/ui/button";
 import { ExerciseItem } from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/getExercise";
-import { RestItemState, updateRest } from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/updateRest";
+import {
+  RestItemState,
+  updateRest,
+} from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/updateRest";
 import DeleteItemButton from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/DeleteItemButton";
-
 
 interface RestItemFormProps {
   item: ExerciseItem;
@@ -30,11 +32,11 @@ const RestItemForm: React.FC<RestItemFormProps> = ({
     month,
     day,
     item.order,
-    exerciseOrder
+    exerciseOrder,
   );
   const [state, formAction] = useActionState(
     updateRestWithIdentifier,
-    initialState
+    initialState,
   );
 
   return (

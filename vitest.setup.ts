@@ -24,7 +24,7 @@ export async function setupTestDBContainer() {
   const databaseUrl = `postgresql://${connectionConfig.user}:${connectionConfig.password}@${connectionConfig.host}:${connectionConfig.port}/${connectionConfig.database}`;
 
   execSync(
-    `DATABASE_URL=${databaseUrl} npx prisma migrate dev --skip-generate`
+    `DATABASE_URL=${databaseUrl} npx prisma migrate dev --skip-generate`,
   );
 
   prisma = new PrismaClient({

@@ -22,7 +22,7 @@ export async function addExercise(
   month: number,
   day: number,
   prevState: State,
-  formData: FormData
+  formData: FormData,
 ) {
   const { id: currentUserId } = getCurrentUser();
   const validatedFields = ExerciseFormSchema.safeParse({
@@ -56,7 +56,7 @@ export async function addExercise(
   const workoutId = workout?.id;
   const maxOrder = workout?.exercises.reduce(
     (acc, cur) => Math.max(acc, cur.order),
-    0
+    0,
   );
   const newOrder = maxOrder + 1;
   await prisma.exercise.create({

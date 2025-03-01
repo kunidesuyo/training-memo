@@ -19,13 +19,13 @@ export default function AddItemButton({
   const buttonLabel = () => {
     switch (type) {
       case "WORK":
-      return "ワーク";
+        return "ワーク";
       case "REST":
-      return "レスト";
+        return "レスト";
       default:
-      return "";
+        return "";
     }
-  }
+  };
   return (
     <form>
       <Button

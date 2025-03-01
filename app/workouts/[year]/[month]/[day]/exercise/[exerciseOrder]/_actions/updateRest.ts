@@ -24,7 +24,7 @@ export async function updateRest(
   itemOrder: number,
   exerciseOrder: number,
   prevState: RestItemState,
-  formData: FormData
+  formData: FormData,
 ) {
   const { id: currentUserId } = getCurrentUser();
   const validatedFields = RestItemFormSchema.safeParse({

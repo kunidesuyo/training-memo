@@ -26,7 +26,7 @@ describe("getWorkout test", () => {
     const day = 1;
 
     await expect(getWorkout(year, month, day)).rejects.toThrow(
-      "No Workout found"
+      "No Workout found",
     );
   });
 });

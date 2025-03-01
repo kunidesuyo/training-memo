@@ -31,11 +31,11 @@ const WorkItemForm: React.FC<WorkItemFormProps> = ({
     month,
     day,
     item.order,
-    exerciseOrder
+    exerciseOrder,
   );
   const [state, formAction] = useActionState(
     updateExerciseItemsWithIdentifier,
-    initialState
+    initialState,
   );
   return (
     <Card className="my-4" key={item.order}>

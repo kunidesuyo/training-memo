@@ -21,7 +21,7 @@ const createWorkout = async (
   rootUser: User,
   year: number,
   month: number,
-  day: number
+  day: number,
 ) => {
   const workout1 = await prisma.workout.create({
     data: {
@@ -170,7 +170,7 @@ const createWorkouts = async (rootUser: User) => {
   for (let i = 10; i <= 15; i++) {
     createWorkout(rootUser, year, month, i);
   }
-}
+};
 
 const main = async () => {
   const rootUser = await createRootUser();

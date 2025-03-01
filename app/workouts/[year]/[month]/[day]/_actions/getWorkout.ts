@@ -37,7 +37,7 @@ export type ExerciseItem = ExerciseWithItems["items"][number];
 export async function getWorkout(
   year: number,
   month: number,
-  day: number
+  day: number,
 ): Promise<Workout> {
   const { id: currentUserId } = getCurrentUser();
   const workout = await prisma.workout.findUniqueOrThrow({

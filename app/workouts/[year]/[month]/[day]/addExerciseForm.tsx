@@ -19,7 +19,7 @@ export default function AddExerciseForm({
     null,
     parseInt(year),
     parseInt(month),
-    parseInt(day)
+    parseInt(day),
   );
   const [state, formAction] = useActionState(addExercise_, initialState);
 

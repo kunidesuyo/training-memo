@@ -30,7 +30,7 @@ const renderWorkoutDetails = (
   selectedWorkout: WorkoutWithExercises,
   year: number,
   month: number,
-  day: number
+  day: number,
 ) => {
   return (
     <div>

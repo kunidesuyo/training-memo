@@ -36,7 +36,7 @@ describe("validaition error test", () => {
       month,
       day,
       { errors: {}, message: null },
-      formData
+      formData,
     );
 
     // Assert
@@ -70,7 +70,7 @@ describe("addExercise test", () => {
       month,
       day,
       { errors: {}, message: null },
-      formData
+      formData,
     );
 
     // Assert
@@ -103,7 +103,13 @@ describe("addExercise test", () => {
 
     // Act & Assert
     await expect(
-      addExercise(year + 1, month, day, { errors: {}, message: null }, formData)
+      addExercise(
+        year + 1,
+        month,
+        day,
+        { errors: {}, message: null },
+        formData,
+      ),
     ).rejects.toThrow("No Workout found");
   });
 });

@@ -28,14 +28,14 @@ export default async function Page(props: {
   };
 
   const initDate = (
-    searchParams?: SearchParams
+    searchParams?: SearchParams,
   ): { year: number; month: number; day: number } => {
     if (isAllParamsSpecified(searchParams)) {
       return {
         year: parseInt(searchParams!.year!),
         month: parseInt(searchParams!.month!),
         day: parseInt(searchParams!.day!),
-      }
+      };
     }
     if (isAllParamsNotSpecified(searchParams)) {
       return todayDate();

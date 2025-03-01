@@ -75,7 +75,7 @@ describe("getExercise test", () => {
 
     // Act & Assert
     await expect(getExercise(year, month, day, exerciseOrder)).rejects.toThrow(
-      "No Exercise found"
+      "No Exercise found",
     );
   });
 });

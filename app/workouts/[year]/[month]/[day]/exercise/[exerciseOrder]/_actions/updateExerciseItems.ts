@@ -26,7 +26,7 @@ export async function updateExerciseItems(
   order: number,
   exerciseOrder: number,
   prevState: State,
-  formData: FormData
+  formData: FormData,
 ) {
   const { id: currentUserId } = getCurrentUser();
   const validatedFields = WorkItemFormSchema.safeParse({
