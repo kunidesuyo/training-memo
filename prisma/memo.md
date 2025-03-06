@@ -27,6 +27,22 @@ migrationファイルを使ってテーブルを作り直す。レコードを�
 
 ### スキーマ修正した後にやること
 
+- format
+```
+npx prisma format
+```
+
+- マイグレーション作成
+```
+npx prisma migrate dev --name {migration name}
+```
+
+
+- (プリズマクライアント生成)
+```
+npx prisma generate
+```
+マイグレーション生成の時にプリズマクラアントも再生成されているっぽい
 
 ## スキーマ定義
 

@@ -1,11 +1,12 @@
-import { PrismaClient } from "@prisma/client";
+import { faker } from "@faker-js/faker/locale/ja";
+import { Exercise, PrismaClient, User, Workout } from "@prisma/client";
 const prisma = new PrismaClient();
 
-type User = {
-  id: number;
-  email: string;
-  name: string;
-};
+// type User = {
+//   id: number;
+//   email: string;
+//   name: string;
+// };
 
 const createRootUser = async (): Promise<User> => {
   const rootUser = await prisma.user.create({
@@ -21,9 +22,9 @@ const createWorkout = async (
   rootUser: User,
   year: number,
   month: number,
-  day: number,
+  day: number
 ) => {
-  const workout1 = await prisma.workout.create({
+  const workout = await prisma.workout.create({
     data: {
       year,
       month,
@@ -31,139 +32,51 @@ const createWorkout = async (
       authorId: rootUser.id,
     },
   });
-  const exercise1 = await prisma.exercise.create({
+  createExercise(workout, rootUser);
+  createExercise(workout, rootUser);
+  createExercise(workout, rootUser);
+};
+
+const createExercise = async (workout: Workout, rootUser: User) => {
+  const exercise = await prisma.exercise.create({
     data: {
-      name: "スクワット",
-      workoutId: workout1.id,
+      name: faker.lorem.word(),
+      workoutId: workout.id,
       order: 1,
       authorId: rootUser.id,
     },
   });
-  await prisma.exerciseItem.create({
-    data: {
-      type: "WORK",
-      weight: 60,
-      rep: 10,
-      order: 1,
-      exerciseId: exercise1.id,
-      authorId: rootUser.id,
-    },
-  });
-  await prisma.exerciseItem.create({
-    data: {
-      type: "REST",
-      time: 120,
-      order: 2,
-      exerciseId: exercise1.id,
-      authorId: rootUser.id,
-    },
-  });
-  await prisma.exerciseItem.create({
-    data: {
-      type: "WORK",
-      weight: 80,
-      rep: 10,
-      order: 3,
-      exerciseId: exercise1.id,
-      authorId: rootUser.id,
-    },
-  });
-  await prisma.exerciseItem.create({
-    data: {
-      type: "REST",
-      time: 120,
-      order: 4,
-      exerciseId: exercise1.id,
-      authorId: rootUser.id,
-    },
-  });
-  await prisma.exerciseItem.create({
-    data: {
-      type: "WORK",
-      weight: 100,
-      rep: 10,
-      order: 5,
-      exerciseId: exercise1.id,
-      authorId: rootUser.id,
-    },
-  });
-  const exercise2 = await prisma.exercise.create({
-    data: {
-      name: "デッドリフト",
-      workoutId: workout1.id,
-      order: 2,
-      authorId: rootUser.id,
-    },
-  });
-  await prisma.exerciseItem.create({
-    data: {
-      type: "WORK",
-      weight: 60,
-      rep: 10,
-      order: 1,
-      exerciseId: exercise2.id,
-      authorId: rootUser.id,
-    },
-  });
-  await prisma.exerciseItem.create({
-    data: {
-      type: "REST",
-      time: 120,
-      order: 2,
-      exerciseId: exercise2.id,
-      authorId: rootUser.id,
-    },
-  });
-  await prisma.exerciseItem.create({
-    data: {
-      type: "WORK",
-      weight: 80,
-      rep: 10,
-      order: 3,
-      exerciseId: exercise2.id,
-      authorId: rootUser.id,
-    },
-  });
-  await prisma.exerciseItem.create({
-    data: {
-      type: "REST",
-      time: 120,
-      order: 4,
-      exerciseId: exercise2.id,
-      authorId: rootUser.id,
-    },
-  });
-  await prisma.exerciseItem.create({
-    data: {
-      type: "WORK",
-      weight: 100,
-      rep: 10,
-      order: 5,
-      exerciseId: exercise2.id,
-      authorId: rootUser.id,
-    },
+  createExerciseItems(exercise, rootUser);
+};
+
+const createExerciseItems = async (exercise: Exercise, rootUser: User) => {
+  // work, rest, work, rest, work
+  const itemTypes = ["WORK", "REST", "WORK", "REST", "WORK"];
+  itemTypes.forEach(async (type, index) => {
+    if (type === "WORK") {
+      await prisma.workExerciseItem.create({
+        data: {
+          weight: faker.number.int({ min: 20, max: 100 }),
+          rep: 10,
+          order: index + 1,
+          exerciseId: exercise.id,
+          authorId: rootUser.id,
+        },
+      });
+    } else {
+      await prisma.restExerciseItem.create({
+        data: {
+          time: 120,
+          order: index + 1,
+          exerciseId: exercise.id,
+          authorId: rootUser.id,
+        },
+      });
+    }
   });
 };
 
-// const createTodayWorkout = async (rootUser: User) => {
-//   const now = new Date();
-//   const year = now.getFullYear();
-//   const month = now.getMonth() + 1;
-//   const day = now.getDate();
-//   createWorkout(rootUser, year, month, day);
-// };
-
-// const createThisMonthWorkout = async (rootUser: User) => {
-//   const now = new Date();
-//   const year = now.getFullYear();
-//   const month = now.getMonth() + 1;
-//   const lastDay = new Date(year, month, 0).getDate();
-//   for (let i = 1; i <= lastDay; i++) {
-//     createWorkout(rootUser, year, month, i);
-//   }
-// };
-
-const createWorkouts = async (rootUser: User) => {
+const createWorkoutsThisMonth = async (rootUser: User) => {
   const now = new Date();
   const year = now.getFullYear();
   const month = now.getMonth() + 1;
@@ -174,8 +87,7 @@ const createWorkouts = async (rootUser: User) => {
 
 const main = async () => {
   const rootUser = await createRootUser();
-  createWorkouts(rootUser);
-  // createThisMonthWorkout(rootUser);
+  createWorkoutsThisMonth(rootUser);
 };
 
 main();

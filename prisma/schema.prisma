@@ -28,44 +28,51 @@ model Workout {
 
 // ユニーク制約追加
 model Exercise {
-  id        Int            @id @default(autoincrement())
-  name      String         @db.VarChar(255)
-  workout   Workout        @relation(fields: [workoutId], references: [id])
+  id        Int                @id @default(autoincrement())
+  name      String             @db.VarChar(255)
+  workout   Workout            @relation(fields: [workoutId], references: [id])
   workoutId Int
   order     Int
-  items     ExerciseItem[]
-  author    User           @relation(fields: [authorId], references: [id])
+  workItems WorkExerciseItem[]
+  restItems RestExerciseItem[]
+  author    User               @relation(fields: [authorId], references: [id])
   authorId  Int
 }
 
-model ExerciseItem {
-  id         Int              @id @default(autoincrement())
-  type       ExerciseItemType
-  weight     Int?
-  rep        Int?
-  time       Int?
-  order      Int
-  exercise   Exercise         @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+model WorkExerciseItem {
+  id         Int      @id @default(autoincrement())
+  exercise   Exercise @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
   exerciseId Int
-  author     User             @relation(fields: [authorId], references: [id])
-  authorId   Int
+  weight     Int
+  rep        Int
+  order      Int
+
+  author   User @relation(fields: [authorId], references: [id])
+  authorId Int
 }
 
-enum ExerciseItemType {
-  WORK
-  REST
+model RestExerciseItem {
+  id         Int      @id @default(autoincrement())
+  exercise   Exercise @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+  exerciseId Int
+  time       Int
+  order      Int
+
+  author   User @relation(fields: [authorId], references: [id])
+  authorId Int
 }
 
 model User {
-  id            Int            @id @default(autoincrement())
-  name          String?
-  email         String         @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  Workouts      Workout[]
-  Exercises     Exercise[]
-  ExerciseItems ExerciseItem[]
+  id                Int                @id @default(autoincrement())
+  name              String?
+  email             String             @unique
+  emailVerified     DateTime?
+  image             String?
+  accounts          Account[]
+  Workouts          Workout[]
+  Exercises         Exercise[]
+  WorkExerciseItems WorkExerciseItem[]
+  RestExerciseItems RestExerciseItem[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
