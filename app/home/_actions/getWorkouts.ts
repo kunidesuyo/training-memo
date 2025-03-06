@@ -8,27 +8,6 @@ const workoutValidator = Prisma.validator<Prisma.WorkoutDefaultArgs>()({
     year: true,
     month: true,
     day: true,
-    exercises: {
-      select: {
-        id: true,
-        name: true,
-        workoutId: true,
-        order: true,
-        workItems: {
-          select: {
-            weight: true,
-            rep: true,
-            order: true,
-          },
-        },
-        restItems: {
-          select: {
-            time: true,
-            order: true,
-          },
-        },
-      },
-    },
   },
 });
 
