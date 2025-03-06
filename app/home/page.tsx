@@ -1,4 +1,4 @@
-import { getWorkouts, Workout } from "@/app/home/actions";
+import { getWorkouts, Workout } from "@/app/home/_actions/getWorkouts";
 import HomeCalender from "@/app/home/homeCalender";
 import SelectedWorkout from "@/app/home/selectedWorkout";
 import { notFound } from "next/navigation";

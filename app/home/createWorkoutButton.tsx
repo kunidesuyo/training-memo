@@ -1,5 +1,5 @@
 "use client";
-import { createWorkout } from "@/app/home/actions/createWorkout";
+import { createWorkout } from "@/app/home/_actions/createWorkout";
 import { Button } from "@/components/ui/button";
 
 export default function CreateWorkoutButton({
