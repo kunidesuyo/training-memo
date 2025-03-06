@@ -12,21 +12,6 @@ const workoutValidator = Prisma.validator<Prisma.WorkoutDefaultArgs>()({
       select: {
         id: true,
         name: true,
-        workoutId: true,
-        order: true,
-        workItems: {
-          select: {
-            weight: true,
-            rep: true,
-            order: true,
-          },
-        },
-        restItems: {
-          select: {
-            time: true,
-            order: true,
-          },
-        },
       },
     },
   },
