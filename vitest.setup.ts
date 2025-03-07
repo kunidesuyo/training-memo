@@ -63,7 +63,8 @@ beforeAll(async () => {
 
 afterEach(async () => {
   console.log("datebase cleanup");
-  await prisma.exerciseItem.deleteMany();
+  await prisma.workExerciseItem.deleteMany();
+  await prisma.restExerciseItem.deleteMany();
   await prisma.exercise.deleteMany();
   await prisma.workout.deleteMany();
   console.log("End database cleanup");
