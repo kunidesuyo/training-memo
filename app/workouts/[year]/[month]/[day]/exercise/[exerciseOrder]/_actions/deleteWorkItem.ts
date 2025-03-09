@@ -2,44 +2,18 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { z } from "zod";
 import { prisma } from "@/prisma";
 import { getCurrentUser } from "@/app/_utils/getCurrentUser";
 
-const RestItemFormSchema = z.object({
-  time: z.coerce.number(),
-});
-
-export type RestItemState = {
-  errors?: {
-    time?: string[];
-  };
-  message?: string | null;
-};
-
-export async function updateRest(
+export async function deleteWorkItem(
   year: number,
   month: number,
   day: number,
-  itemOrder: number,
   exerciseOrder: number,
-  prevState: RestItemState,
-  formData: FormData,
+  itemOrder: number
 ) {
   const { id: currentUserId } = getCurrentUser();
-  const validatedFields = RestItemFormSchema.safeParse({
-    time: formData.get("time"),
-  });
-
-  if (!validatedFields.success) {
-    return {
-      errors: validatedFields.error.flatten().fieldErrors,
-      message: "error",
-    };
-  }
-  const { time } = validatedFields.data;
-
-  const targetExerciseItem = await prisma.exerciseItem.findFirstOrThrow({
+  const targetExerciseItem = await prisma.workExerciseItem.findFirstOrThrow({
     where: {
       exercise: {
         workout: {
@@ -55,12 +29,9 @@ export async function updateRest(
   });
   const targetExerciseItemId = targetExerciseItem.id;
 
-  await prisma.exerciseItem.update({
+  await prisma.workExerciseItem.delete({
     where: {
       id: targetExerciseItemId,
-    },
-    data: {
-      time,
     },
   });
 

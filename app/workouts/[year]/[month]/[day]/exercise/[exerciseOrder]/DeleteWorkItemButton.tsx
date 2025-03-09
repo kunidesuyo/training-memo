@@ -1,10 +1,10 @@
 "use client";
 
-import { deleteItem } from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/deleteItem";
+import { deleteWorkItem } from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/deleteWorkItem";
 import { Button } from "@/components/ui/button";
 import React from "react";
 
-export default function DeleteItemButton({
+export default function DeleteWorkItemButton({
   year,
   month,
   day,
@@ -18,7 +18,9 @@ export default function DeleteItemButton({
   itemOrder: number;
 }) {
   return (
-    <form action={() => deleteItem(year, month, day, exerciseOrder, itemOrder)}>
+    <form
+      action={() => deleteWorkItem(year, month, day, exerciseOrder, itemOrder)}
+    >
       <Button type="submit">削除</Button>
     </form>
   );

@@ -7,7 +7,7 @@ import {
   WorkItemState,
   updateWorkItems,
 } from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/updateWorkItems";
-import DeleteItemButton from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/DeleteItemButton";
+import DeleteWorkItemButton from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/DeleteWorkItemButton";
 
 interface WorkItemFormProps {
   item: WorkItem;
@@ -31,11 +31,11 @@ const WorkItemForm: React.FC<WorkItemFormProps> = ({
     month,
     day,
     item.order,
-    exerciseOrder,
+    exerciseOrder
   );
   const [state, formAction] = useActionState(
     updateExerciseItemsWithIdentifier,
-    initialState,
+    initialState
   );
   return (
     <Card className="my-4" key={item.order}>
@@ -78,7 +78,7 @@ const WorkItemForm: React.FC<WorkItemFormProps> = ({
             更新
           </Button>
         </form>
-        <DeleteItemButton
+        <DeleteWorkItemButton
           year={year}
           month={month}
           day={day}

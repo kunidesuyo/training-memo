@@ -5,15 +5,15 @@ import { redirect } from "next/navigation";
 import { prisma } from "@/prisma";
 import { getCurrentUser } from "@/app/_utils/getCurrentUser";
 
-export async function deleteItem(
+export async function deleteRestItem(
   year: number,
   month: number,
   day: number,
   exerciseOrder: number,
-  itemOrder: number,
+  itemOrder: number
 ) {
   const { id: currentUserId } = getCurrentUser();
-  const targetExerciseItem = await prisma.exerciseItem.findFirstOrThrow({
+  const targetExerciseItem = await prisma.restExerciseItem.findFirstOrThrow({
     where: {
       exercise: {
         workout: {
@@ -29,7 +29,7 @@ export async function deleteItem(
   });
   const targetExerciseItemId = targetExerciseItem.id;
 
-  await prisma.exerciseItem.delete({
+  await prisma.restExerciseItem.delete({
     where: {
       id: targetExerciseItemId,
     },

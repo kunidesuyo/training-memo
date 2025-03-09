@@ -1,4 +1,4 @@
-import { deleteItem } from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/deleteItem";
+import { deleteItem } from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/deleteRestItem";
 import { getCurrentUser } from "@/app/_utils/getCurrentUser";
 import { prisma } from "@/prisma";
 import { faker } from "@faker-js/faker/locale/ja";
@@ -88,7 +88,7 @@ describe("deleteItem test", () => {
 
     // Act & Assert
     await expect(
-      deleteItem(year, month, day, exerciseOrder, itemOrder),
+      deleteItem(year, month, day, exerciseOrder, itemOrder)
     ).rejects.toThrow("No ExerciseItem found");
   });
 
@@ -111,7 +111,7 @@ describe("deleteItem test", () => {
 
     // Act & Assert
     await expect(
-      deleteItem(year, month, day, exerciseOrder, itemOrder),
+      deleteItem(year, month, day, exerciseOrder, itemOrder)
     ).rejects.toThrow("No ExerciseItem found");
   });
 
@@ -143,7 +143,7 @@ describe("deleteItem test", () => {
 
     // Act & Assert
     await expect(
-      deleteItem(year, month, day, exerciseOrder, itemOrder),
+      deleteItem(year, month, day, exerciseOrder, itemOrder)
     ).rejects.toThrow("No ExerciseItem found");
   });
 });

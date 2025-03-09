@@ -8,7 +8,7 @@ import {
   RestItemState,
   updateRestItems,
 } from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/updateRestItems";
-import DeleteItemButton from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/DeleteItemButton";
+import DeleteRestItemButton from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/DeleteRestItemButton";
 
 interface RestItemFormProps {
   item: RestItem;
@@ -63,7 +63,7 @@ const RestItemForm: React.FC<RestItemFormProps> = ({
             更新
           </Button>
         </form>
-        <DeleteItemButton
+        <DeleteRestItemButton
           year={year}
           month={month}
           day={day}
