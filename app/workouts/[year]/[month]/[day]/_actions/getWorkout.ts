@@ -11,11 +11,20 @@ const workoutValidator = Prisma.validator<Prisma.WorkoutDefaultArgs>()({
         name: true,
         workoutId: true,
         order: true,
-        items: {
+        workItems: {
           select: {
-            type: true,
+            exerciseId: true,
             weight: true,
             rep: true,
+            order: true,
+          },
+          orderBy: {
+            order: "asc",
+          },
+        },
+        restItems: {
+          select: {
+            exerciseId: true,
             time: true,
             order: true,
           },
@@ -30,14 +39,18 @@ const workoutValidator = Prisma.validator<Prisma.WorkoutDefaultArgs>()({
 
 export type Workout = Prisma.WorkoutGetPayload<typeof workoutValidator>;
 
-export type ExerciseWithItems = Workout["exercises"][number];
+export type Exercise = Workout["exercises"][number];
 
-export type ExerciseItem = ExerciseWithItems["items"][number];
+export type WorkItem = Exercise["workItems"][number];
+
+export type RestItem = Exercise["restItems"][number];
+
+// export type ExerciseItem = ExerciseWithItems["items"][number];
 
 export async function getWorkout(
   year: number,
   month: number,
-  day: number,
+  day: number
 ): Promise<Workout> {
   const { id: currentUserId } = getCurrentUser();
   const workout = await prisma.workout.findUniqueOrThrow({

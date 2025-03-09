@@ -1,20 +1,33 @@
-import { ExerciseWithItems } from "@/app/workouts/[year]/[month]/[day]/_actions/getWorkout";
+import {
+  Exercise,
+  WorkItem,
+  RestItem,
+} from "@/app/workouts/[year]/[month]/[day]/_actions/getWorkout";
 import RestItemDetail from "@/app/workouts/[year]/[month]/[day]/RestItemDetail";
 import WorkItemDetail from "@/app/workouts/[year]/[month]/[day]/WorkItemDetail";
 
-export default function ExerciseDetail({
-  exercise,
-}: {
-  exercise: ExerciseWithItems;
-}) {
+type ExerciseItems = (WorkItem | RestItem)[];
+
+function isWorkItem(item: WorkItem | RestItem): item is WorkItem {
+  return "weight" in item && "rep" in item;
+}
+
+export default function ExerciseDetail({ exercise }: { exercise: Exercise }) {
+  const exerciseItems: ExerciseItems = [
+    ...exercise.workItems,
+    ...exercise.restItems,
+  ];
+  const sortedExerciseItmems: ExerciseItems = exerciseItems.sort(
+    (a, b) => a.order - b.order
+  );
   return (
     <div>
-      {exercise.items.map((item) => {
-        return item.type === "WORK" ? (
+      {sortedExerciseItmems.map((item) => {
+        return isWorkItem(item) ? (
           <WorkItemDetail key={item.order} workItem={item} />
-        ) : item.type === "REST" ? (
+        ) : (
           <RestItemDetail key={item.order} workItem={item} />
-        ) : null;
+        );
       })}
     </div>
   );

@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/accordion";
 import { getWorkout } from "@/app/workouts/[year]/[month]/[day]/_actions/getWorkout";
 import type {
-  ExerciseWithItems,
+  Exercise,
   Workout,
 } from "@/app/workouts/[year]/[month]/[day]/_actions/getWorkout";
 import DeleteExercise from "@/app/workouts/[year]/[month]/[day]/deleteExercise";
@@ -23,7 +23,7 @@ export default async function Workout({
   const workout: Workout = await getWorkout(
     parseInt(year),
     parseInt(month),
-    parseInt(day),
+    parseInt(day)
   );
 
   return (
@@ -31,7 +31,7 @@ export default async function Workout({
       <h2>{`${year}年${month}月${day}日のワークアウト`}</h2>
       <div>
         <Accordion type="single" collapsible>
-          {workout.exercises.map((exercise: ExerciseWithItems) => (
+          {workout.exercises.map((exercise: Exercise) => (
             <AccordionItem
               key={exercise.id.toString()}
               value={exercise.id.toString()}

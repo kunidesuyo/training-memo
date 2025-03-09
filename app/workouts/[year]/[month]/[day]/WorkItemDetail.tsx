@@ -1,10 +1,10 @@
-import { ExerciseItem } from "@/app/workouts/[year]/[month]/[day]/_actions/getWorkout";
+import { WorkItem } from "@/app/workouts/[year]/[month]/[day]/_actions/getWorkout";
 import { Card, CardContent } from "@/components/ui/card";
 
 export default function WorkItemDetail({
   workItem,
 }: {
-  workItem: ExerciseItem;
+  workItem: WorkItem;
 }) {
   return (
     <div>
