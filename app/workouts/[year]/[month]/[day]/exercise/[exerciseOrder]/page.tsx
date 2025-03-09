@@ -15,7 +15,7 @@ export default async function Page({
     parseInt(year),
     parseInt(month),
     parseInt(day),
-    parseInt(exerciseOrder),
+    parseInt(exerciseOrder)
   );
 
   return (

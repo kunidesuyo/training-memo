@@ -7,13 +7,20 @@ const exerciseValidator = Prisma.validator<Prisma.ExerciseDefaultArgs>()({
     id: true,
     name: true,
     order: true,
-    items: {
+    workItems: {
       select: {
-        type: true,
+        order: true,
         weight: true,
         rep: true,
-        time: true,
+      },
+      orderBy: {
+        order: "asc",
+      },
+    },
+    restItems: {
+      select: {
         order: true,
+        time: true,
       },
       orderBy: {
         order: "asc",
@@ -24,13 +31,17 @@ const exerciseValidator = Prisma.validator<Prisma.ExerciseDefaultArgs>()({
 
 export type Exercise = Prisma.ExerciseGetPayload<typeof exerciseValidator>;
 
-export type ExerciseItem = Exercise["items"][number];
+export type WorkItem = Exercise["workItems"][number];
+
+export type RestItem = Exercise["restItems"][number];
+
+// export type ExerciseItem = Exercise["items"][number];
 
 export async function getExercise(
   year: number,
   month: number,
   day: number,
-  exerciseOrder: number,
+  exerciseOrder: number
 ): Promise<Exercise> {
   const { id: currentUserId } = getCurrentUser();
   const exercise = await prisma.exercise.findFirstOrThrow({

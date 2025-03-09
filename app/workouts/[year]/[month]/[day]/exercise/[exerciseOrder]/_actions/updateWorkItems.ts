@@ -11,7 +11,7 @@ const WorkItemFormSchema = z.object({
   rep: z.coerce.number(),
 });
 
-export type State = {
+export type WorkItemState = {
   errors?: {
     weight?: string[];
     rep?: string[];
@@ -19,14 +19,14 @@ export type State = {
   message?: string | null;
 };
 
-export async function updateExerciseItems(
+export async function updateWorkItems(
   year: number,
   month: number,
   day: number,
   order: number,
   exerciseOrder: number,
-  prevState: State,
-  formData: FormData,
+  prevState: WorkItemState,
+  formData: FormData
 ) {
   const { id: currentUserId } = getCurrentUser();
   const validatedFields = WorkItemFormSchema.safeParse({
@@ -42,7 +42,7 @@ export async function updateExerciseItems(
   }
   const { weight, rep } = validatedFields.data;
 
-  const targetExerciseItem = await prisma.exerciseItem.findFirstOrThrow({
+  const targetExerciseItem = await prisma.workExerciseItem.findFirstOrThrow({
     where: {
       exercise: {
         workout: {
@@ -58,7 +58,7 @@ export async function updateExerciseItems(
   });
   const targetExerciseItemId = targetExerciseItem.id;
 
-  await prisma.exerciseItem.update({
+  await prisma.workExerciseItem.update({
     where: {
       id: targetExerciseItemId,
     },

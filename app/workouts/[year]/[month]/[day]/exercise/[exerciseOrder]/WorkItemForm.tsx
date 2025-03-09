@@ -2,15 +2,15 @@ import React, { useActionState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ExerciseItem } from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/getExercise";
+import { WorkItem } from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/getExercise";
 import {
-  State,
-  updateExerciseItems,
-} from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/updateExerciseItems";
+  WorkItemState,
+  updateWorkItems,
+} from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/updateWorkItems";
 import DeleteItemButton from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/DeleteItemButton";
 
 interface WorkItemFormProps {
-  item: ExerciseItem;
+  item: WorkItem;
   year: number;
   month: number;
   day: number;
@@ -24,8 +24,8 @@ const WorkItemForm: React.FC<WorkItemFormProps> = ({
   day,
   exerciseOrder,
 }) => {
-  const initialState: State = { message: null, errors: {} };
-  const updateExerciseItemsWithIdentifier = updateExerciseItems.bind(
+  const initialState: WorkItemState = { message: null, errors: {} };
+  const updateExerciseItemsWithIdentifier = updateWorkItems.bind(
     null,
     year,
     month,

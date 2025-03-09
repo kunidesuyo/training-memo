@@ -1,6 +1,6 @@
 import { addItemToExercise } from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/addItemToExercise";
 import { Button } from "@/components/ui/button";
-import { ExerciseItemType } from "@prisma/client";
+// import { ExerciseItemType } from "@prisma/client";
 import React from "react";
 
 export default function AddItemButton({
@@ -10,7 +10,7 @@ export default function AddItemButton({
   day,
   exerciseOrder,
 }: {
-  type: ExerciseItemType;
+  type: "WORK" | "REST";
   year: number;
   month: number;
   day: number;

@@ -2,12 +2,22 @@
 
 import {
   Exercise,
-  ExerciseItem,
+  // ExerciseItem,
+  RestItem,
+  WorkItem,
 } from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/getExercise";
 import AddItemButton from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/AddItemButton";
 import DeleteExercise from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/deleteExercise";
 import RestItemForm from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/RestItemForm";
 import WorkItemForm from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/WorkItemForm";
+
+// TODO: app/workouts/[year]/[month]/[day]/ExerciseDetail.tsxもある
+// モデルメソッドとかに定義する？
+type ExerciseItem = WorkItem | RestItem;
+// 同上
+function isWorkItem(item: ExerciseItem): item is WorkItem {
+  return "weight" in item && "rep" in item;
+}
 
 export default function ExerciseForm({
   exercise,
@@ -22,10 +32,17 @@ export default function ExerciseForm({
   day: number;
   exerciseOrder: number;
 }) {
+  const exerciseItems: ExerciseItem[] = [
+    ...exercise.workItems,
+    ...exercise.restItems,
+  ];
+  const sortedExerciseItmems: ExerciseItem[] = exerciseItems.sort(
+    (a, b) => a.order - b.order
+  );
   return (
     <div>
-      {exercise.items.map((item: ExerciseItem) => {
-        return item.type === "WORK" ? (
+      {sortedExerciseItmems.map((item) => {
+        return isWorkItem(item) ? (
           <WorkItemForm
             key={item.order}
             item={item}
@@ -34,7 +51,7 @@ export default function ExerciseForm({
             day={day}
             exerciseOrder={exerciseOrder}
           />
-        ) : item.type === "REST" ? (
+        ) : (
           <RestItemForm
             key={item.order}
             item={item}
@@ -43,7 +60,7 @@ export default function ExerciseForm({
             day={day}
             exerciseOrder={exerciseOrder}
           />
-        ) : null;
+        );
       })}
       <div className="my-4 flex">
         <AddItemButton

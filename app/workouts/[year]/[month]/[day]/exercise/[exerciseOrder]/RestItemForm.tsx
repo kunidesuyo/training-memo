@@ -3,15 +3,15 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 
 import { Button } from "@/components/ui/button";
-import { ExerciseItem } from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/getExercise";
+import { RestItem } from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/getExercise";
 import {
   RestItemState,
-  updateRest,
-} from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/updateRest";
+  updateRestItems,
+} from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/updateRestItems";
 import DeleteItemButton from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/DeleteItemButton";
 
 interface RestItemFormProps {
-  item: ExerciseItem;
+  item: RestItem;
   year: number;
   month: number;
   day: number;
@@ -26,17 +26,17 @@ const RestItemForm: React.FC<RestItemFormProps> = ({
   exerciseOrder,
 }) => {
   const initialState: RestItemState = { message: null, errors: {} };
-  const updateRestWithIdentifier = updateRest.bind(
+  const updateRestWithIdentifier = updateRestItems.bind(
     null,
     year,
     month,
     day,
     item.order,
-    exerciseOrder,
+    exerciseOrder
   );
   const [state, formAction] = useActionState(
     updateRestWithIdentifier,
-    initialState,
+    initialState
   );
 
   return (
