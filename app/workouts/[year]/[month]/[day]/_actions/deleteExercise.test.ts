@@ -22,7 +22,7 @@ beforeEach(() => {
 });
 
 describe("動作テスト", () => {
-  it("対象のExerciseを削除できる", async () => {
+  it("対象のExerciseを削除できる。TODO: 紐づくWorkItems, RestItemsも削除される", async () => {
     // Arrange
     const year = faker.date.anytime().getFullYear();
     const month = faker.date.future().getMonth();
@@ -71,7 +71,7 @@ describe("動作テスト", () => {
 
     // Act & Assert
     await expect(
-      deleteExercise(year, month, day, exerciseOrder),
+      deleteExercise(year, month, day, exerciseOrder)
     ).rejects.toThrow("No Exercise found");
   });
 
@@ -93,7 +93,7 @@ describe("動作テスト", () => {
 
     // Act & Assert
     await expect(
-      deleteExercise(year, month, day, exerciseOrder),
+      deleteExercise(year, month, day, exerciseOrder)
     ).rejects.toThrow("No Exercise found");
   });
 });
