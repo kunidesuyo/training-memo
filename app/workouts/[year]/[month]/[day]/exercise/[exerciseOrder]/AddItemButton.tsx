@@ -22,8 +22,6 @@ export default function AddItemButton({
         return "ワーク";
       case "REST":
         return "レスト";
-      default:
-        return "";
     }
   };
   return (

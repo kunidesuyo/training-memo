@@ -1,17 +1,16 @@
 "use server";
 
-import { ExerciseItemType } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { prisma } from "@/prisma";
 import { getCurrentUser } from "@/app/_utils/getCurrentUser";
 
 export async function addItemToExercise(
-  type: ExerciseItemType,
+  type: "WORK" | "REST",
   year: number,
   month: number,
   day: number,
-  exerciseOrder: number,
+  exerciseOrder: number
 ) {
   const { id: currentUserId } = getCurrentUser();
   const targetExercise = await prisma.exercise.findFirstOrThrow({
@@ -26,20 +25,40 @@ export async function addItemToExercise(
     },
     select: {
       id: true,
-      items: true,
+      workItems: true,
+      restItems: true,
     },
   });
 
-  const newItemOrder = targetExercise.items.length + 1;
+  const targetExerciseItems = [
+    ...targetExercise.workItems,
+    ...targetExercise.restItems,
+  ];
 
-  await prisma.exerciseItem.create({
-    data: {
-      type,
-      order: newItemOrder,
-      exerciseId: targetExercise.id,
-      authorId: currentUserId,
-    },
-  });
+  const newItemOrder =
+    Math.max(...targetExerciseItems.map((item) => item.order)) + 1;
+
+  // TODO: 型ガードとかでやりたい
+  if (type === "WORK") {
+    await prisma.workExerciseItem.create({
+      data: {
+        weight: 0,
+        rep: 0,
+        order: newItemOrder,
+        exerciseId: targetExercise.id,
+        authorId: currentUserId,
+      },
+    });
+  } else {
+    await prisma.restExerciseItem.create({
+      data: {
+        time: 0,
+        order: newItemOrder,
+        exerciseId: targetExercise.id,
+        authorId: currentUserId,
+      },
+    });
+  }
 
   revalidatePath(`/workouts/${year}/${month}/${day}/exercise/${exerciseOrder}`);
   redirect(`/workouts/${year}/${month}/${day}/exercise/${exerciseOrder}`);
