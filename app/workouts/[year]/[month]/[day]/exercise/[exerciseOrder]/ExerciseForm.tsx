@@ -2,11 +2,11 @@
 
 import {
   Exercise,
-  // ExerciseItem,
   RestItem,
   WorkItem,
 } from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/getExercise";
-import AddItemButton from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/AddItemButton";
+import AddRestItemButton from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/AddRestItemButton";
+import AddWorkItemButton from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/AddWorkItemButton";
 import DeleteExercise from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/deleteExercise";
 import RestItemForm from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/RestItemForm";
 import WorkItemForm from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/WorkItemForm";
@@ -63,15 +63,13 @@ export default function ExerciseForm({
         );
       })}
       <div className="my-4 flex">
-        <AddItemButton
-          type={"WORK"}
+        <AddWorkItemButton
           year={year}
           month={month}
           day={day}
           exerciseOrder={exerciseOrder}
         />
-        <AddItemButton
-          type={"REST"}
+        <AddRestItemButton
           year={year}
           month={month}
           day={day}

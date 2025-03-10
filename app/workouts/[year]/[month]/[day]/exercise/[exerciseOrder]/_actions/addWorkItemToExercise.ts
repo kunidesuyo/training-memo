@@ -5,8 +5,7 @@ import { redirect } from "next/navigation";
 import { prisma } from "@/prisma";
 import { getCurrentUser } from "@/app/_utils/getCurrentUser";
 
-export async function addItemToExercise(
-  type: "WORK" | "REST",
+export async function addWorkItemToExercise(
   year: number,
   month: number,
   day: number,
@@ -38,27 +37,15 @@ export async function addItemToExercise(
   const newItemOrder =
     Math.max(...targetExerciseItems.map((item) => item.order)) + 1;
 
-  // TODO: 型ガードとかでやりたい
-  if (type === "WORK") {
-    await prisma.workExerciseItem.create({
-      data: {
-        weight: 0,
-        rep: 0,
-        order: newItemOrder,
-        exerciseId: targetExercise.id,
-        authorId: currentUserId,
-      },
-    });
-  } else {
-    await prisma.restExerciseItem.create({
-      data: {
-        time: 0,
-        order: newItemOrder,
-        exerciseId: targetExercise.id,
-        authorId: currentUserId,
-      },
-    });
-  }
+  await prisma.workExerciseItem.create({
+    data: {
+      weight: 0,
+      rep: 0,
+      order: newItemOrder,
+      exerciseId: targetExercise.id,
+      authorId: currentUserId,
+    },
+  });
 
   revalidatePath(`/workouts/${year}/${month}/${day}/exercise/${exerciseOrder}`);
   redirect(`/workouts/${year}/${month}/${day}/exercise/${exerciseOrder}`);
