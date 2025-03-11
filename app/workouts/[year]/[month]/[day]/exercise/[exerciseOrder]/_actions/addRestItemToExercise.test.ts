@@ -22,7 +22,7 @@ beforeEach(() => {
 });
 
 describe("addRestItemToExercise test", () => {
-  it("対象のExerciseにrestItemが追加できる", async () => {
+  it("restItem, workItemを持たないExerciseにrestItemが追加できる", async () => {
     // Arrange
     const year = faker.date.anytime().getFullYear();
     const month = faker.date.future().getMonth();
@@ -71,4 +71,9 @@ describe("addRestItemToExercise test", () => {
     expect(restExerciseItem).toHaveLength(1);
     expect(restExerciseItem[0].time).toBe(0);
   });
+
+  it("restItemを持つExerciseにrestItemが追加できる", async () => {});
+  it("workItemを持つExerciseにrestItemが追加できる", async () => {});
+  it("restItem, workItem両方を持つExerciseにrestItemが追加できる", async () => {});
+  it("Exerciseが存在しない場合、例外を返す", async () => {});
 });
