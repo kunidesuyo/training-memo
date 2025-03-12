@@ -63,8 +63,5 @@
     "typescript": "^5.7.2",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.0.5"
-  },
-  "lint-staged": {
-    "*.{ts, tsx}": "biome check --apply"
   }
 }
