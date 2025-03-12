@@ -2,7 +2,6 @@ import { getCurrentUser } from "@/app/_utils/getCurrentUser";
 import { addRestItemToExercise } from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/addRestItemToExercise";
 import { prisma } from "@/prisma";
 import { faker } from "@faker-js/faker/locale/ja";
-import { revalidatePath } from "next/cache";
 
 beforeEach(() => {
   vi.mock("next/cache", () => {
@@ -275,21 +274,4 @@ describe("addRestItemToExercise test", () => {
       addRestItemToExercise(year, month, day, exerciseOrder),
     ).rejects.toThrow("No Exercise found");
   });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 });
