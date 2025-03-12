@@ -29,7 +29,6 @@ describe("addRestItemToExercise test", () => {
     const day = faker.date.future().getDate();
     const exerciseOrder = 1;
     const currentUser = getCurrentUser();
-    // const targetWorkout =
     await prisma.workout.create({
       data: {
         year,
@@ -79,7 +78,6 @@ describe("addRestItemToExercise test", () => {
     const day = faker.date.future().getDate();
     const exerciseOrder = 1;
     const currentUser = getCurrentUser();
-    // const targetWorkout =
     await prisma.workout.create({
       data: {
         year,
@@ -128,9 +126,66 @@ describe("addRestItemToExercise test", () => {
       },
     });
     expect(restExerciseItem).toHaveLength(2);
-    expect(restExerciseItem.some(item => item.order === 2)).toBe(true);
+    expect(restExerciseItem.some((item) => item.order === 2)).toBe(true);
   });
-  it("workItemを持つExerciseにrestItemが追加できる", async () => {});
+  it("workItemを持つExerciseにrestItemが追加できる", async () => {
+    // Arrange
+    const year = faker.date.anytime().getFullYear();
+    const month = faker.date.future().getMonth();
+    const day = faker.date.future().getDate();
+    const exerciseOrder = 1;
+    const currentUser = getCurrentUser();
+    await prisma.workout.create({
+      data: {
+        year,
+        month,
+        day,
+        authorId: currentUser.id,
+        exercises: {
+          create: [
+            {
+              name: faker.lorem.words(),
+              order: exerciseOrder,
+              authorId: currentUser.id,
+              workItems: {
+                create: [
+                  {
+                    weight: 10,
+                    rep: 10,
+                    order: 1,
+                    authorId: currentUser.id,
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      },
+      select: {
+        exercises: true,
+      },
+    });
+
+    // Act
+    await addRestItemToExercise(year, month, day, exerciseOrder);
+
+    // Assert
+    const restExerciseItem = await prisma.restExerciseItem.findMany({
+      where: {
+        exercise: {
+          workout: {
+            year,
+            month,
+            day,
+            authorId: currentUser.id,
+          },
+          order: exerciseOrder,
+        },
+      },
+    });
+    expect(restExerciseItem).toHaveLength(1);
+    expect(restExerciseItem[0].order).toBe(2);
+  });
   it("restItem, workItem両方を持つExerciseにrestItemが追加できる", async () => {});
   it("Exerciseが存在しない場合、例外を返す", async () => {});
 });
