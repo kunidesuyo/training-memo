@@ -65,8 +65,8 @@
     "vitest": "^3.0.5"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "npm run test"
+    "**.{js|ts|cjs|mjs|d.cts|d.mts|jsx|tsx|json|jsonc}": [
+      "biome check --write --no-errors-on-unmatched"
     ]
   }
 }
