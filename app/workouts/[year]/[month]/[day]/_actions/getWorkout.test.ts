@@ -1,6 +1,6 @@
 import { getCurrentUser } from "@/app/_utils/getCurrentUser";
-import { getWorkout } from "./getWorkout";
 import { prisma } from "@/prisma";
+import { getWorkout } from "./getWorkout";
 
 describe("getWorkout test", () => {
   it("should return a workout", async () => {

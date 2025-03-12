@@ -1,10 +1,10 @@
 "use server";
 
+import { getCurrentUser } from "@/app/_utils/getCurrentUser";
+import { prisma } from "@/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
-import { prisma } from "@/prisma";
-import { getCurrentUser } from "@/app/_utils/getCurrentUser";
 
 const RestItemFormSchema = z.object({
   time: z.coerce.number(),
@@ -23,7 +23,7 @@ export async function updateRestItems(
   day: number,
   itemOrder: number,
   exerciseOrder: number,
-  prevState: RestItemState,
+  _prevState: RestItemState,
   formData: FormData,
 ) {
   const { id: currentUserId } = getCurrentUser();

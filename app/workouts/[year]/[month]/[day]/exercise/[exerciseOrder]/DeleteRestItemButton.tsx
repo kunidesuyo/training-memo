@@ -2,7 +2,6 @@
 
 import { deleteRestItem } from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/deleteRestItem";
 import { Button } from "@/components/ui/button";
-import React from "react";
 
 export default function DeleteRestItemButton({
   year,

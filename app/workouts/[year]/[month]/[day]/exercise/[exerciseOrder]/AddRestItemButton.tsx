@@ -1,6 +1,5 @@
 import { addRestItemToExercise } from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/addRestItemToExercise";
 import { Button } from "@/components/ui/button";
-import React from "react";
 
 export default function AddRestItemButton({
   year,

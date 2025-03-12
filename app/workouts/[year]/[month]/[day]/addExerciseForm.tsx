@@ -1,8 +1,8 @@
 "use client";
 
 import {
+  type State,
   addExercise,
-  State,
 } from "@/app/workouts/[year]/[month]/[day]/_actions/addExercise";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -17,9 +17,9 @@ export default function AddExerciseForm({
   const initialState: State = { message: null, errors: {} };
   const addExercise_ = addExercise.bind(
     null,
-    parseInt(year),
-    parseInt(month),
-    parseInt(day),
+    Number.parseInt(year),
+    Number.parseInt(month),
+    Number.parseInt(day),
   );
   const [state, formAction] = useActionState(addExercise_, initialState);
 
@@ -35,12 +35,11 @@ export default function AddExerciseForm({
             defaultValue={""}
           />
           <div id="name-error" aria-live="polite" aria-atomic="true">
-            {state.errors?.name &&
-              state.errors.name.map((error: string) => (
-                <p className="mt-2 text-sm text-red-500" key={error}>
-                  {error}
-                </p>
-              ))}
+            {state.errors?.name?.map((error: string) => (
+              <p className="mt-2 text-sm text-red-500" key={error}>
+                {error}
+              </p>
+            ))}
           </div>
         </div>
         <Button type="submit" className="mx-2 underline">

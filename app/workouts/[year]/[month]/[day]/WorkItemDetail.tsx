@@ -1,4 +1,4 @@
-import { WorkItem } from "@/app/workouts/[year]/[month]/[day]/_actions/getWorkout";
+import type { WorkItem } from "@/app/workouts/[year]/[month]/[day]/_actions/getWorkout";
 import { Card, CardContent } from "@/components/ui/card";
 
 export default function WorkItemDetail({
@@ -10,7 +10,7 @@ export default function WorkItemDetail({
     <div>
       <Card className="my-4" key={workItem.order}>
         <CardContent className="flex p-4">
-          <p>{`ワーク`}</p>
+          <p>{"ワーク"}</p>
           <p>{workItem.weight}</p>
           <p>kg</p>
           <p>{workItem.rep}</p>

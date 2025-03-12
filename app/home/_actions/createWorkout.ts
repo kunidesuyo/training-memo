@@ -1,9 +1,9 @@
 "use server";
 
-import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/app/_utils/getCurrentUser";
 import { prisma } from "@/prisma";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 export async function createWorkout(year: number, month: number, day: number) {
   const { id: currentUserId } = getCurrentUser();

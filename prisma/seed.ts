@@ -1,5 +1,10 @@
 import { faker } from "@faker-js/faker/locale/ja";
-import { Exercise, PrismaClient, User, Workout } from "@prisma/client";
+import {
+  type Exercise,
+  PrismaClient,
+  type User,
+  type Workout,
+} from "@prisma/client";
 const prisma = new PrismaClient();
 
 // type User = {
@@ -22,7 +27,7 @@ const createWorkout = async (
   rootUser: User,
   year: number,
   month: number,
-  day: number
+  day: number,
 ) => {
   const workout = await prisma.workout.create({
     data: {

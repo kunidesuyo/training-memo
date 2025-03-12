@@ -15,7 +15,7 @@ export type Workout = Prisma.WorkoutGetPayload<typeof workoutValidator>;
 
 export async function getWorkouts(
   year: number,
-  month: number
+  month: number,
 ): Promise<Workout[]> {
   const { id: currentUserId } = getCurrentUser();
   const workouts = await prisma.workout.findMany({

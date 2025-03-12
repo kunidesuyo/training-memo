@@ -41,7 +41,7 @@ export async function getExercise(
   year: number,
   month: number,
   day: number,
-  exerciseOrder: number
+  exerciseOrder: number,
 ): Promise<Exercise> {
   const { id: currentUserId } = getCurrentUser();
   const exercise = await prisma.exercise.findFirstOrThrow({

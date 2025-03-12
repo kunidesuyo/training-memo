@@ -29,4 +29,3 @@ describe("getWorkout test", () => {
     expect(fetchedWorkout).toBeNull();
   });
 });
-

@@ -1,9 +1,7 @@
 "use client";
-
-import React from "react";
+import type { Workout } from "@/app/home/_actions/getWorkouts";
 import { Calendar } from "@/components/ui/calendar";
 import { usePathname, useRouter } from "next/navigation";
-import { Workout } from "@/app/home/_actions/getWorkouts";
 
 export default function HomeCalender({
   workouts,
@@ -16,7 +14,8 @@ export default function HomeCalender({
   const router = useRouter();
 
   const workoutDays = workouts.map(
-    (workout: Workout) => new Date(workout.year, workout.month - 1, workout.day)
+    (workout: Workout) =>
+      new Date(workout.year, workout.month - 1, workout.day),
   );
 
   const showSelectedDateCalendar = (date: Date | undefined) => {
