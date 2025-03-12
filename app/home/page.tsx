@@ -27,14 +27,15 @@ export default async function Page(props: {
     };
   };
 
+  // TODO: リファクタリング
   const initDate = (
     searchParams?: SearchParams,
   ): { year: number; month: number; day: number } => {
     if (isAllParamsSpecified(searchParams)) {
       return {
-        year: Number.parseInt(searchParams!.year!),
-        month: Number.parseInt(searchParams!.month!),
-        day: Number.parseInt(searchParams!.day!),
+        year: Number.parseInt(searchParams?.year as string),
+        month: Number.parseInt(searchParams?.month as string),
+        day: Number.parseInt(searchParams?.day as string),
       };
     }
     if (isAllParamsNotSpecified(searchParams)) {
