@@ -274,4 +274,11 @@ describe("addRestItemToExercise test", () => {
       addRestItemToExercise(year, month, day, exerciseOrder),
     ).rejects.toThrow("No Exercise found");
   });
+
+
+
+
+
+
+  
 });
