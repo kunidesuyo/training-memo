@@ -71,7 +71,7 @@ describe("動作テスト", () => {
 
     // Act & Assert
     await expect(
-      deleteExercise(year, month, day, exerciseOrder)
+      deleteExercise(year, month, day, exerciseOrder),
     ).rejects.toThrow("No Exercise found");
   });
 
@@ -93,7 +93,7 @@ describe("動作テスト", () => {
 
     // Act & Assert
     await expect(
-      deleteExercise(year, month, day, exerciseOrder)
+      deleteExercise(year, month, day, exerciseOrder),
     ).rejects.toThrow("No Exercise found");
   });
 });

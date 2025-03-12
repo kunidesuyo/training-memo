@@ -1,15 +1,15 @@
 "use server";
 
+import { getCurrentUser } from "@/app/_utils/getCurrentUser";
+import { prisma } from "@/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { prisma } from "@/prisma";
-import { getCurrentUser } from "@/app/_utils/getCurrentUser";
 
 export async function addRestItemToExercise(
   year: number,
   month: number,
   day: number,
-  exerciseOrder: number
+  exerciseOrder: number,
 ) {
   const { id: currentUserId } = getCurrentUser();
   const targetExercise = await prisma.exercise.findFirstOrThrow({
@@ -35,7 +35,9 @@ export async function addRestItemToExercise(
   ];
 
   const newItemOrder =
-    Math.max(...targetExerciseItems.map((item) => item.order)) + 1;
+    targetExerciseItems.length === 0
+      ? 1
+      : Math.max(...targetExerciseItems.map((item) => item.order)) + 1;
 
   await prisma.restExerciseItem.create({
     data: {

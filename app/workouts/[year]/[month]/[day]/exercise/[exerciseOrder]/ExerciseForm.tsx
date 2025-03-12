@@ -1,15 +1,15 @@
 "use client";
 
-import {
+import AddRestItemButton from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/AddRestItemButton";
+import AddWorkItemButton from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/AddWorkItemButton";
+import RestItemForm from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/RestItemForm";
+import WorkItemForm from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/WorkItemForm";
+import type {
   Exercise,
   RestItem,
   WorkItem,
 } from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/getExercise";
-import AddRestItemButton from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/AddRestItemButton";
-import AddWorkItemButton from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/AddWorkItemButton";
 import DeleteExercise from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/deleteExercise";
-import RestItemForm from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/RestItemForm";
-import WorkItemForm from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/WorkItemForm";
 
 // TODO: app/workouts/[year]/[month]/[day]/ExerciseDetail.tsxもある
 // モデルメソッドとかに定義する？
@@ -37,7 +37,7 @@ export default function ExerciseForm({
     ...exercise.restItems,
   ];
   const sortedExerciseItmems: ExerciseItem[] = exerciseItems.sort(
-    (a, b) => a.order - b.order
+    (a, b) => a.order - b.order,
   );
   return (
     <div>

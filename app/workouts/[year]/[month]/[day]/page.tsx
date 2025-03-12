@@ -1,29 +1,29 @@
+import ExerciseDetail from "@/app/workouts/[year]/[month]/[day]/ExerciseDetail";
+import { getWorkout } from "@/app/workouts/[year]/[month]/[day]/_actions/getWorkout";
+import type {
+  Exercise,
+  Workout,
+} from "@/app/workouts/[year]/[month]/[day]/_actions/getWorkout";
 import AddExerciseForm from "@/app/workouts/[year]/[month]/[day]/addExerciseForm";
+import DeleteExercise from "@/app/workouts/[year]/[month]/[day]/deleteExercise";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { getWorkout } from "@/app/workouts/[year]/[month]/[day]/_actions/getWorkout";
-import type {
-  Exercise,
-  Workout,
-} from "@/app/workouts/[year]/[month]/[day]/_actions/getWorkout";
-import DeleteExercise from "@/app/workouts/[year]/[month]/[day]/deleteExercise";
 import Link from "next/link";
-import ExerciseDetail from "@/app/workouts/[year]/[month]/[day]/ExerciseDetail";
 
-export default async function Workout({
+export default async function Page({
   params,
 }: {
   params: { year: string; month: string; day: string };
 }) {
   const { year, month, day } = await params;
   const workout: Workout = await getWorkout(
-    parseInt(year),
-    parseInt(month),
-    parseInt(day)
+    Number.parseInt(year),
+    Number.parseInt(month),
+    Number.parseInt(day),
   );
 
   return (
@@ -39,9 +39,9 @@ export default async function Workout({
               <AccordionTrigger>{exercise.name}</AccordionTrigger>
               <AccordionContent>
                 <DeleteExercise
-                  year={parseInt(year)}
-                  month={parseInt(month)}
-                  day={parseInt(day)}
+                  year={Number.parseInt(year)}
+                  month={Number.parseInt(month)}
+                  day={Number.parseInt(day)}
                   order={exercise.order}
                 />
                 <Link

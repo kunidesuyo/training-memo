@@ -1,10 +1,10 @@
 "use server";
 
-import { z } from "zod";
+import { getCurrentUser } from "@/app/_utils/getCurrentUser";
 import { prisma } from "@/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { getCurrentUser } from "@/app/_utils/getCurrentUser";
+import { z } from "zod";
 
 export type State = {
   errors?: {
@@ -21,7 +21,7 @@ export async function addExercise(
   year: number,
   month: number,
   day: number,
-  prevState: State,
+  _prevState: State,
   formData: FormData,
 ) {
   const { id: currentUserId } = getCurrentUser();

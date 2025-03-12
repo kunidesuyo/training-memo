@@ -1,4 +1,4 @@
-import { RestItem } from "@/app/workouts/[year]/[month]/[day]/_actions/getWorkout";
+import type { RestItem } from "@/app/workouts/[year]/[month]/[day]/_actions/getWorkout";
 import { Card, CardContent } from "@/components/ui/card";
 
 export default function RestItemDetail({
@@ -10,7 +10,7 @@ export default function RestItemDetail({
     <div>
       <Card className="my-4" key={workItem.order}>
         <CardContent className="flex p-4">
-          <p>{`レスト`}</p>
+          <p>{"レスト"}</p>
           <p>{workItem.time}</p>
           <p>秒</p>
         </CardContent>

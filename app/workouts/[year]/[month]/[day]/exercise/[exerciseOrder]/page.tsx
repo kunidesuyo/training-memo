@@ -1,8 +1,8 @@
+import ExerciseForm from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/ExerciseForm";
 import {
-  Exercise,
+  type Exercise,
   getExercise,
 } from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/getExercise";
-import ExerciseForm from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/ExerciseForm";
 import Link from "next/link";
 
 export default async function Page({
@@ -12,10 +12,10 @@ export default async function Page({
 }) {
   const { year, month, day, exerciseOrder } = await params;
   const exercise: Exercise = await getExercise(
-    parseInt(year),
-    parseInt(month),
-    parseInt(day),
-    parseInt(exerciseOrder)
+    Number.parseInt(year),
+    Number.parseInt(month),
+    Number.parseInt(day),
+    Number.parseInt(exerciseOrder),
   );
 
   return (
@@ -27,10 +27,10 @@ export default async function Page({
       <div className="m-4">
         <ExerciseForm
           exercise={exercise}
-          year={parseInt(year)}
-          month={parseInt(month)}
-          day={parseInt(day)}
-          exerciseOrder={parseInt(exerciseOrder)}
+          year={Number.parseInt(year)}
+          month={Number.parseInt(month)}
+          day={Number.parseInt(day)}
+          exerciseOrder={Number.parseInt(exerciseOrder)}
         />
       </div>
     </div>

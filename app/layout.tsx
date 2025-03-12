@@ -1,9 +1,9 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import "./globals.css";
-import Link from "next/link";
 import { ThemeProvider } from "@/components/theme-provider";
-import { Noto_Sans_JP } from "next/font/google";
 import { House } from "lucide-react";
+import { Noto_Sans_JP } from "next/font/google";
+import Link from "next/link";
 
 const notoSansJp = Noto_Sans_JP({
   subsets: ["latin"],

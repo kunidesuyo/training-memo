@@ -1,14 +1,15 @@
-import React, { useActionState } from "react";
-import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import type React from "react";
+import { useActionState } from "react";
 
-import { Button } from "@/components/ui/button";
-import { RestItem } from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/getExercise";
+import DeleteRestItemButton from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/DeleteRestItemButton";
+import type { RestItem } from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/getExercise";
 import {
-  RestItemState,
+  type RestItemState,
   updateRestItems,
 } from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/updateRestItems";
-import DeleteRestItemButton from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/DeleteRestItemButton";
+import { Button } from "@/components/ui/button";
 
 interface RestItemFormProps {
   item: RestItem;
@@ -32,17 +33,17 @@ const RestItemForm: React.FC<RestItemFormProps> = ({
     month,
     day,
     item.order,
-    exerciseOrder
+    exerciseOrder,
   );
   const [state, formAction] = useActionState(
     updateRestWithIdentifier,
-    initialState
+    initialState,
   );
 
   return (
     <Card className="my-4" key={item.order}>
       <CardContent className="flex p-4">
-        <p>{`レスト`}</p>
+        <p>{"レスト"}</p>
         <form action={formAction} className="flex">
           <Input
             name="time"
@@ -52,12 +53,11 @@ const RestItemForm: React.FC<RestItemFormProps> = ({
           />
           <p>秒</p>
           <div id="time-error" aria-live="polite" aria-atomic="true">
-            {state.errors?.time &&
-              state.errors.time.map((error: string) => (
-                <p className="mt-2 text-sm text-red-500" key={error}>
-                  {error}
-                </p>
-              ))}
+            {state.errors?.time?.map((error: string) => (
+              <p className="mt-2 text-sm text-red-500" key={error}>
+                {error}
+              </p>
+            ))}
           </div>
           <Button type="submit" className="mx-2 underline">
             更新

@@ -1,7 +1,10 @@
-import { getWorkout, Workout, Exercise } from "@/app/home/_actions/getWorkout";
+import {
+  type Exercise,
+  type Workout,
+  getWorkout,
+} from "@/app/home/_actions/getWorkout";
 import CreateWorkoutButton from "@/app/home/createWorkoutButton";
 import Link from "next/link";
-import React from "react";
 
 const formatDate = (selectedDate: Date) => {
   const year = selectedDate.getFullYear();
@@ -26,7 +29,7 @@ const renderWorkoutDetails = (
   selectedWorkout: Workout,
   year: number,
   month: number,
-  day: number
+  day: number,
 ) => {
   return (
     <div>

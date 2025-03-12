@@ -1,15 +1,15 @@
 "use server";
 
+import { getCurrentUser } from "@/app/_utils/getCurrentUser";
+import { prisma } from "@/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { prisma } from "@/prisma";
-import { getCurrentUser } from "@/app/_utils/getCurrentUser";
 
 export async function addWorkItemToExercise(
   year: number,
   month: number,
   day: number,
-  exerciseOrder: number
+  exerciseOrder: number,
 ) {
   const { id: currentUserId } = getCurrentUser();
   const targetExercise = await prisma.exercise.findFirstOrThrow({

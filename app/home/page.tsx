@@ -1,4 +1,4 @@
-import { getWorkouts, Workout } from "@/app/home/_actions/getWorkouts";
+import { type Workout, getWorkouts } from "@/app/home/_actions/getWorkouts";
 import HomeCalender from "@/app/home/homeCalender";
 import SelectedWorkout from "@/app/home/selectedWorkout";
 import { notFound } from "next/navigation";
@@ -27,14 +27,15 @@ export default async function Page(props: {
     };
   };
 
+  // TODO: リファクタリング
   const initDate = (
-    searchParams?: SearchParams
+    searchParams?: SearchParams,
   ): { year: number; month: number; day: number } => {
     if (isAllParamsSpecified(searchParams)) {
       return {
-        year: parseInt(searchParams!.year!),
-        month: parseInt(searchParams!.month!),
-        day: parseInt(searchParams!.day!),
+        year: Number.parseInt(searchParams?.year as string),
+        month: Number.parseInt(searchParams?.month as string),
+        day: Number.parseInt(searchParams?.day as string),
       };
     }
     if (isAllParamsNotSpecified(searchParams)) {

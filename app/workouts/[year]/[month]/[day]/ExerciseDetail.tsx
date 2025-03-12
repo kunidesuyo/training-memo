@@ -1,10 +1,10 @@
-import {
-  Exercise,
-  WorkItem,
-  RestItem,
-} from "@/app/workouts/[year]/[month]/[day]/_actions/getWorkout";
 import RestItemDetail from "@/app/workouts/[year]/[month]/[day]/RestItemDetail";
 import WorkItemDetail from "@/app/workouts/[year]/[month]/[day]/WorkItemDetail";
+import type {
+  Exercise,
+  RestItem,
+  WorkItem,
+} from "@/app/workouts/[year]/[month]/[day]/_actions/getWorkout";
 
 type ExerciseItems = (WorkItem | RestItem)[];
 
@@ -18,7 +18,7 @@ export default function ExerciseDetail({ exercise }: { exercise: Exercise }) {
     ...exercise.restItems,
   ];
   const sortedExerciseItmems: ExerciseItems = exerciseItems.sort(
-    (a, b) => a.order - b.order
+    (a, b) => a.order - b.order,
   );
   return (
     <div>

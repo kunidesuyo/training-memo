@@ -1,10 +1,10 @@
 "use server";
 
+import { getCurrentUser } from "@/app/_utils/getCurrentUser";
+import { prisma } from "@/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
-import { prisma } from "@/prisma";
-import { getCurrentUser } from "@/app/_utils/getCurrentUser";
 
 const WorkItemFormSchema = z.object({
   weight: z.coerce.number(),
@@ -25,8 +25,8 @@ export async function updateWorkItems(
   day: number,
   order: number,
   exerciseOrder: number,
-  prevState: WorkItemState,
-  formData: FormData
+  _prevState: WorkItemState,
+  formData: FormData,
 ) {
   const { id: currentUserId } = getCurrentUser();
   const validatedFields = WorkItemFormSchema.safeParse({

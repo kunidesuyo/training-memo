@@ -1,13 +1,14 @@
-import React, { useActionState } from "react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { WorkItem } from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/getExercise";
+import DeleteWorkItemButton from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/DeleteWorkItemButton";
+import type { WorkItem } from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/getExercise";
 import {
-  WorkItemState,
+  type WorkItemState,
   updateWorkItems,
 } from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/updateWorkItems";
-import DeleteWorkItemButton from "@/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/DeleteWorkItemButton";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import type React from "react";
+import { useActionState } from "react";
 
 interface WorkItemFormProps {
   item: WorkItem;
@@ -31,16 +32,16 @@ const WorkItemForm: React.FC<WorkItemFormProps> = ({
     month,
     day,
     item.order,
-    exerciseOrder
+    exerciseOrder,
   );
   const [state, formAction] = useActionState(
     updateExerciseItemsWithIdentifier,
-    initialState
+    initialState,
   );
   return (
     <Card className="my-4" key={item.order}>
       <CardContent className="flex p-4">
-        <p>{`ワーク`}</p>
+        <p>{"ワーク"}</p>
         <form action={formAction} className="flex">
           <Input
             name="weight"
@@ -51,12 +52,11 @@ const WorkItemForm: React.FC<WorkItemFormProps> = ({
           />
           <p>kg</p>
           <div id="weight-error" aria-live="polite" aria-atomic="true">
-            {state.errors?.weight &&
-              state.errors.weight.map((error: string) => (
-                <p className="mt-2 text-sm text-red-500" key={error}>
-                  {error}
-                </p>
-              ))}
+            {state.errors?.weight?.map((error: string) => (
+              <p className="mt-2 text-sm text-red-500" key={error}>
+                {error}
+              </p>
+            ))}
           </div>
           <Input
             name="rep"
@@ -67,12 +67,11 @@ const WorkItemForm: React.FC<WorkItemFormProps> = ({
           />
           <p>回</p>
           <div id="weight-error" aria-live="polite" aria-atomic="true">
-            {state.errors?.rep &&
-              state.errors.rep.map((error: string) => (
-                <p className="mt-2 text-sm text-red-500" key={error}>
-                  {error}
-                </p>
-              ))}
+            {state.errors?.rep?.map((error: string) => (
+              <p className="mt-2 text-sm text-red-500" key={error}>
+                {error}
+              </p>
+            ))}
           </div>
           <Button type="submit" className="mx-2 underline">
             更新
