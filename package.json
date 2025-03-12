@@ -6,9 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "biome lint -- apply .",
+    "lint": "biome lint --write .",
     "format": "biome format . --write",
-    "check": "biome check --apply .",
+    "check": "biome check --write .",
     "test": "vitest",
     "testrun": "vitest run",
     "prepare": "husky"
