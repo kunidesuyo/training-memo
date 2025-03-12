@@ -253,5 +253,25 @@ describe("addRestItemToExercise test", () => {
     expect(restExerciseItem).toHaveLength(2);
     expect(restExerciseItem.some((item) => item.order === 3)).toBe(true);
   });
-  it("Exerciseが存在しない場合、例外を返す", async () => {});
+  it("Exerciseが存在しない場合、例外を返す", async () => {
+    // Arrange
+    const year = faker.date.anytime().getFullYear();
+    const month = faker.date.future().getMonth();
+    const day = faker.date.future().getDate();
+    const exerciseOrder = 1;
+    const currentUser = getCurrentUser();
+    await prisma.workout.create({
+      data: {
+        year,
+        month,
+        day,
+        authorId: currentUser.id,
+      },
+    });
+
+    // Act & Assert
+    await expect(
+      addRestItemToExercise(year, month, day, exerciseOrder)
+    ).rejects.toThrow("No Exercise found");
+  });
 });
