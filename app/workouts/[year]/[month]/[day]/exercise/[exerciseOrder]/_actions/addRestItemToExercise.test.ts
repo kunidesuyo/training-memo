@@ -271,7 +271,7 @@ describe("addRestItemToExercise test", () => {
 
     // Act & Assert
     await expect(
-      addRestItemToExercise(year, month, day, exerciseOrder)
+      addRestItemToExercise(year, month, day, exerciseOrder),
     ).rejects.toThrow("No Exercise found");
   });
 });
