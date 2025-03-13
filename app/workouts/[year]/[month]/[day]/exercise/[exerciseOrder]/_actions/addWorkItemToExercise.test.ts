@@ -272,6 +272,5 @@ describe("addRestItemToExercise test", () => {
     await expect(
       addWorkItemToExercise(year, month, day, exerciseOrder),
     ).rejects.toThrow("No Exercise found");
-    //
   });
 });
