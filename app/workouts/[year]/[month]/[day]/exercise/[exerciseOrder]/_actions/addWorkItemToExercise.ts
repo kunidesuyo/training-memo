@@ -35,7 +35,9 @@ export async function addWorkItemToExercise(
   ];
 
   const newItemOrder =
-    Math.max(...targetExerciseItems.map((item) => item.order)) + 1;
+    targetExerciseItems.length === 0
+      ? 1
+      : Math.max(...targetExerciseItems.map((item) => item.order)) + 1;
 
   await prisma.workExerciseItem.create({
     data: {
