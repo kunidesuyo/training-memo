@@ -1,6 +1,6 @@
 import { execSync } from "node:child_process";
-import * as _getCurrentUser from "@/app/_utils/getCurrentUser";
 import * as _prisma from "@/prisma";
+import * as _getCurrentUser from "@/src/app/_utils/getCurrentUser";
 import { PrismaClient } from "@prisma/client";
 import {
   PostgreSqlContainer,
