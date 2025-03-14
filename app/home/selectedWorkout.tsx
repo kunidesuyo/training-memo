@@ -1,8 +1,8 @@
 import {
   type Exercise,
-  type Workout,
-  getWorkout,
-} from "@/app/home/_actions/getWorkout";
+  type WorkoutWithExercises,
+  getWorkoutWithExercise,
+} from "@/app/home/actions";
 import CreateWorkoutButton from "@/app/home/createWorkoutButton";
 import Link from "next/link";
 
@@ -26,7 +26,7 @@ const renderSelectedDate = (selectedDate: Date) => {
 };
 
 const renderWorkoutDetails = (
-  selectedWorkout: Workout,
+  selectedWorkout: WorkoutWithExercises,
   year: number,
   month: number,
   day: number,
@@ -53,7 +53,8 @@ export default async function SelectedWorkout({
   selectedDate: Date;
 }) {
   const { year, month, day } = formatDate(selectedDate);
-  const selectedWorkout: Workout | null = await getWorkout(year, month, day);
+  const selectedWorkout: WorkoutWithExercises | null =
+    await getWorkoutWithExercise(year, month, day);
 
   return (
     <div>
