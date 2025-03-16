@@ -7,12 +7,6 @@ import {
 } from "@prisma/client";
 const prisma = new PrismaClient();
 
-// type User = {
-//   id: number;
-//   email: string;
-//   name: string;
-// };
-
 const createRootUser = async (): Promise<User> => {
   const rootUser = await prisma.user.create({
     data: {
@@ -37,17 +31,22 @@ const createWorkout = async (
       authorId: rootUser.id,
     },
   });
-  createExercise(workout, rootUser);
-  createExercise(workout, rootUser);
-  createExercise(workout, rootUser);
+
+  createExercise(workout, rootUser, 1);
+  createExercise(workout, rootUser, 2);
+  createExercise(workout, rootUser, 3);
 };
 
-const createExercise = async (workout: Workout, rootUser: User) => {
+const createExercise = async (
+  workout: Workout,
+  rootUser: User,
+  order: number,
+) => {
   const exercise = await prisma.exercise.create({
     data: {
       name: faker.lorem.word(),
       workoutId: workout.id,
-      order: 1,
+      order,
       authorId: rootUser.id,
     },
   });
@@ -55,7 +54,6 @@ const createExercise = async (workout: Workout, rootUser: User) => {
 };
 
 const createExerciseItems = async (exercise: Exercise, rootUser: User) => {
-  // work, rest, work, rest, work
   const itemTypes = ["WORK", "REST", "WORK", "REST", "WORK"];
   itemTypes.forEach(async (type, index) => {
     if (type === "WORK") {

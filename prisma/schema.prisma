@@ -22,11 +22,9 @@ model Workout {
   authorId  Int
   exercises Exercise[]
 
-  // TODO: 複合ユニークキーの命名を行う
   @@unique([year, month, day, authorId])
 }
 
-// ユニーク制約追加
 model Exercise {
   id        Int                @id @default(autoincrement())
   name      String             @db.VarChar(255)
@@ -35,8 +33,11 @@ model Exercise {
   order     Int
   workItems WorkExerciseItem[]
   restItems RestExerciseItem[]
-  author    User               @relation(fields: [authorId], references: [id])
-  authorId  Int
+
+  author   User @relation(fields: [authorId], references: [id])
+  authorId Int
+
+  @@unique([workoutId, order])
 }
 
 model WorkExerciseItem {
