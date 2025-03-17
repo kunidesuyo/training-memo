@@ -81,6 +81,6 @@ describe("deleteExercise test", () => {
     // Act & Assert
     await expect(
       deleteExercise(year, month, day, exerciseOrder),
-    ).rejects.toThrow("No Exercise found");
+    ).rejects.toThrow();
   });
 });

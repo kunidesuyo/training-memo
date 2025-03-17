@@ -1,6 +1,7 @@
 "use server";
 
 import { prisma } from "@/prisma";
+import { getCurrentUser } from "@/src/app/_utils/getCurrentUser";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -10,22 +11,23 @@ export async function deleteExercise(
   day: number,
   exerciseOrder: number,
 ) {
-  // TODO: Exerciseスキーマにユニーク制約を追加して直接削除できるように修正する
-
-  const targetExercise = await prisma.exercise.findFirstOrThrow({
+  const targetWorkout = await prisma.workout.findUniqueOrThrow({
     where: {
-      workout: {
+      year_month_day_authorId: {
         year,
         month,
         day,
+        authorId: getCurrentUser().id,
       },
-      order: exerciseOrder,
     },
   });
 
   await prisma.exercise.delete({
     where: {
-      id: targetExercise.id,
+      workoutId_order: {
+        workoutId: targetWorkout.id,
+        order: exerciseOrder,
+      },
     },
   });
 

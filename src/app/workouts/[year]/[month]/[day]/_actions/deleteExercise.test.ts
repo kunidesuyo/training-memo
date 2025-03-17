@@ -72,7 +72,7 @@ describe("動作テスト", () => {
     // Act & Assert
     await expect(
       deleteExercise(year, month, day, exerciseOrder),
-    ).rejects.toThrow("No Exercise found");
+    ).rejects.toThrow();
   });
 
   it("対象のWorkoutは存在するが、対象のExerciseが存在しない場合、例外を返す", async () => {
@@ -94,6 +94,6 @@ describe("動作テスト", () => {
     // Act & Assert
     await expect(
       deleteExercise(year, month, day, exerciseOrder),
-    ).rejects.toThrow("No Exercise found");
+    ).rejects.toThrow();
   });
 });
