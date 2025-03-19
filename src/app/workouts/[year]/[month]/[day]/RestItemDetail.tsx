@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import type { RestItem } from "@/src/app/workouts/[year]/[month]/[day]/_actions/getWorkout";
+import type { RestItem } from "@/src/services/workoutService";
 
 export default function RestItemDetail({
   workItem,
