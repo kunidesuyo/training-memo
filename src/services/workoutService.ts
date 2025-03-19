@@ -9,6 +9,7 @@ export type {
   RestItem,
 } from "@/src/types/workout";
 
+// getCurrentUserをDIする？
 export class WorkoutService {
   constructor(private workoutRepository: WorkoutRepository) {}
 
