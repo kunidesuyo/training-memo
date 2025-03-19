@@ -4,6 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { prisma } from "@/prisma";
 import ExerciseDetail from "@/src/app/workouts/[year]/[month]/[day]/ExerciseDetail";
 import AddExerciseForm from "@/src/app/workouts/[year]/[month]/[day]/addExerciseForm";
 import DeleteExercise from "@/src/app/workouts/[year]/[month]/[day]/deleteExercise";
@@ -19,7 +20,7 @@ export default async function Page({
 }) {
   const { year, month, day } = await params;
   // DIコンテナ導入する？
-  const workoutRepository = new WorkoutRepository();
+  const workoutRepository = new WorkoutRepository(prisma);
   const workoutService = new WorkoutService(workoutRepository);
   const workout: Workout = await workoutService.getWorkout(
     Number.parseInt(year),
