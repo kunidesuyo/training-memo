@@ -7,6 +7,7 @@ import {
 import ExerciseDetail from "@/src/app/workouts/[year]/[month]/[day]/ExerciseDetail";
 import AddExerciseForm from "@/src/app/workouts/[year]/[month]/[day]/addExerciseForm";
 import DeleteExercise from "@/src/app/workouts/[year]/[month]/[day]/deleteExercise";
+import { WorkoutRepository } from "@/src/repositories/workoutRepository";
 import type { Exercise, Workout } from "@/src/services/workoutService";
 import { WorkoutService } from "@/src/services/workoutService";
 import Link from "next/link";
@@ -17,7 +18,9 @@ export default async function Page({
   params: { year: string; month: string; day: string };
 }) {
   const { year, month, day } = await params;
-  const workoutService = new WorkoutService();
+  // DIコンテナ導入する？
+  const workoutRepository = new WorkoutRepository();
+  const workoutService = new WorkoutService(workoutRepository);
   const workout: Workout = await workoutService.getWorkout(
     Number.parseInt(year),
     Number.parseInt(month),
