@@ -3,11 +3,8 @@ import { getCurrentUser } from "@/src/app/_utils/getCurrentUser";
 import { Prisma } from "@prisma/client";
 
 const workoutValidator = Prisma.validator<Prisma.WorkoutDefaultArgs>()({
-  select: {
-    id: true,
-    year: true,
-    month: true,
-    day: true,
+  include: {
+    exercises: true,
   },
 });
 
@@ -24,7 +21,7 @@ export async function getWorkouts(
       month,
       authorId: currentUserId,
     },
-    select: workoutValidator.select,
+    include: workoutValidator.include,
   });
   return workouts;
 }

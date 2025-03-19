@@ -1,8 +1,5 @@
-import {
-  type Exercise,
-  type Workout,
-  getWorkout,
-} from "@/src/app/home/_actions/getWorkout";
+import type { Exercise } from "@/src/app/home/_actions/getWorkout";
+import type { Workout } from "@/src/app/home/_actions/getWorkouts";
 import CreateWorkoutButton from "@/src/app/home/createWorkoutButton";
 import Link from "next/link";
 
@@ -49,12 +46,16 @@ const renderWorkoutDetails = (
 
 export default async function SelectedWorkout({
   selectedDate,
+  selectedWorkout,
 }: {
   selectedDate: Date;
+  selectedWorkout: Workout | undefined;
 }) {
   const { year, month, day } = formatDate(selectedDate);
-  const selectedWorkout: Workout | null = await getWorkout(year, month, day);
+  // 表示するworkoutはpropsで受け取るように変更
+  // const selectedWorkout: Workout | null = await getWorkout(year, month, day);
 
+  console.log(selectedWorkout);
   return (
     <div>
       {selectedDate ? (

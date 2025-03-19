@@ -48,11 +48,18 @@ export default async function Page(props: {
 
   const workouts: Workout[] = await getWorkouts(year, month);
   const selectedDate = new Date(year, month - 1, day);
+  const selectedWorkout: Workout | undefined = workouts.find(
+    (workout) =>
+      workout.year === year && workout.month === month && workout.day === day,
+  );
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <HomeCalender workouts={workouts} selectedDate={selectedDate} />
-      <SelectedWorkout selectedDate={selectedDate} />
+      <SelectedWorkout
+        selectedDate={selectedDate}
+        selectedWorkout={selectedWorkout}
+      />
     </div>
   );
 }
