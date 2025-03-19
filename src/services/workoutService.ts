@@ -17,4 +17,13 @@ export class WorkoutService {
     const { id: currentUserId } = getCurrentUser();
     return this.workoutRepository.findByDate(year, month, day, currentUserId);
   }
+
+  async getWorkoutsInMonth(year: number, month: number): Promise<Workout[]> {
+    const { id: currentUserId } = getCurrentUser();
+    return this.workoutRepository.findManyByYearAndMonth(
+      year,
+      month,
+      currentUserId,
+    );
+  }
 }

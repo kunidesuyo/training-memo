@@ -1,6 +1,9 @@
-import { type Workout, getWorkouts } from "@/src/app/home/_actions/getWorkouts";
+// import { type Workout, getWorkouts } from "@/src/app/home/_actions/getWorkouts";
+import { prisma } from "@/prisma";
 import HomeCalender from "@/src/app/home/homeCalender";
 import SelectedWorkout from "@/src/app/home/selectedWorkout";
+import { WorkoutRepository } from "@/src/repositories/workoutRepository";
+import { type Workout, WorkoutService } from "@/src/services/workoutService";
 import { notFound } from "next/navigation";
 
 type SearchParams = { year?: string; month?: string; day?: string };
@@ -46,7 +49,12 @@ export default async function Page(props: {
 
   const { year, month, day } = initDate(searchParams);
 
-  const workouts: Workout[] = await getWorkouts(year, month);
+  const workoutRepository = new WorkoutRepository(prisma);
+  const workoutService = new WorkoutService(workoutRepository);
+  const workouts: Workout[] = await workoutService.getWorkoutsInMonth(
+    year,
+    month,
+  );
   const selectedDate = new Date(year, month - 1, day);
   const selectedWorkout: Workout | undefined = workouts.find(
     (workout) =>

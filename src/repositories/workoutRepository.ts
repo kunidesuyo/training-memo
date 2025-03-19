@@ -18,4 +18,19 @@ export class WorkoutRepository {
       include: workoutValidator.include,
     });
   }
+
+  async findManyByYearAndMonth(
+    year: number,
+    month: number,
+    authorId: number,
+  ): Promise<Workout[]> {
+    return this.prisma.workout.findMany({
+      where: {
+        year,
+        month,
+        authorId,
+      },
+      include: workoutValidator.include,
+    });
+  }
 }
