@@ -4,12 +4,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import type { Workout } from "@/src/_repositories/workoutRepository";
-import type { Exercise } from "@/src/_repositories/workoutRepository";
-import { WorkoutService } from "@/src/_services/workoutService";
 import ExerciseDetail from "@/src/app/workouts/[year]/[month]/[day]/ExerciseDetail";
 import AddExerciseForm from "@/src/app/workouts/[year]/[month]/[day]/addExerciseForm";
 import DeleteExercise from "@/src/app/workouts/[year]/[month]/[day]/deleteExercise";
+import type { Workout } from "@/src/repositories/workoutRepository";
+import type { Exercise } from "@/src/repositories/workoutRepository";
+import { WorkoutService } from "@/src/services/workoutService";
 import Link from "next/link";
 
 export default async function Page({

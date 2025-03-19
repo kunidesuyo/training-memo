@@ -1,6 +1,6 @@
-import { WorkoutRepository } from "@/src/_repositories/workoutRepository";
-import type { Workout } from "@/src/_repositories/workoutRepository";
 import { getCurrentUser } from "@/src/app/_utils/getCurrentUser";
+import { WorkoutRepository } from "@/src/repositories/workoutRepository";
+import type { Workout } from "@/src/repositories/workoutRepository";
 
 export class WorkoutService {
   private workoutRepository: WorkoutRepository;
