@@ -1,35 +1,11 @@
 import { Prisma } from "@prisma/client";
 
 export const workoutValidator = Prisma.validator<Prisma.WorkoutDefaultArgs>()({
-  select: {
-    id: true,
+  include: {
     exercises: {
-      select: {
-        id: true,
-        name: true,
-        workoutId: true,
-        order: true,
-        workItems: {
-          select: {
-            exerciseId: true,
-            weight: true,
-            rep: true,
-            order: true,
-          },
-          orderBy: {
-            order: "asc",
-          },
-        },
-        restItems: {
-          select: {
-            exerciseId: true,
-            time: true,
-            order: true,
-          },
-          orderBy: {
-            order: "asc",
-          },
-        },
+      include: {
+        workItems: true,
+        restItems: true,
       },
     },
   },

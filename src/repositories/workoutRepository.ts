@@ -13,7 +13,7 @@ export class WorkoutRepository {
       where: {
         year_month_day_authorId: { year, month, day, authorId },
       },
-      select: workoutValidator.select,
+      include: workoutValidator.include,
     });
   }
 }
