@@ -7,8 +7,7 @@ import {
 import ExerciseDetail from "@/src/app/workouts/[year]/[month]/[day]/ExerciseDetail";
 import AddExerciseForm from "@/src/app/workouts/[year]/[month]/[day]/addExerciseForm";
 import DeleteExercise from "@/src/app/workouts/[year]/[month]/[day]/deleteExercise";
-import type { Workout } from "@/src/repositories/workoutRepository";
-import type { Exercise } from "@/src/repositories/workoutRepository";
+import type { Exercise, Workout } from "@/src/services/workoutService";
 import { WorkoutService } from "@/src/services/workoutService";
 import Link from "next/link";
 
