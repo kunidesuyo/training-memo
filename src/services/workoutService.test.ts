@@ -40,3 +40,56 @@ describe("workoutService.getWorkout test", () => {
     await expect(workoutService.getWorkout(year, month, day)).rejects.toThrow();
   });
 });
+
+describe("workoutService.getWorkoutsInMonth test", () => {
+  it("workoutを取得できる", async () => {
+    // Arrange
+    const year = 2025;
+    const month = 1;
+    const days = [1, 2, 3];
+    const currentUser = getCurrentUser();
+    const workouts = [];
+    for (const day of days) {
+      const workout = await prisma.workout.create({
+        data: {
+          year,
+          month,
+          day,
+          authorId: currentUser.id,
+        },
+      });
+      workouts.push(workout);
+    }
+
+    // Act
+    const workoutRepository = new WorkoutRepository(prisma);
+    const workoutService = new WorkoutService(workoutRepository);
+    const fetchedWorkouts = await workoutService.getWorkoutsInMonth(
+      year,
+      month,
+    );
+
+    // Assert
+    expect(fetchedWorkouts).toHaveLength(workouts.length);
+    const sortedFetchedWorkouts = fetchedWorkouts.sort((a, b) => a.id - b.id);
+    const sortedWorkouts = workouts.sort((a, b) => a.id - b.id);
+    for (let i = 0; i < sortedWorkouts.length; i++) {
+      expect(sortedFetchedWorkouts[i].id).toBe(sortedWorkouts[i].id);
+    }
+  });
+
+  it("Workoutが存在しない場合、空の配列を返す", async () => {
+    // Arrange
+    const year = 2025;
+    const month = 1;
+
+    // Act & Assert
+    const workoutRepository = new WorkoutRepository(prisma);
+    const workoutService = new WorkoutService(workoutRepository);
+    const fetchedWorkouts = await workoutService.getWorkoutsInMonth(
+      year,
+      month,
+    );
+    expect(fetchedWorkouts).toHaveLength(0);
+  });
+});
