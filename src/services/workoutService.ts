@@ -26,4 +26,9 @@ export class WorkoutService {
       currentUserId,
     );
   }
+
+  async createWorkout(year: number, month: number, day: number) {
+    const { id: currentUserId } = getCurrentUser();
+    this.workoutRepository.create(year, month, day, currentUserId);
+  }
 }

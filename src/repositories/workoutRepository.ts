@@ -33,4 +33,15 @@ export class WorkoutRepository {
       include: workoutValidator.include,
     });
   }
+
+  async create(year: number, month: number, day: number, authorId: number) {
+    await this.prisma.workout.create({
+      data: {
+        year,
+        month,
+        day,
+        authorId,
+      },
+    });
+  }
 }
