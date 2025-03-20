@@ -2,7 +2,7 @@ import { prisma } from "@/prisma";
 import { getCurrentUser } from "@/src/app/_utils/getCurrentUser";
 import { WorkoutRepository } from "@/src/repositories/workoutRepository";
 
-describe("workoutRepository.findByDate test", () => {
+describe("findByDate test", () => {
   it("workoutを取得できる", async () => {
     // Arrange
     const year = 2025;
@@ -43,4 +43,13 @@ describe("workoutRepository.findByDate test", () => {
       workoutRepository.findByDate(year, month, day, 1),
     ).rejects.toThrow();
   });
+});
+
+describe("findManyByYearAndMonth test", () => {
+  it("workoutを取得できる", async () => {});
+  it("Workoutが存在しない場合、空配列を返す", async () => {});
+});
+
+describe("create test", () => {
+  it("workoutを作成できる", async () => {});
 });

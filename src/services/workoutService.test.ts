@@ -3,7 +3,7 @@ import { getCurrentUser } from "@/src/app/_utils/getCurrentUser";
 import { WorkoutRepository } from "@/src/repositories/workoutRepository";
 import { WorkoutService } from "@/src/services/workoutService";
 
-describe("workoutService.getWorkout test", () => {
+describe("getWorkout test", () => {
   it("workoutを取得できる", async () => {
     // Arrange
     const year = 2025;
@@ -41,7 +41,7 @@ describe("workoutService.getWorkout test", () => {
   });
 });
 
-describe("workoutService.getWorkoutsInMonth test", () => {
+describe("getWorkoutsInMonth test", () => {
   it("workoutを取得できる", async () => {
     // Arrange
     const year = 2025;
@@ -92,4 +92,8 @@ describe("workoutService.getWorkoutsInMonth test", () => {
     );
     expect(fetchedWorkouts).toHaveLength(0);
   });
+});
+
+describe("createWorkout test", () => {
+  it("workoutを作成できる", async () => {});
 });
