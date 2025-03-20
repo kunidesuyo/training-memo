@@ -95,5 +95,24 @@ describe("getWorkoutsInMonth test", () => {
 });
 
 describe("createWorkout test", () => {
-  it("workoutを作成できる", async () => {});
+  it("workoutを作成できる", async () => {
+    // Arrange
+    const year = 2025;
+    const month = 1;
+    const day = 1;
+    const currentUser = getCurrentUser();
+
+    // Act
+    const workoutRepository = new WorkoutRepository(prisma);
+    const workoutService = new WorkoutService(workoutRepository);
+    await workoutService.createWorkout(year, month, day);
+
+    // Assert
+    const workout = await prisma.workout.findUnique({
+      where: {
+        year_month_day_authorId: { year, month, day, authorId: currentUser.id },
+      },
+    });
+    expect(workout).not.toBeNull();
+  });
 });
