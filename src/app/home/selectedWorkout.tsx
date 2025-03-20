@@ -1,5 +1,5 @@
 import CreateWorkoutButton from "@/src/app/home/createWorkoutButton";
-import type { Exercise, Workout } from "@/src/services/workoutService";
+import type { Exercise, Workout } from "@/src/services/WorkoutService";
 import Link from "next/link";
 
 const formatDate = (selectedDate: Date) => {

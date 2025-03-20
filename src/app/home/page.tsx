@@ -2,7 +2,7 @@ import { prisma } from "@/prisma";
 import HomeCalender from "@/src/app/home/homeCalender";
 import SelectedWorkout from "@/src/app/home/selectedWorkout";
 import { WorkoutRepository } from "@/src/repositories/workoutRepository";
-import { type Workout, WorkoutService } from "@/src/services/workoutService";
+import { type Workout, WorkoutService } from "@/src/services/WorkoutService";
 import { notFound } from "next/navigation";
 
 type SearchParams = { year?: string; month?: string; day?: string };

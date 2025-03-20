@@ -4,7 +4,7 @@ import type {
   Exercise,
   RestItem,
   WorkItem,
-} from "@/src/services/workoutService";
+} from "@/src/services/WorkoutService";
 
 type ExerciseItems = (WorkItem | RestItem)[];
 

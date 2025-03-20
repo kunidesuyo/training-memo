@@ -9,8 +9,8 @@ import ExerciseDetail from "@/src/app/workouts/[year]/[month]/[day]/ExerciseDeta
 import AddExerciseForm from "@/src/app/workouts/[year]/[month]/[day]/addExerciseForm";
 import DeleteExercise from "@/src/app/workouts/[year]/[month]/[day]/deleteExercise";
 import { WorkoutRepository } from "@/src/repositories/workoutRepository";
-import type { Exercise, Workout } from "@/src/services/workoutService";
-import { WorkoutService } from "@/src/services/workoutService";
+import type { Exercise, Workout } from "@/src/services/WorkoutService";
+import { WorkoutService } from "@/src/services/WorkoutService";
 import Link from "next/link";
 
 export default async function Page({
