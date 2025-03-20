@@ -1,6 +1,6 @@
 "use client";
 import { Calendar } from "@/components/ui/calendar";
-import type { Workout } from "@/src/app/home/_actions/getWorkouts";
+import type { Workout } from "@/src/services/workoutService";
 import { usePathname, useRouter } from "next/navigation";
 
 export default function HomeCalender({

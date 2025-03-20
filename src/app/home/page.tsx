@@ -1,4 +1,3 @@
-// import { type Workout, getWorkouts } from "@/src/app/home/_actions/getWorkouts";
 import { prisma } from "@/prisma";
 import HomeCalender from "@/src/app/home/homeCalender";
 import SelectedWorkout from "@/src/app/home/selectedWorkout";
