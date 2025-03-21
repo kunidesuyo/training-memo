@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import {
   type State,
   addExercise,
-} from "@/src/app/workouts/[year]/[month]/[day]/_actions/addExercise";
+} from "@/src/app/workouts/[year]/[month]/[day]/addExercise";
 import { useActionState } from "react";
 
 export default function AddExerciseForm({

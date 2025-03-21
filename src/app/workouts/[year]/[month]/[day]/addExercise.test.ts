@@ -1,6 +1,6 @@
 import { prisma } from "@/prisma";
 import { getCurrentUser } from "@/src/app/_utils/getCurrentUser";
-import { addExercise } from "@/src/app/workouts/[year]/[month]/[day]/_actions/addExercise";
+import { addExercise } from "@/src/app/workouts/[year]/[month]/[day]/addExercise";
 import { faker } from "@faker-js/faker/locale/ja";
 
 beforeEach(() => {
