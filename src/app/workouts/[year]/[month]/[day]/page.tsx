@@ -8,7 +8,7 @@ import { prisma } from "@/prisma";
 import ExerciseDetail from "@/src/app/workouts/[year]/[month]/[day]/ExerciseDetail";
 import AddExerciseForm from "@/src/app/workouts/[year]/[month]/[day]/addExerciseForm";
 import DeleteExercise from "@/src/app/workouts/[year]/[month]/[day]/deleteExercise";
-import { WorkoutRepository } from "@/src/repositories/workoutRepository";
+import { WorkoutRepository } from "@/src/repositories/WorkoutRepository";
 import type { Exercise, Workout } from "@/src/services/WorkoutService";
 import { WorkoutService } from "@/src/services/WorkoutService";
 import Link from "next/link";

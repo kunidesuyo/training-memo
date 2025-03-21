@@ -1,7 +1,7 @@
 "use server";
 
 import { prisma } from "@/prisma";
-import { WorkoutRepository } from "@/src/repositories/workoutRepository";
+import { WorkoutRepository } from "@/src/repositories/WorkoutRepository";
 import { WorkoutService } from "@/src/services/WorkoutService";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";

@@ -1,6 +1,6 @@
 import { prisma } from "@/prisma";
 import { getCurrentUser } from "@/src/app/_utils/getCurrentUser";
-import { WorkoutRepository } from "@/src/repositories/workoutRepository";
+import { WorkoutRepository } from "@/src/repositories/WorkoutRepository";
 
 describe("findByDate test", () => {
   it("workoutを取得できる", async () => {

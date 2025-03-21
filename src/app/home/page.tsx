@@ -1,7 +1,7 @@
 import { prisma } from "@/prisma";
 import HomeCalender from "@/src/app/home/homeCalender";
 import SelectedWorkout from "@/src/app/home/selectedWorkout";
-import { WorkoutRepository } from "@/src/repositories/workoutRepository";
+import { WorkoutRepository } from "@/src/repositories/WorkoutRepository";
 import { type Workout, WorkoutService } from "@/src/services/WorkoutService";
 import { notFound } from "next/navigation";
 

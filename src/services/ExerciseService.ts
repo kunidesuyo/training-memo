@@ -1,6 +1,6 @@
 import { getCurrentUser } from "@/src/app/_utils/getCurrentUser";
-import type { ExerciseRepository } from "@/src/repositories/exerciseRepository";
-import type { WorkoutRepository } from "@/src/repositories/workoutRepository";
+import type { ExerciseRepository } from "@/src/repositories/ExerciseRepository";
+import type { WorkoutRepository } from "@/src/repositories/WorkoutRepository";
 
 export class ExerciseService {
   constructor(

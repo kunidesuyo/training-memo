@@ -1,6 +1,6 @@
 import { prisma } from "@/prisma";
 import { getCurrentUser } from "@/src/app/_utils/getCurrentUser";
-import { WorkoutRepository } from "@/src/repositories/workoutRepository";
+import { WorkoutRepository } from "@/src/repositories/WorkoutRepository";
 import { WorkoutService } from "@/src/services/WorkoutService";
 
 describe("getWorkout test", () => {
