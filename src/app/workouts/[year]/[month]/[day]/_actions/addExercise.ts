@@ -1,7 +1,8 @@
 "use server";
-
 import { prisma } from "@/prisma";
-import { getCurrentUser } from "@/src/app/_utils/getCurrentUser";
+import { ExerciseRepository } from "@/src/repositories/ExerciseRepository";
+import { WorkoutRepository } from "@/src/repositories/WorkoutRepository";
+import { ExerciseService } from "@/src/services/ExerciseService";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
@@ -24,7 +25,7 @@ export async function addExercise(
   _prevState: State,
   formData: FormData,
 ) {
-  const { id: currentUserId } = getCurrentUser();
+  // const { id: currentUserId } = getCurrentUser();
   const validatedFields = ExerciseFormSchema.safeParse({
     name: formData.get("name"),
   });
@@ -36,37 +37,45 @@ export async function addExercise(
     };
   }
   const { name } = validatedFields.data;
-  // TODO: 以下のもっと綺麗に書けそう
-  const workout = await prisma.workout.findFirstOrThrow({
-    where: {
-      year: year,
-      month: month,
-      day: day,
-      authorId: currentUserId,
-    },
-    select: {
-      id: true,
-      exercises: {
-        select: {
-          order: true,
-        },
-      },
-    },
-  });
-  const workoutId = workout?.id;
-  const maxOrder = workout?.exercises.reduce(
-    (acc, cur) => Math.max(acc, cur.order),
-    0,
+
+  const workoutRepository = new WorkoutRepository(prisma);
+  const exerciseRepository = new ExerciseRepository(prisma);
+  const exerciseService = new ExerciseService(
+    workoutRepository,
+    exerciseRepository,
   );
-  const newOrder = maxOrder + 1;
-  await prisma.exercise.create({
-    data: {
-      name: name,
-      workoutId,
-      order: newOrder,
-      authorId: currentUserId,
-    },
-  });
+  exerciseService.addExerciseToWorkout(year, month, day, name);
+  // // TODO: 以下のもっと綺麗に書けそう
+  // const workout = await prisma.workout.findFirstOrThrow({
+  //   where: {
+  //     year: year,
+  //     month: month,
+  //     day: day,
+  //     authorId: currentUserId,
+  //   },
+  //   select: {
+  //     id: true,
+  //     exercises: {
+  //       select: {
+  //         order: true,
+  //       },
+  //     },
+  //   },
+  // });
+  // const workoutId = workout?.id;
+  // const maxOrder = workout?.exercises.reduce(
+  //   (acc, cur) => Math.max(acc, cur.order),
+  //   0,
+  // );
+  // const newOrder = maxOrder + 1;
+  // await prisma.exercise.create({
+  //   data: {
+  //     name: name,
+  //     workoutId,
+  //     order: newOrder,
+  //     authorId: currentUserId,
+  //   },
+  // });
   revalidatePath(`/workouts/${year}/${month}/${day}`);
   redirect(`/workouts/${year}/${month}/${day}`);
 }
