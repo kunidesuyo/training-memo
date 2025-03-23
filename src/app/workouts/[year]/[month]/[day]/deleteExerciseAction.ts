@@ -7,7 +7,7 @@ import { ExerciseService } from "@/src/services/ExerciseService";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-export async function deleteExercise(
+export async function deleteExerciseAction(
   year: number,
   month: number,
   day: number,

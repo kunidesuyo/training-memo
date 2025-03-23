@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { deleteExercise } from "@/src/app/workouts/[year]/[month]/[day]/_actions/deleteExercise";
+import { deleteExercise } from "@/src/app/workouts/[year]/[month]/[day]/deleteExercise";
 
 export default function DeleteExercise({
   year,

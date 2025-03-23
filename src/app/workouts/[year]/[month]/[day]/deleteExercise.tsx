@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { deleteExercise } from "@/src/app/workouts/[year]/[month]/[day]/_actions/deleteExercise";
+import { deleteExerciseAction } from "@/src/app/workouts/[year]/[month]/[day]/deleteExerciseAction";
 
 export default function DeleteExercise({
   year,
@@ -16,7 +16,7 @@ export default function DeleteExercise({
 }) {
   return (
     <div>
-      <form action={() => deleteExercise(year, month, day, order)}>
+      <form action={() => deleteExerciseAction(year, month, day, order)}>
         <Button type="submit">削除</Button>
       </form>
     </div>
