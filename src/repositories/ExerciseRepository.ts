@@ -20,4 +20,15 @@ export class ExerciseRepository {
       },
     });
   }
+
+  async delete(workoutId: number, order: number) {
+    await this.prisma.exercise.delete({
+      where: {
+        workoutId_order: {
+          workoutId,
+          order,
+        },
+      },
+    });
+  }
 }

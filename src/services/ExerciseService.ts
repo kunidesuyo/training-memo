@@ -35,4 +35,21 @@ export class ExerciseService {
 
     await this.exerciseRepository.addToWorkout(targetWorkout.id, exerciseData);
   }
+
+  async deleteExercise(
+    year: number,
+    month: number,
+    day: number,
+    exerciseOrder: number,
+  ) {
+    const currentUser = getCurrentUser();
+    const targetWorkout = await this.workoutRepository.findByDate(
+      year,
+      month,
+      day,
+      currentUser.id,
+    );
+
+    await this.exerciseRepository.delete(targetWorkout.id, exerciseOrder);
+  }
 }
