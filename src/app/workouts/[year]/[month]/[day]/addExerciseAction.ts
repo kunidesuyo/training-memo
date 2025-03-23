@@ -18,7 +18,7 @@ const ExerciseFormSchema = z.object({
   name: z.string().min(1),
 });
 
-export async function addExercise(
+export async function addExerciseAction(
   year: number,
   month: number,
   day: number,

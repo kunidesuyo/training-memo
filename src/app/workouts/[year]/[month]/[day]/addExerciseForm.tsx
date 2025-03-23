@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
   type State,
-  addExercise,
-} from "@/src/app/workouts/[year]/[month]/[day]/addExercise";
+  addExerciseAction,
+} from "@/src/app/workouts/[year]/[month]/[day]/addExerciseAction";
 import { useActionState } from "react";
 
 export default function AddExerciseForm({
@@ -15,7 +15,7 @@ export default function AddExerciseForm({
 }) {
   const { year, month, day } = pathParams;
   const initialState: State = { message: null, errors: {} };
-  const addExercise_ = addExercise.bind(
+  const addExercise_ = addExerciseAction.bind(
     null,
     Number.parseInt(year),
     Number.parseInt(month),
