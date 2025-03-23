@@ -4,12 +4,8 @@ import AddRestItemButton from "@/src/app/workouts/[year]/[month]/[day]/exercise/
 import AddWorkItemButton from "@/src/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/AddWorkItemButton";
 import RestItemForm from "@/src/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/RestItemForm";
 import WorkItemForm from "@/src/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/WorkItemForm";
-import type {
-  Exercise,
-  RestItem,
-  WorkItem,
-} from "@/src/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/getExercise";
 import DeleteExercise from "@/src/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/deleteExercise";
+import type { Exercise, RestItem, WorkItem } from "@/src/types/exercise";
 
 // TODO: app/workouts/[year]/[month]/[day]/ExerciseDetail.tsxもある
 // モデルメソッドとかに定義する？

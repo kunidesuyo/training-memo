@@ -2,11 +2,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import DeleteWorkItemButton from "@/src/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/DeleteWorkItemButton";
-import type { WorkItem } from "@/src/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/getExercise";
 import {
   type WorkItemState,
   updateWorkItems,
 } from "@/src/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/updateWorkItems";
+import type { WorkItem } from "@/src/services/ExerciseService";
 import type React from "react";
 import { useActionState } from "react";
 

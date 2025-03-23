@@ -1,7 +1,31 @@
+import { exerciseValidator } from "@/src/types/exercise";
+import type { Exercise } from "@/src/types/exercise";
 import type { PrismaClient } from "@prisma/client";
 
 export class ExerciseRepository {
   constructor(private prisma: PrismaClient) {}
+
+  async findByDateAndOrder(
+    year: number,
+    month: number,
+    day: number,
+    order: number,
+    authorId: number,
+  ): Promise<Exercise> {
+    const exercise = await this.prisma.exercise.findFirstOrThrow({
+      where: {
+        workout: {
+          year,
+          month,
+          day,
+          authorId,
+        },
+        order,
+      },
+      include: exerciseValidator.include,
+    });
+    return exercise;
+  }
 
   async addToWorkout(
     workoutId: number,

@@ -1,8 +1,9 @@
+import { prisma } from "@/prisma";
 import ExerciseForm from "@/src/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/ExerciseForm";
-import {
-  type Exercise,
-  getExercise,
-} from "@/src/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/getExercise";
+import { ExerciseRepository } from "@/src/repositories/ExerciseRepository";
+import { WorkoutRepository } from "@/src/repositories/WorkoutRepository";
+import { ExerciseService } from "@/src/services/ExerciseService";
+import type { Exercise } from "@/src/services/ExerciseService";
 import Link from "next/link";
 
 export default async function Page({
@@ -11,7 +12,14 @@ export default async function Page({
   params: { year: string; month: string; day: string; exerciseOrder: string };
 }) {
   const { year, month, day, exerciseOrder } = await params;
-  const exercise: Exercise = await getExercise(
+
+  const exerciseRepository = new ExerciseRepository(prisma);
+  const workoutRepository = new WorkoutRepository(prisma);
+  const exerciseService = new ExerciseService(
+    workoutRepository,
+    exerciseRepository,
+  );
+  const exercise: Exercise = await exerciseService.getExercise(
     Number.parseInt(year),
     Number.parseInt(month),
     Number.parseInt(day),

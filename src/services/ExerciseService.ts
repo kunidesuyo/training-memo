@@ -2,11 +2,29 @@ import { getCurrentUser } from "@/src/app/_utils/getCurrentUser";
 import type { ExerciseRepository } from "@/src/repositories/ExerciseRepository";
 import type { WorkoutRepository } from "@/src/repositories/WorkoutRepository";
 
+export type { Exercise, WorkItem, RestItem } from "@/src/types/exercise";
+
 export class ExerciseService {
   constructor(
     private workoutRepository: WorkoutRepository,
     private exerciseRepository: ExerciseRepository,
   ) {}
+
+  async getExercise(
+    year: number,
+    month: number,
+    day: number,
+    exerciseOrder: number,
+  ) {
+    const currentUser = getCurrentUser();
+    return this.exerciseRepository.findByDateAndOrder(
+      year,
+      month,
+      day,
+      exerciseOrder,
+      currentUser.id,
+    );
+  }
 
   async addExerciseToWorkout(
     year: number,
