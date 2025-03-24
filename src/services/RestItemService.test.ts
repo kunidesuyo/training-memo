@@ -1,6 +1,5 @@
 import { prisma } from "@/prisma";
 import { getCurrentUser } from "@/src/app/_utils/getCurrentUser";
-import { addRestItemToExercise } from "@/src/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/addRestItemToExercise";
 import { ExerciseRepository } from "@/src/repositories/ExerciseRepository";
 import { RestItemRepository } from "@/src/repositories/RestItemRepository";
 import { RestItemService } from "@/src/services/RestItemService";
@@ -136,7 +135,7 @@ describe("addRestItemToExercise test", () => {
     expect(restExerciseItem.some((item) => item.order === 2)).toBe(true);
   });
 
-  it.skip("workItemを持つExerciseにrestItemが追加できる", async () => {
+  it("workItemを持つExerciseにrestItemが追加できる", async () => {
     // Arrange
     const year = faker.date.anytime().getFullYear();
     const month = faker.date.future().getMonth();
@@ -175,7 +174,18 @@ describe("addRestItemToExercise test", () => {
     });
 
     // Act
-    await addRestItemToExercise(year, month, day, exerciseOrder);
+    const exerciseRepository = new ExerciseRepository(prisma);
+    const restItemRepository = new RestItemRepository(prisma);
+    const restItemService = new RestItemService(
+      exerciseRepository,
+      restItemRepository,
+    );
+    await restItemService.addRestItemToExercise(
+      year,
+      month,
+      day,
+      exerciseOrder,
+    );
 
     // Assert
     const restExerciseItem = await prisma.restExerciseItem.findMany({
@@ -195,7 +205,7 @@ describe("addRestItemToExercise test", () => {
     expect(restExerciseItem[0].order).toBe(2);
   });
 
-  it.skip("restItem, workItem両方を持つExerciseにrestItemが追加できる", async () => {
+  it("restItem, workItem両方を持つExerciseにrestItemが追加できる", async () => {
     // Arrange
     const year = faker.date.anytime().getFullYear();
     const month = faker.date.future().getMonth();
@@ -243,7 +253,18 @@ describe("addRestItemToExercise test", () => {
     });
 
     // Act
-    await addRestItemToExercise(year, month, day, exerciseOrder);
+    const exerciseRepository = new ExerciseRepository(prisma);
+    const restItemRepository = new RestItemRepository(prisma);
+    const restItemService = new RestItemService(
+      exerciseRepository,
+      restItemRepository,
+    );
+    await restItemService.addRestItemToExercise(
+      year,
+      month,
+      day,
+      exerciseOrder,
+    );
 
     // Assert
     const restExerciseItem = await prisma.restExerciseItem.findMany({
@@ -263,7 +284,7 @@ describe("addRestItemToExercise test", () => {
     expect(restExerciseItem.some((item) => item.order === 3)).toBe(true);
   });
 
-  it.skip("Exerciseが存在しない場合、例外を返す", async () => {
+  it("Exerciseが存在しない場合、例外を返す", async () => {
     // Arrange
     const year = faker.date.anytime().getFullYear();
     const month = faker.date.future().getMonth();
@@ -280,9 +301,15 @@ describe("addRestItemToExercise test", () => {
     });
 
     // Act & Assert
+    const exerciseRepository = new ExerciseRepository(prisma);
+    const restItemRepository = new RestItemRepository(prisma);
+    const restItemService = new RestItemService(
+      exerciseRepository,
+      restItemRepository,
+    );
+
     await expect(
-      addRestItemToExercise(year, month, day, exerciseOrder),
+      restItemService.addRestItemToExercise(year, month, day, exerciseOrder),
     ).rejects.toThrow("No Exercise found");
-    //
   });
 });
