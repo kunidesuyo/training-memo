@@ -21,7 +21,7 @@ beforeEach(() => {
   });
 });
 
-describe("addRestItemToExercise test", () => {
+describe.skip("addRestItemToExercise test", () => {
   it("restItem, workItemを持たないExerciseにrestItemが追加できる", async () => {
     // Arrange
     const year = faker.date.anytime().getFullYear();

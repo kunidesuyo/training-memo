@@ -1,7 +1,9 @@
 "use server";
+import { ExerciseRepository } from "@/src/repositories/ExerciseRepository";
 
 import { prisma } from "@/prisma";
-import { getCurrentUser } from "@/src/app/_utils/getCurrentUser";
+import { RestItemRepository } from "@/src/repositories/RestItemRepository";
+import { RestItemService } from "@/src/services/RestItemService";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -11,42 +13,14 @@ export async function addRestItemToExercise(
   day: number,
   exerciseOrder: number,
 ) {
-  const { id: currentUserId } = getCurrentUser();
-  const targetExercise = await prisma.exercise.findFirstOrThrow({
-    where: {
-      workout: {
-        year,
-        month,
-        day,
-        authorId: currentUserId,
-      },
-      order: exerciseOrder,
-    },
-    select: {
-      id: true,
-      workItems: true,
-      restItems: true,
-    },
-  });
+  const exerciseRepository = new ExerciseRepository(prisma);
+  const restItemRepository = new RestItemRepository(prisma);
+  const restItemService = new RestItemService(
+    exerciseRepository,
+    restItemRepository,
+  );
 
-  const targetExerciseItems = [
-    ...targetExercise.workItems,
-    ...targetExercise.restItems,
-  ];
-
-  const newItemOrder =
-    targetExerciseItems.length === 0
-      ? 1
-      : Math.max(...targetExerciseItems.map((item) => item.order)) + 1;
-
-  await prisma.restExerciseItem.create({
-    data: {
-      time: 0,
-      order: newItemOrder,
-      exerciseId: targetExercise.id,
-      authorId: currentUserId,
-    },
-  });
+  restItemService.addRestItemToExercise(year, month, day, exerciseOrder);
 
   revalidatePath(`/workouts/${year}/${month}/${day}/exercise/${exerciseOrder}`);
   redirect(`/workouts/${year}/${month}/${day}/exercise/${exerciseOrder}`);
