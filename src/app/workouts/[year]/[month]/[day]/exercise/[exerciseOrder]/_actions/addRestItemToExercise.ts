@@ -1,7 +1,6 @@
 "use server";
-import { ExerciseRepository } from "@/src/repositories/ExerciseRepository";
-
 import { prisma } from "@/prisma";
+import { ExerciseRepository } from "@/src/repositories/ExerciseRepository";
 import { RestItemRepository } from "@/src/repositories/RestItemRepository";
 import { RestItemService } from "@/src/services/RestItemService";
 import { revalidatePath } from "next/cache";
