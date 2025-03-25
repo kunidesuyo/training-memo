@@ -6,7 +6,7 @@ import { RestItemService } from "@/src/services/RestItemService";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-export async function addRestItemToExercise(
+export async function addRestItemToExerciseAction(
   year: number,
   month: number,
   day: number,

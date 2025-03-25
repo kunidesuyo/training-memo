@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { addRestItemToExercise } from "@/src/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/addRestItemToExercise";
+import { addRestItemToExerciseAction } from "@/src/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/addRestItemToExerciseAction";
 
 export default function AddRestItemButton({
   year,
@@ -16,7 +16,7 @@ export default function AddRestItemButton({
     <form>
       <Button
         formAction={() =>
-          addRestItemToExercise(year, month, day, exerciseOrder)
+          addRestItemToExerciseAction(year, month, day, exerciseOrder)
         }
       >
         {"レスト追加"}
