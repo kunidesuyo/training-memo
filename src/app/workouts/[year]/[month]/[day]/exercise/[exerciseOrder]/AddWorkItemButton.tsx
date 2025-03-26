@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { addWorkItemToExercise } from "@/src/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/addWorkItemToExercise";
+import { addWorkItemToExerciseAction } from "@/src/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/addWorkItemToExerciseAction";
 
 export default function AddWorkItemButton({
   year,
@@ -16,7 +16,7 @@ export default function AddWorkItemButton({
     <form>
       <Button
         formAction={() =>
-          addWorkItemToExercise(year, month, day, exerciseOrder)
+          addWorkItemToExerciseAction(year, month, day, exerciseOrder)
         }
       >
         {"ワーク追加"}
