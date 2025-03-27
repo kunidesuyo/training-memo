@@ -20,7 +20,7 @@ export async function addWorkItemToExerciseAction(
     workItemRepository,
   );
 
-  workItemService.addRestItemToExercise(year, month, day, exerciseOrder);
+  workItemService.addWorkItemToExercise(year, month, day, exerciseOrder);
 
   revalidatePath(`/workouts/${year}/${month}/${day}/exercise/${exerciseOrder}`);
   redirect(`/workouts/${year}/${month}/${day}/exercise/${exerciseOrder}`);

@@ -8,7 +8,7 @@ export class WorkItemService {
     private workItemRepository: WorkItemRepository,
   ) {}
 
-  async addRestItemToExercise(
+  async addWorkItemToExercise(
     year: number,
     month: number,
     day: number,
