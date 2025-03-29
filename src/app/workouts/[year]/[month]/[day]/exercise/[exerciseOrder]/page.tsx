@@ -4,6 +4,7 @@ import { ExerciseRepository } from "@/src/repositories/ExerciseRepository";
 import { WorkoutRepository } from "@/src/repositories/WorkoutRepository";
 import { ExerciseService } from "@/src/services/ExerciseService";
 import type { Exercise } from "@/src/services/ExerciseService";
+import { auth } from "@clerk/nextjs/server";
 import Link from "next/link";
 
 export default async function Page({
@@ -11,6 +12,11 @@ export default async function Page({
 }: {
   params: { year: string; month: string; day: string; exerciseOrder: string };
 }) {
+  // 認証チェック
+  const { userId, redirectToSignIn } = await auth();
+
+  if (!userId) return redirectToSignIn();
+
   const { year, month, day, exerciseOrder } = await params;
 
   const exerciseRepository = new ExerciseRepository(prisma);

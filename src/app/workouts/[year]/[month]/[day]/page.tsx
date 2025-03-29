@@ -11,6 +11,7 @@ import DeleteExercise from "@/src/app/workouts/[year]/[month]/[day]/deleteExerci
 import { WorkoutRepository } from "@/src/repositories/WorkoutRepository";
 import type { Exercise, Workout } from "@/src/services/WorkoutService";
 import { WorkoutService } from "@/src/services/WorkoutService";
+import { auth } from "@clerk/nextjs/server";
 import Link from "next/link";
 
 export default async function Page({
@@ -18,6 +19,11 @@ export default async function Page({
 }: {
   params: { year: string; month: string; day: string };
 }) {
+  // 認証チェック
+  const { userId, redirectToSignIn } = await auth();
+
+  if (!userId) return redirectToSignIn();
+
   const { year, month, day } = await params;
   // DIコンテナ導入する？
   const workoutRepository = new WorkoutRepository(prisma);
