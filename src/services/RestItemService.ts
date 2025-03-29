@@ -57,8 +57,6 @@ export class RestItemService {
       currentUser.id,
     );
 
-    console.log(targetExercise);
-
     await this.restItemRepository.delete(targetExercise.id, itemOrder);
   }
 

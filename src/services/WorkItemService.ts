@@ -58,8 +58,6 @@ export class WorkItemService {
       currentUser.id,
     );
 
-    console.log(targetExercise);
-
     await this.workItemRepository.delete(targetExercise.id, itemOrder);
   }
 

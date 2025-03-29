@@ -54,7 +54,6 @@ export default async function SelectedWorkout({
   // 表示するworkoutはpropsで受け取るように変更
   // const selectedWorkout: Workout | null = await getWorkout(year, month, day);
 
-  console.log(selectedWorkout);
   return (
     <div>
       {selectedDate ? (
