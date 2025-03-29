@@ -1,1 +1,2 @@
-// TODO: テスト書く
+describe.skip("addToExercise test", () => {});
+describe.skip("delete test", () => {});

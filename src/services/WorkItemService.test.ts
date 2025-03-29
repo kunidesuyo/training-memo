@@ -315,3 +315,5 @@ describe("addWorkItemToExercise test", () => {
     ).rejects.toThrow("No Exercise found");
   });
 });
+
+describe.skip("deleteWorkItem test", () => {});
