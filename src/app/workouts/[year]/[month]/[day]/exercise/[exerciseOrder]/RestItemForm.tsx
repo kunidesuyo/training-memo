@@ -7,8 +7,8 @@ import { Button } from "@/components/ui/button";
 import DeleteRestItemButton from "@/src/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/DeleteRestItemButton";
 import {
   type RestItemState,
-  updateRestItems,
-} from "@/src/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/updateRestItems";
+  updateRestItemAction,
+} from "@/src/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/updateRestItemAction";
 import type { RestItem } from "@/src/services/ExerciseService";
 
 interface RestItemFormProps {
@@ -27,7 +27,7 @@ const RestItemForm: React.FC<RestItemFormProps> = ({
   exerciseOrder,
 }) => {
   const initialState: RestItemState = { message: null, errors: {} };
-  const updateRestWithIdentifier = updateRestItems.bind(
+  const updateRestWithIdentifier = updateRestItemAction.bind(
     null,
     year,
     month,

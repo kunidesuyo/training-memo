@@ -19,7 +19,7 @@ export type RestItemState = {
   message?: string | null;
 };
 
-export async function updateRestItems(
+export async function updateRestItemAction(
   year: number,
   month: number,
   day: number,
