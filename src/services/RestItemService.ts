@@ -39,4 +39,49 @@ export class RestItemService {
       authorId: currentUser.id,
     });
   }
+
+  async deleteRestItem(
+    year: number,
+    month: number,
+    day: number,
+    exerciseOrder: number,
+    itemOrder: number,
+  ) {
+    const currentUser = getCurrentUser();
+
+    const targetExercise = await this.exerciseRepository.findByDateAndOrder(
+      year,
+      month,
+      day,
+      exerciseOrder,
+      currentUser.id,
+    );
+
+    console.log(targetExercise);
+
+    await this.restItemRepository.delete(targetExercise.id, itemOrder);
+  }
+
+  async updateRestItem(
+    year: number,
+    month: number,
+    day: number,
+    exerciseOrder: number,
+    itemOrder: number,
+    time: number,
+  ) {
+    const currentUser = getCurrentUser();
+
+    const targetExercise = await this.exerciseRepository.findByDateAndOrder(
+      year,
+      month,
+      day,
+      exerciseOrder,
+      currentUser.id,
+    );
+
+    await this.restItemRepository.update(targetExercise.id, itemOrder, {
+      time,
+    });
+  }
 }

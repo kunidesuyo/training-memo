@@ -1,7 +1,9 @@
 "use server";
 
 import { prisma } from "@/prisma";
-import { getCurrentUser } from "@/src/app/_utils/getCurrentUser";
+import { ExerciseRepository } from "@/src/repositories/ExerciseRepository";
+import { RestItemRepository } from "@/src/repositories/RestItemRepository";
+import { RestItemService } from "@/src/services/RestItemService";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
@@ -26,7 +28,6 @@ export async function updateRestItems(
   _prevState: RestItemState,
   formData: FormData,
 ) {
-  const { id: currentUserId } = getCurrentUser();
   const validatedFields = RestItemFormSchema.safeParse({
     time: formData.get("time"),
   });
@@ -39,30 +40,21 @@ export async function updateRestItems(
   }
   const { time } = validatedFields.data;
 
-  const targetExerciseItem = await prisma.restExerciseItem.findFirstOrThrow({
-    where: {
-      exercise: {
-        workout: {
-          year: year,
-          month: month,
-          day: day,
-          authorId: currentUserId,
-        },
-        order: exerciseOrder,
-      },
-      order: itemOrder,
-    },
-  });
-  const targetExerciseItemId = targetExerciseItem.id;
+  const exerciseRepository = new ExerciseRepository(prisma);
+  const restItemRepository = new RestItemRepository(prisma);
+  const restItemService = new RestItemService(
+    exerciseRepository,
+    restItemRepository,
+  );
 
-  await prisma.restExerciseItem.update({
-    where: {
-      id: targetExerciseItemId,
-    },
-    data: {
-      time,
-    },
-  });
+  await restItemService.updateRestItem(
+    year,
+    month,
+    day,
+    exerciseOrder,
+    itemOrder,
+    time,
+  );
 
   revalidatePath(`/workouts/${year}/${month}/${day}/exercise/${exerciseOrder}`);
   redirect(`/workouts/${year}/${month}/${day}/exercise/${exerciseOrder}`);

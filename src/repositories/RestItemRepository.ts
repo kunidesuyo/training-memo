@@ -20,4 +20,34 @@ export class RestItemRepository {
       },
     });
   }
+  async delete(exerciseId: number, order: number) {
+    await this.prisma.restExerciseItem.delete({
+      where: {
+        exerciseId_order: {
+          exerciseId,
+          order,
+        },
+      },
+    });
+  }
+
+  async update(
+    exerciseId: number,
+    order: number,
+    workItemData: {
+      time: number;
+    },
+  ) {
+    await this.prisma.restExerciseItem.update({
+      where: {
+        exerciseId_order: {
+          exerciseId,
+          order,
+        },
+      },
+      data: {
+        time: workItemData.time,
+      },
+    });
+  }
 }
