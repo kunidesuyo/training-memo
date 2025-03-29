@@ -33,4 +33,26 @@ export class WorkItemRepository {
       },
     });
   }
+
+  async update(
+    exerciseId: number,
+    order: number,
+    workItemData: {
+      weight: number;
+      rep: number;
+    },
+  ) {
+    await this.prisma.workExerciseItem.update({
+      where: {
+        exerciseId_order: {
+          exerciseId,
+          order,
+        },
+      },
+      data: {
+        weight: workItemData.weight,
+        rep: workItemData.rep,
+      },
+    });
+  }
 }

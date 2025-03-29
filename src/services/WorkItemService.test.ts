@@ -317,3 +317,4 @@ describe("addWorkItemToExercise test", () => {
 });
 
 describe.skip("deleteWorkItem test", () => {});
+describe.skip("updateWorkItem test", () => {});

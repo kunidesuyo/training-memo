@@ -62,4 +62,29 @@ export class WorkItemService {
 
     await this.workItemRepository.delete(targetExercise.id, itemOrder);
   }
+
+  async updateWorkItem(
+    year: number,
+    month: number,
+    day: number,
+    exerciseOrder: number,
+    itemOrder: number,
+    weight: number,
+    rep: number,
+  ) {
+    const currentUser = getCurrentUser();
+
+    const targetExercise = await this.exerciseRepository.findByDateAndOrder(
+      year,
+      month,
+      day,
+      exerciseOrder,
+      currentUser.id,
+    );
+
+    await this.workItemRepository.update(targetExercise.id, itemOrder, {
+      weight,
+      rep,
+    });
+  }
 }

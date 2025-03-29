@@ -1,7 +1,9 @@
 "use server";
 
 import { prisma } from "@/prisma";
-import { getCurrentUser } from "@/src/app/_utils/getCurrentUser";
+import { ExerciseRepository } from "@/src/repositories/ExerciseRepository";
+import { WorkItemRepository } from "@/src/repositories/WorkItemRepository";
+import { WorkItemService } from "@/src/services/WorkItemService";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
@@ -28,7 +30,6 @@ export async function updateWorkItems(
   _prevState: WorkItemState,
   formData: FormData,
 ) {
-  const { id: currentUserId } = getCurrentUser();
   const validatedFields = WorkItemFormSchema.safeParse({
     weight: formData.get("weight"),
     rep: formData.get("rep"),
@@ -42,31 +43,22 @@ export async function updateWorkItems(
   }
   const { weight, rep } = validatedFields.data;
 
-  const targetExerciseItem = await prisma.workExerciseItem.findFirstOrThrow({
-    where: {
-      exercise: {
-        workout: {
-          year: year,
-          month: month,
-          day: day,
-          authorId: currentUserId,
-        },
-        order: exerciseOrder,
-      },
-      order: order,
-    },
-  });
-  const targetExerciseItemId = targetExerciseItem.id;
+  const exerciseRepository = new ExerciseRepository(prisma);
+  const workItemRepository = new WorkItemRepository(prisma);
+  const workItemService = new WorkItemService(
+    exerciseRepository,
+    workItemRepository,
+  );
 
-  await prisma.workExerciseItem.update({
-    where: {
-      id: targetExerciseItemId,
-    },
-    data: {
-      weight: weight,
-      rep: rep,
-    },
-  });
+  await workItemService.updateWorkItem(
+    year,
+    month,
+    day,
+    exerciseOrder,
+    order,
+    weight,
+    rep,
+  );
 
   revalidatePath(`/workouts/${year}/${month}/${day}/exercise/${exerciseOrder}`);
   redirect(`/workouts/${year}/${month}/${day}/exercise/${exerciseOrder}`);
