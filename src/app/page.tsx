@@ -1,11 +1,10 @@
-import { auth } from "@/auth";
-import { redirect } from "next/navigation";
+import { auth } from "@clerk/nextjs/server";
 
 export default async function Page() {
-  const session = await auth();
-  if (!session) {
-    redirect("/api/auth/signin");
-  }
+  const { userId, redirectToSignIn } = await auth();
+
+  if (!userId) return redirectToSignIn();
+
   return (
     <div>
       <h1>training memo</h1>
