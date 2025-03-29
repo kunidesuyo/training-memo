@@ -70,7 +70,8 @@ model RestExerciseItem {
 model User {
   id                Int                @id @default(autoincrement())
   name              String?
-  email             String             @unique
+  email             String
+  clerkId           String             @unique // ClerkのユーザーID
   Workouts          Workout[]
   Exercises         Exercise[]
   WorkExerciseItems WorkExerciseItem[]
