@@ -7,7 +7,7 @@ import { WorkItemService } from "@/src/services/WorkItemService";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-export async function deleteWorkItem(
+export async function deleteWorkItemAction(
   year: number,
   month: number,
   day: number,
