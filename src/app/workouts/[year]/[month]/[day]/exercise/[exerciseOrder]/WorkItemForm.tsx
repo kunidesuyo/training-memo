@@ -4,8 +4,8 @@ import { Input } from "@/components/ui/input";
 import DeleteWorkItemButton from "@/src/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/DeleteWorkItemButton";
 import {
   type WorkItemState,
-  updateWorkItems,
-} from "@/src/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/_actions/updateWorkItems";
+  updateWorkItemAction,
+} from "@/src/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/updateWorkItemAction";
 import type { WorkItem } from "@/src/services/ExerciseService";
 import type React from "react";
 import { useActionState } from "react";
@@ -26,7 +26,7 @@ const WorkItemForm: React.FC<WorkItemFormProps> = ({
   exerciseOrder,
 }) => {
   const initialState: WorkItemState = { message: null, errors: {} };
-  const updateExerciseItemsWithIdentifier = updateWorkItems.bind(
+  const updateExerciseItemsWithIdentifier = updateWorkItemAction.bind(
     null,
     year,
     month,

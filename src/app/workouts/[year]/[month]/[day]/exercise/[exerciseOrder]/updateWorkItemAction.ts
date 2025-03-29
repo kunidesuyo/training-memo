@@ -21,7 +21,7 @@ export type WorkItemState = {
   message?: string | null;
 };
 
-export async function updateWorkItems(
+export async function updateWorkItemAction(
   year: number,
   month: number,
   day: number,
