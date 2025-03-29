@@ -29,29 +29,6 @@ export async function deleteRestItem(
     itemOrder,
   );
 
-  // const { id: currentUserId } = getCurrentUser();
-  // const targetExerciseItem = await prisma.restExerciseItem.findFirstOrThrow({
-  //   where: {
-  //     exercise: {
-  //       workout: {
-  //         year: year,
-  //         month: month,
-  //         day: day,
-  //         authorId: currentUserId,
-  //       },
-  //       order: exerciseOrder,
-  //     },
-  //     order: itemOrder,
-  //   },
-  // });
-  // const targetExerciseItemId = targetExerciseItem.id;
-
-  // await prisma.restExerciseItem.delete({
-  //   where: {
-  //     id: targetExerciseItemId,
-  //   },
-  // });
-
   revalidatePath(`/workouts/${year}/${month}/${day}/exercise/${exerciseOrder}`);
   redirect(`/workouts/${year}/${month}/${day}/exercise/${exerciseOrder}`);
 }
