@@ -37,6 +37,11 @@ npx prisma format
 npx prisma migrate dev --name {migration name}
 ```
 
+- アプリ起動中の場合は再起動
+```
+ctrl+c
+npm run dev
+```
 
 - (プリズマクライアント生成)
 ```

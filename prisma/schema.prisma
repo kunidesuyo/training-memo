@@ -50,6 +50,8 @@ model WorkExerciseItem {
 
   author   User @relation(fields: [authorId], references: [id])
   authorId Int
+
+  @@unique([exerciseId, order])
 }
 
 model RestExerciseItem {
@@ -61,6 +63,8 @@ model RestExerciseItem {
 
   author   User @relation(fields: [authorId], references: [id])
   authorId Int
+
+  @@unique([exerciseId, order])
 }
 
 model User {

@@ -22,4 +22,15 @@ export class WorkItemRepository {
       },
     });
   }
+
+  async delete(exerciseId: number, order: number) {
+    await this.prisma.workExerciseItem.delete({
+      where: {
+        exerciseId_order: {
+          exerciseId,
+          order,
+        },
+      },
+    });
+  }
 }

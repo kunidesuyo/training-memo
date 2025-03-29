@@ -1,7 +1,9 @@
 "use server";
 
 import { prisma } from "@/prisma";
-import { getCurrentUser } from "@/src/app/_utils/getCurrentUser";
+import { ExerciseRepository } from "@/src/repositories/ExerciseRepository";
+import { WorkItemRepository } from "@/src/repositories/WorkItemRepository";
+import { WorkItemService } from "@/src/services/WorkItemService";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -12,28 +14,14 @@ export async function deleteWorkItem(
   exerciseOrder: number,
   itemOrder: number,
 ) {
-  const { id: currentUserId } = getCurrentUser();
-  const targetExerciseItem = await prisma.workExerciseItem.findFirstOrThrow({
-    where: {
-      exercise: {
-        workout: {
-          year: year,
-          month: month,
-          day: day,
-          authorId: currentUserId,
-        },
-        order: exerciseOrder,
-      },
-      order: itemOrder,
-    },
-  });
-  const targetExerciseItemId = targetExerciseItem.id;
+  const exerciseRepository = new ExerciseRepository(prisma);
+  const workItemRepository = new WorkItemRepository(prisma);
+  const workItemService = new WorkItemService(
+    exerciseRepository,
+    workItemRepository,
+  );
 
-  await prisma.workExerciseItem.delete({
-    where: {
-      id: targetExerciseItemId,
-    },
-  });
+  workItemService.deleteWorkItem(year, month, day, exerciseOrder, itemOrder);
 
   revalidatePath(`/workouts/${year}/${month}/${day}/exercise/${exerciseOrder}`);
   redirect(`/workouts/${year}/${month}/${day}/exercise/${exerciseOrder}`);

@@ -40,4 +40,26 @@ export class WorkItemService {
       authorId: currentUser.id,
     });
   }
+
+  async deleteWorkItem(
+    year: number,
+    month: number,
+    day: number,
+    exerciseOrder: number,
+    itemOrder: number,
+  ) {
+    const currentUser = getCurrentUser();
+
+    const targetExercise = await this.exerciseRepository.findByDateAndOrder(
+      year,
+      month,
+      day,
+      exerciseOrder,
+      currentUser.id,
+    );
+
+    console.log(targetExercise);
+
+    await this.workItemRepository.delete(targetExercise.id, itemOrder);
+  }
 }
