@@ -313,3 +313,6 @@ describe("addRestItemToExercise test", () => {
     ).rejects.toThrow("No Exercise found");
   });
 });
+
+describe.skip("deleteRestItem test", () => {});
+describe.skip("updateRestItem test", () => {});
