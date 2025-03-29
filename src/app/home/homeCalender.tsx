@@ -39,7 +39,7 @@ export default function HomeCalender({
         onSelect={showSelectedDateCalendar}
         onMonthChange={showSelectedDateCalendar}
         modifiers={{ workoutDay: workoutDays }}
-        modifiersClassNames={{ workoutDay: "bg-red-900" }}
+        modifiersClassNames={{ workoutDay: "bg-sky-400" }}
       />
     </div>
   );
