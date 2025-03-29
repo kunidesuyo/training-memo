@@ -7,7 +7,7 @@ import { RestItemService } from "@/src/services/RestItemService";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-export async function deleteRestItem(
+export async function deleteRestItemAction(
   year: number,
   month: number,
   day: number,
