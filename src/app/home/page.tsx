@@ -3,6 +3,7 @@ import HomeCalender from "@/src/app/home/homeCalender";
 import SelectedWorkout from "@/src/app/home/selectedWorkout";
 import { WorkoutRepository } from "@/src/repositories/WorkoutRepository";
 import { type Workout, WorkoutService } from "@/src/services/WorkoutService";
+import { auth } from "@clerk/nextjs/server";
 import { notFound } from "next/navigation";
 
 type SearchParams = { year?: string; month?: string; day?: string };
@@ -10,6 +11,11 @@ type SearchParams = { year?: string; month?: string; day?: string };
 export default async function Page(props: {
   searchParams?: Promise<SearchParams>;
 }) {
+  // 認証チェック
+  const { userId, redirectToSignIn } = await auth();
+
+  if (!userId) return redirectToSignIn();
+
   const searchParams = await props.searchParams;
 
   const isAllParamsSpecified = (searchParams?: SearchParams) => {

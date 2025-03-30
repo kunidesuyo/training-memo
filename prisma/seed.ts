@@ -12,6 +12,7 @@ const createRootUser = async (): Promise<User> => {
     data: {
       email: "test@example.com",
       name: "root_user",
+      clerkId: "clerk_id_tmp",
     },
   });
   return rootUser as User;
