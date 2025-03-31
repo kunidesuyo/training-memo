@@ -14,7 +14,9 @@ export default function CreateWorkoutButton({
   return (
     <div>
       <form action={() => createWorkoutAction(year, month, day)}>
-        <Button>ワークアウトを作成</Button>
+        <Button className="bg-sky-600 hover:bg-sky-700 active:bg-sky-800 text-white ">
+          ワークアウトを作成
+        </Button>
       </form>
     </div>
   );
