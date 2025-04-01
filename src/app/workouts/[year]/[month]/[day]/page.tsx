@@ -63,7 +63,7 @@ export default async function Page({
           ))}
         </Accordion>
       </div>
-      <div className="m-4">
+      <div className="my-4 mx-2">
         <AddExerciseForm pathParams={await params} />
       </div>
     </div>

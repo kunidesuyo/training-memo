@@ -25,10 +25,10 @@ export default function AddExerciseForm({
 
   return (
     <form action={formAction}>
-      <div className="flex">
-        <div>
+      <div className="flex justify-center w-full">
+        <div className="w-full">
           <Input
-            className="w-[300px]"
+            className="w-full"
             type="text"
             name="name"
             placeholder="エクササイズ名"
@@ -42,8 +42,11 @@ export default function AddExerciseForm({
             ))}
           </div>
         </div>
-        <Button type="submit" className="mx-2 underline">
-          エクササイズ追加
+        <Button
+          type="submit"
+          className="mx-2 bg-sky-600 hover:bg-sky-700 active:bg-sky-800 duration-200 text-white"
+        >
+          追加
         </Button>
       </div>
     </form>
