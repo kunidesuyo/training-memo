@@ -17,7 +17,12 @@ export default function DeleteExercise({
   return (
     <div>
       <form action={() => deleteExerciseAction(year, month, day, order)}>
-        <Button type="submit">削除</Button>
+        <Button
+          type="submit"
+          className="bg-sky-600 hover:bg-sky-700 active:bg-sky-800 duration-200 text-white"
+        >
+          削除
+        </Button>
       </form>
     </div>
   );
