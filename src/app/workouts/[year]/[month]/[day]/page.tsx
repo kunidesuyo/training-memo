@@ -37,7 +37,7 @@ export default async function Page({
 
   return (
     <div>
-      <h2>{`${year}年${month}月${day}日のワークアウト`}</h2>
+      <h2 className="text-lg font-medium my-4 mx-2">{`${year}年${month}月${day}日のワークアウト`}</h2>
       <div className="mx-2">
         <Accordion type="single" collapsible>
           {workout.exercises.map((exercise: Exercise) => (
@@ -45,7 +45,15 @@ export default async function Page({
               key={exercise.id.toString()}
               value={exercise.id.toString()}
             >
-              <AccordionTrigger>{exercise.name}</AccordionTrigger>
+              <AccordionTrigger>
+                <div className="flex-1 text-left">
+                  <Link
+                    href={`/workouts/${year}/${month}/${day}/exercise/${exercise.order}`}
+                  >
+                    {exercise.name}
+                  </Link>
+                </div>
+              </AccordionTrigger>
               <AccordionContent>
                 <ExerciseDetail exercise={exercise} />
                 <div className="flex justify-start">
