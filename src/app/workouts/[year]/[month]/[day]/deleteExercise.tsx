@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { deleteExerciseAction } from "@/src/app/workouts/[year]/[month]/[day]/deleteExerciseAction";
+import { Trash2 } from "lucide-react";
 
 export default function DeleteExercise({
   year,
@@ -19,9 +20,10 @@ export default function DeleteExercise({
       <form action={() => deleteExerciseAction(year, month, day, order)}>
         <Button
           type="submit"
-          className="bg-sky-600 hover:bg-sky-700 active:bg-sky-800 duration-200 text-white"
+          className="bg-transparent hover:bg-sky-200 active:bg-sky-300 duration-200 text-gray-500 hover:text-sky-700 hover:shadow-sm"
+          size="icon"
         >
-          削除
+          <Trash2 className="h-4 w-4" />
         </Button>
       </form>
     </div>

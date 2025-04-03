@@ -13,6 +13,7 @@ import { WorkoutRepository } from "@/src/repositories/WorkoutRepository";
 import type { Exercise, Workout } from "@/src/services/WorkoutService";
 import { WorkoutService } from "@/src/services/WorkoutService";
 import { auth } from "@clerk/nextjs/server";
+import { PenSquare } from "lucide-react";
 import Link from "next/link";
 
 export default async function Page({
@@ -56,7 +57,7 @@ export default async function Page({
               </AccordionTrigger>
               <AccordionContent>
                 <ExerciseDetail exercise={exercise} />
-                <div className="flex justify-start">
+                <div className="flex justify-start items-center">
                   <DeleteExercise
                     year={Number.parseInt(year)}
                     month={Number.parseInt(month)}
@@ -67,10 +68,11 @@ export default async function Page({
                     href={`/workouts/${year}/${month}/${day}/exercise/${exercise.order}`}
                   >
                     <Button
-                      variant="default"
-                      className="ml-2 bg-sky-600 hover:bg-sky-700 active:bg-sky-800 duration-200 text-white"
+                      variant="ghost"
+                      size="icon"
+                      className="h-8 w-8 hover:bg-sky-100 active:bg-sky-200"
                     >
-                      詳細
+                      <PenSquare className="h-4 w-4 text-sky-600" />
                     </Button>
                   </Link>
                 </div>
