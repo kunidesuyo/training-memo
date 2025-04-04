@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Save, Timer } from "lucide-react";
 import type React from "react";
 import { useActionState } from "react";
 
@@ -42,12 +43,12 @@ const RestItemForm: React.FC<RestItemFormProps> = ({
 
   return (
     <Card className="my-4" key={item.order}>
-      <CardContent className="flex p-4">
-        <p>{"レスト"}</p>
-        <form action={formAction} className="flex">
+      <CardContent className="flex items-center gap-4 p-4">
+        <Timer className="h-5 w-5 text-sky-600" />
+        <form action={formAction} className="flex items-center gap-2 flex-1">
           <Input
             name="time"
-            className="mx-2 w-100"
+            className="w-16"
             type="number"
             defaultValue={item.time ?? ""}
           />
@@ -59,9 +60,16 @@ const RestItemForm: React.FC<RestItemFormProps> = ({
               </p>
             ))}
           </div>
-          <Button type="submit" className="mx-2 underline">
-            更新
-          </Button>
+          <div className="ml-auto flex items-center gap-2">
+            <Button
+              type="submit"
+              size="icon"
+              variant="ghost"
+              className="hover:bg-sky-100 active:bg-sky-200 duration-200 text-gray-500 hover:text-sky-600 hover:shadow-sm"
+            >
+              <Save className="h-4 w-4" />
+            </Button>
+          </div>
         </form>
         <DeleteRestItemButton
           year={year}
