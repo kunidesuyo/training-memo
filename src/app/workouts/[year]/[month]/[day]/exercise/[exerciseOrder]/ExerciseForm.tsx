@@ -58,21 +58,21 @@ export default function ExerciseForm({
           />
         );
       })}
-      <div className="my-4 flex">
-        <AddWorkItemButton
-          year={year}
-          month={month}
-          day={day}
-          exerciseOrder={exerciseOrder}
-        />
-        <AddRestItemButton
-          year={year}
-          month={month}
-          day={day}
-          exerciseOrder={exerciseOrder}
-        />
-      </div>
-      <div>
+      <div className="my-4 flex gap-2 justify-between">
+        <div className="flex gap-2">
+          <AddWorkItemButton
+            year={year}
+            month={month}
+            day={day}
+            exerciseOrder={exerciseOrder}
+          />
+          <AddRestItemButton
+            year={year}
+            month={month}
+            day={day}
+            exerciseOrder={exerciseOrder}
+          />
+        </div>
         <DeleteExercise
           year={year}
           month={month}

@@ -37,7 +37,9 @@ export default async function Page({
       <Link className="m-4" href={`/workouts/${year}/${month}/${day}`}>
         戻る
       </Link>
-      <h2 className="m-4">{exercise.name}</h2>
+      <h2 className="text-2xl font-bold text-gray-800 m-4 pb-2 border-b border-gray-200">
+        {exercise.name}
+      </h2>
       <div className="m-4">
         <ExerciseForm
           exercise={exercise}
