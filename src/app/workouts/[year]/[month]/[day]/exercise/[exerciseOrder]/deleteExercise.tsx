@@ -26,7 +26,8 @@ export default function DeleteExercise({
       <Button
         onClick={handleDelete}
         variant="ghost"
-        className="border border-gray-200 hover:bg-red-100 active:bg-red-200 duration-200 text-gray-500 hover:text-red-600 hover:shadow-sm flex items-center gap-1"
+        size="icon"
+        className="border border-gray-200 hover:bg-red-100 active:bg-red-200 duration-200 text-gray-500 hover:text-red-600 hover:shadow-sm"
       >
         <Trash2 className="h-4 w-4" />
       </Button>
