@@ -43,12 +43,12 @@ const RestItemForm: React.FC<RestItemFormProps> = ({
 
   return (
     <Card className="my-4" key={item.order}>
-      <CardContent className="flex items-center gap-4 p-4">
-        <Timer className="h-5 w-5 text-sky-600" />
-        <form action={formAction} className="flex items-center gap-2 flex-1">
+      <CardContent className="flex items-center p-3 gap-1">
+        <Timer className="h-4 w-4 text-sky-600" />
+        <form action={formAction} className="flex items-center gap-1 flex-1">
           <Input
             name="time"
-            className="w-16"
+            className="w-14 ml-2"
             type="number"
             defaultValue={item.time ?? ""}
           />
@@ -60,7 +60,7 @@ const RestItemForm: React.FC<RestItemFormProps> = ({
               </p>
             ))}
           </div>
-          <div className="ml-auto flex items-center gap-2">
+          <div className="ml-auto flex items-center">
             <Button
               type="submit"
               size="icon"

@@ -1,14 +1,16 @@
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Dumbbell, Save } from "lucide-react";
+import type React from "react";
+import { useActionState } from "react";
+
+import { Button } from "@/components/ui/button";
 import DeleteWorkItemButton from "@/src/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/DeleteWorkItemButton";
 import {
   type WorkItemState,
   updateWorkItemAction,
 } from "@/src/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/updateWorkItemAction";
 import type { WorkItem } from "@/src/services/ExerciseService";
-import type React from "react";
-import { useActionState } from "react";
 
 interface WorkItemFormProps {
   item: WorkItem;
@@ -40,12 +42,12 @@ const WorkItemForm: React.FC<WorkItemFormProps> = ({
   );
   return (
     <Card className="my-4" key={item.order}>
-      <CardContent className="flex p-4">
-        <p>{"ワーク"}</p>
-        <form action={formAction} className="flex">
+      <CardContent className="flex items-center p-3 gap-1">
+        <Dumbbell className="h-4 w-4 text-sky-600" />
+        <form action={formAction} className="flex items-center gap-1 flex-1">
           <Input
             name="weight"
-            className="mx-2 w-100"
+            className="w-14 ml-2"
             type="number"
             defaultValue={item.weight ?? ""}
             placeholder="重さ"
@@ -60,22 +62,29 @@ const WorkItemForm: React.FC<WorkItemFormProps> = ({
           </div>
           <Input
             name="rep"
-            className="mx-2 w-100"
+            className="w-12 ml-2"
             type="number"
             defaultValue={item.rep ?? ""}
             placeholder="回数"
           />
           <p>回</p>
-          <div id="weight-error" aria-live="polite" aria-atomic="true">
+          <div id="rep-error" aria-live="polite" aria-atomic="true">
             {state.errors?.rep?.map((error: string) => (
               <p className="mt-2 text-sm text-red-500" key={error}>
                 {error}
               </p>
             ))}
           </div>
-          <Button type="submit" className="mx-2 underline">
-            更新
-          </Button>
+          <div className="ml-auto flex items-center">
+            <Button
+              type="submit"
+              size="icon"
+              variant="ghost"
+              className="hover:bg-sky-100 active:bg-sky-200 duration-200 text-gray-500 hover:text-sky-600 hover:shadow-sm"
+            >
+              <Save className="h-4 w-4" />
+            </Button>
+          </div>
         </form>
         <DeleteWorkItemButton
           year={year}

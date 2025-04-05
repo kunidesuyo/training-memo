@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { deleteWorkItemAction } from "@/src/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/deleteWorkItemAction";
+import { Trash2 } from "lucide-react";
 
 export default function DeleteWorkItemButton({
   year,
@@ -22,7 +23,14 @@ export default function DeleteWorkItemButton({
         deleteWorkItemAction(year, month, day, exerciseOrder, itemOrder)
       }
     >
-      <Button type="submit">削除</Button>
+      <Button
+        type="submit"
+        size="icon"
+        variant="ghost"
+        className="bg-transparent hover:bg-sky-200 active:bg-sky-300 duration-200 text-gray-500 hover:text-sky-700 hover:shadow-sm"
+      >
+        <Trash2 className="h-4 w-4" />
+      </Button>
     </form>
   );
 }
