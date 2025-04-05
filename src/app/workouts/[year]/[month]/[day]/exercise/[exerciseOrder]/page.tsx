@@ -5,6 +5,7 @@ import { WorkoutRepository } from "@/src/repositories/WorkoutRepository";
 import { ExerciseService } from "@/src/services/ExerciseService";
 import type { Exercise } from "@/src/services/ExerciseService";
 import { auth } from "@clerk/nextjs/server";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
 export default async function Page({
@@ -34,9 +35,15 @@ export default async function Page({
 
   return (
     <div className="m-4">
-      <Link className="m-4" href={`/workouts/${year}/${month}/${day}`}>
-        戻る
-      </Link>
+      <div className="flex items-center gap-2 m-4">
+        <Link
+          href={`/workouts/${year}/${month}/${day}`}
+          className="border border-gray-200 hover:bg-sky-100 active:bg-sky-200 duration-200 text-gray-500 hover:text-sky-600 hover:shadow-sm flex items-center gap-1 px-2 py-1 rounded-md"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          <span className="text-xs">戻る</span>
+        </Link>
+      </div>
       <h2 className="text-2xl font-bold text-gray-800 m-4 pb-2 border-b border-gray-200">
         {exercise.name}
       </h2>
