@@ -13,7 +13,7 @@ import { WorkoutRepository } from "@/src/repositories/WorkoutRepository";
 import type { Exercise, Workout } from "@/src/services/WorkoutService";
 import { WorkoutService } from "@/src/services/WorkoutService";
 import { auth } from "@clerk/nextjs/server";
-import { PenSquare } from "lucide-react";
+import { ArrowLeft, PenSquare } from "lucide-react";
 import Link from "next/link";
 
 export default async function Page({
@@ -38,6 +38,15 @@ export default async function Page({
 
   return (
     <div>
+      <div className="flex items-center gap-2 m-4">
+        <Link
+          href={"/home"}
+          className="border border-gray-200 hover:bg-sky-100 active:bg-sky-200 duration-200 text-gray-500 hover:text-sky-600 hover:shadow-sm flex items-center gap-1 px-2 py-1 rounded-md"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          <span className="text-xs">戻る</span>
+        </Link>
+      </div>
       <h2 className="text-lg font-medium my-4 mx-2">{`${year}年${month}月${day}日のワークアウト`}</h2>
       <div className="mx-2">
         <Accordion type="single" collapsible>
