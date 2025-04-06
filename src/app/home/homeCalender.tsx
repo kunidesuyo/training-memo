@@ -32,7 +32,7 @@ export default function HomeCalender({
   };
 
   return (
-    <div className="my-4 rounded-md border p-4">
+    <div className="my-4 rounded-md border p-4 max-w-[85%] w-full">
       <Calendar
         mode="single"
         selected={selectedDate}
