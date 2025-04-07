@@ -9,7 +9,7 @@ describe("getWorkout test", () => {
     const year = 2025;
     const month = 1;
     const day = 1;
-    const currentUser = getCurrentUser();
+    const currentUser = await getCurrentUser();
     const workout = await prisma.workout.create({
       data: {
         year,
@@ -47,7 +47,7 @@ describe("getWorkoutsInMonth test", () => {
     const year = 2025;
     const month = 1;
     const days = [1, 2, 3];
-    const currentUser = getCurrentUser();
+    const currentUser = await getCurrentUser();
     const workouts = [];
     for (const day of days) {
       const workout = await prisma.workout.create({
@@ -100,7 +100,7 @@ describe("createWorkout test", () => {
     const year = 2025;
     const month = 1;
     const day = 1;
-    const currentUser = getCurrentUser();
+    const currentUser = await getCurrentUser();
 
     // Act
     const workoutRepository = new WorkoutRepository(prisma);

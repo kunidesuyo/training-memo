@@ -14,12 +14,12 @@ export class WorkoutService {
   constructor(private workoutRepository: WorkoutRepository) {}
 
   async getWorkout(year: number, month: number, day: number): Promise<Workout> {
-    const { id: currentUserId } = getCurrentUser();
+    const { id: currentUserId } = await getCurrentUser();
     return this.workoutRepository.findByDate(year, month, day, currentUserId);
   }
 
   async getWorkoutsInMonth(year: number, month: number): Promise<Workout[]> {
-    const { id: currentUserId } = getCurrentUser();
+    const { id: currentUserId } = await getCurrentUser();
     return this.workoutRepository.findManyByYearAndMonth(
       year,
       month,
@@ -28,7 +28,7 @@ export class WorkoutService {
   }
 
   async createWorkout(year: number, month: number, day: number) {
-    const { id: currentUserId } = getCurrentUser();
+    const { id: currentUserId } = await getCurrentUser();
     this.workoutRepository.create(year, month, day, currentUserId);
   }
 }

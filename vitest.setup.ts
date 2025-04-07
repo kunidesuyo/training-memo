@@ -51,10 +51,11 @@ beforeAll(async () => {
   const currentUser = await prisma.user.create({
     data: {
       email: "test@example.com",
+      clerkId: "test-clerk-id",
     },
   });
   console.log("Setup Get Current User Mock");
-  vi.spyOn(_getCurrentUser, "getCurrentUser").mockImplementation(() => {
+  vi.spyOn(_getCurrentUser, "getCurrentUser").mockImplementation(async () => {
     return { id: currentUser.id };
   });
 

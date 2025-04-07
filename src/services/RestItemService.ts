@@ -14,7 +14,7 @@ export class RestItemService {
     day: number,
     exerciseOrder: number,
   ) {
-    const currentUser = getCurrentUser();
+    const currentUser = await getCurrentUser();
     const targetExercise = await this.exerciseRepository.findByDateAndOrder(
       year,
       month,
@@ -47,7 +47,7 @@ export class RestItemService {
     exerciseOrder: number,
     itemOrder: number,
   ) {
-    const currentUser = getCurrentUser();
+    const currentUser = await getCurrentUser();
 
     const targetExercise = await this.exerciseRepository.findByDateAndOrder(
       year,
@@ -68,7 +68,7 @@ export class RestItemService {
     itemOrder: number,
     time: number,
   ) {
-    const currentUser = getCurrentUser();
+    const currentUser = await getCurrentUser();
 
     const targetExercise = await this.exerciseRepository.findByDateAndOrder(
       year,

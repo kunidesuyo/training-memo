@@ -16,7 +16,7 @@ export class ExerciseService {
     day: number,
     exerciseOrder: number,
   ) {
-    const currentUser = getCurrentUser();
+    const currentUser = await getCurrentUser();
     return this.exerciseRepository.findByDateAndOrder(
       year,
       month,
@@ -32,7 +32,7 @@ export class ExerciseService {
     day: number,
     name: string,
   ) {
-    const currentUser = getCurrentUser();
+    const currentUser = await getCurrentUser();
     const targetWorkout = await this.workoutRepository.findByDate(
       year,
       month,
@@ -60,7 +60,7 @@ export class ExerciseService {
     day: number,
     exerciseOrder: number,
   ) {
-    const currentUser = getCurrentUser();
+    const currentUser = await getCurrentUser();
     const targetWorkout = await this.workoutRepository.findByDate(
       year,
       month,

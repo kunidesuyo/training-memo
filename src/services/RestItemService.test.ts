@@ -12,7 +12,7 @@ describe("addRestItemToExercise test", () => {
     const month = faker.date.future().getMonth();
     const day = faker.date.future().getDate();
     const exerciseOrder = 1;
-    const currentUser = getCurrentUser();
+    const currentUser = await getCurrentUser();
     await prisma.workout.create({
       data: {
         year,
@@ -72,7 +72,7 @@ describe("addRestItemToExercise test", () => {
     const month = faker.date.future().getMonth();
     const day = faker.date.future().getDate();
     const exerciseOrder = 1;
-    const currentUser = getCurrentUser();
+    const currentUser = await getCurrentUser();
     await prisma.workout.create({
       data: {
         year,
@@ -141,7 +141,7 @@ describe("addRestItemToExercise test", () => {
     const month = faker.date.future().getMonth();
     const day = faker.date.future().getDate();
     const exerciseOrder = 1;
-    const currentUser = getCurrentUser();
+    const currentUser = await getCurrentUser();
     await prisma.workout.create({
       data: {
         year,
@@ -211,7 +211,7 @@ describe("addRestItemToExercise test", () => {
     const month = faker.date.future().getMonth();
     const day = faker.date.future().getDate();
     const exerciseOrder = 1;
-    const currentUser = getCurrentUser();
+    const currentUser = await getCurrentUser();
     await prisma.workout.create({
       data: {
         year,
@@ -290,7 +290,7 @@ describe("addRestItemToExercise test", () => {
     const month = faker.date.future().getMonth();
     const day = faker.date.future().getDate();
     const exerciseOrder = 1;
-    const currentUser = getCurrentUser();
+    const currentUser = await getCurrentUser();
     await prisma.workout.create({
       data: {
         year,

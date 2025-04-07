@@ -14,7 +14,7 @@ export class WorkItemService {
     day: number,
     exerciseOrder: number,
   ) {
-    const currentUser = getCurrentUser();
+    const currentUser = await getCurrentUser();
     const targetExercise = await this.exerciseRepository.findByDateAndOrder(
       year,
       month,
@@ -48,7 +48,7 @@ export class WorkItemService {
     exerciseOrder: number,
     itemOrder: number,
   ) {
-    const currentUser = getCurrentUser();
+    const currentUser = await getCurrentUser();
 
     const targetExercise = await this.exerciseRepository.findByDateAndOrder(
       year,
@@ -70,7 +70,7 @@ export class WorkItemService {
     weight: number,
     rep: number,
   ) {
-    const currentUser = getCurrentUser();
+    const currentUser = await getCurrentUser();
 
     const targetExercise = await this.exerciseRepository.findByDateAndOrder(
       year,

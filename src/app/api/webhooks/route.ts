@@ -4,6 +4,7 @@ import { headers } from "next/headers";
 import { Webhook } from "svix";
 
 export async function POST(req: Request) {
+  console.log("webhook received");
   const SIGNING_SECRET = process.env.SIGNING_SECRET;
 
   if (!SIGNING_SECRET) {

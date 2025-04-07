@@ -8,7 +8,7 @@ describe("addToWorkout test", () => {
     const year = 2025;
     const month = 1;
     const day = 1;
-    const currentUser = getCurrentUser();
+    const currentUser = await getCurrentUser();
     const workout = await prisma.workout.create({
       data: {
         year,
@@ -60,7 +60,7 @@ describe("delte test", () => {
     const year = 2025;
     const month = 1;
     const day = 1;
-    const currentUser = getCurrentUser();
+    const currentUser = await getCurrentUser();
     const workout = await prisma.workout.create({
       data: {
         year,
@@ -109,7 +109,7 @@ describe("delte test", () => {
     const year = 2025;
     const month = 1;
     const day = 1;
-    const currentUser = getCurrentUser();
+    const currentUser = await getCurrentUser();
     const workout = await prisma.workout.create({
       data: {
         year,
