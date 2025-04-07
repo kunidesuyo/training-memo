@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { addWorkItemToExerciseAction } from "@/src/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/addWorkItemToExerciseAction";
+import { addWorkItemToExerciseAction } from "@/src/components/pages/exercise/addWorkItemToExerciseAction";
 import { Dumbbell, Plus } from "lucide-react";
 
 export default function AddWorkItemButton({

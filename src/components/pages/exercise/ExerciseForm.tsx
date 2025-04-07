@@ -1,10 +1,10 @@
 "use client";
 
-import AddRestItemButton from "@/src/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/AddRestItemButton";
-import AddWorkItemButton from "@/src/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/AddWorkItemButton";
-import RestItemForm from "@/src/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/RestItemForm";
-import WorkItemForm from "@/src/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/WorkItemForm";
-import DeleteExercise from "@/src/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/deleteExercise";
+import AddRestItemButton from "@/src/components/pages/exercise/AddRestItemButton";
+import AddWorkItemButton from "@/src/components/pages/exercise/AddWorkItemButton";
+import DeleteExercise from "@/src/components/pages/exercise/DeleteExercise";
+import RestItemForm from "@/src/components/pages/exercise/RestItemForm";
+import WorkItemForm from "@/src/components/pages/exercise/WorkItemForm";
 import type { Exercise, RestItem, WorkItem } from "@/src/types/exercise";
 
 // TODO: app/workouts/[year]/[month]/[day]/ExerciseDetail.tsxもある

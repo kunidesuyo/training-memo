@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { deleteRestItemAction } from "@/src/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/deleteRestItemAction";
+import { deleteRestItemAction } from "@/src/components/pages/exercise/deleteRestItemAction";
 import { Trash2 } from "lucide-react";
 
 export default function DeleteRestItemButton({

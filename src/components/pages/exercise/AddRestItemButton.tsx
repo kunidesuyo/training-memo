@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { addRestItemToExerciseAction } from "@/src/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/addRestItemToExerciseAction";
+import { addRestItemToExerciseAction } from "@/src/components/pages/exercise/addRestItemToExerciseAction";
 import { Plus, Timer } from "lucide-react";
 
 export default function AddRestItemButton({

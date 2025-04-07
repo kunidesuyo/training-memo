@@ -1,5 +1,5 @@
 import { prisma } from "@/prisma";
-import ExerciseForm from "@/src/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/ExerciseForm";
+import ExerciseForm from "@/src/components/pages/exercise/ExerciseForm";
 import { ExerciseRepository } from "@/src/repositories/ExerciseRepository";
 import { WorkoutRepository } from "@/src/repositories/WorkoutRepository";
 import { ExerciseService } from "@/src/services/ExerciseService";

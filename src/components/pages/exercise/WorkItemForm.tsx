@@ -5,11 +5,11 @@ import type React from "react";
 import { useActionState } from "react";
 
 import { Button } from "@/components/ui/button";
-import DeleteWorkItemButton from "@/src/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/DeleteWorkItemButton";
+import DeleteWorkItemButton from "@/src/components/pages/exercise/DeleteWorkItemButton";
 import {
   type WorkItemState,
   updateWorkItemAction,
-} from "@/src/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/updateWorkItemAction";
+} from "@/src/components/pages/exercise/updateWorkItemAction";
 import type { WorkItem } from "@/src/services/ExerciseService";
 
 interface WorkItemFormProps {

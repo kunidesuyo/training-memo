@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { deleteWorkItemAction } from "@/src/app/workouts/[year]/[month]/[day]/exercise/[exerciseOrder]/deleteWorkItemAction";
+import { deleteWorkItemAction } from "@/src/components/pages/exercise/deleteWorkItemAction";
 import { Trash2 } from "lucide-react";
 
 export default function DeleteWorkItemButton({
