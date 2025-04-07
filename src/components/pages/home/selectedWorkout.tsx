@@ -1,4 +1,4 @@
-import CreateWorkoutButton from "@/src/app/home/createWorkoutButton";
+import CreateWorkoutButton from "@/src/components/pages/home/createWorkoutButton";
 import type { Exercise, Workout } from "@/src/services/WorkoutService";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
