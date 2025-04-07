@@ -1,5 +1,5 @@
-import RestItemDetail from "@/src/app/workouts/[year]/[month]/[day]/RestItemDetail";
-import WorkItemDetail from "@/src/app/workouts/[year]/[month]/[day]/WorkItemDetail";
+import RestItemDetail from "@/src/components/pages/workouts/RestItemDetail";
+import WorkItemDetail from "@/src/components/pages/workouts/WorkItemDetail";
 import type {
   Exercise,
   RestItem,

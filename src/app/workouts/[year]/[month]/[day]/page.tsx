@@ -6,9 +6,9 @@ import {
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { prisma } from "@/prisma";
-import ExerciseDetail from "@/src/app/workouts/[year]/[month]/[day]/ExerciseDetail";
-import AddExerciseForm from "@/src/app/workouts/[year]/[month]/[day]/addExerciseForm";
-import DeleteExercise from "@/src/app/workouts/[year]/[month]/[day]/deleteExercise";
+import ExerciseDetail from "@/src/components/pages/workouts/ExerciseDetail";
+import AddExerciseForm from "@/src/components/pages/workouts/addExerciseForm";
+import DeleteExercise from "@/src/components/pages/workouts/deleteExercise";
 import { WorkoutRepository } from "@/src/repositories/WorkoutRepository";
 import type { Exercise, Workout } from "@/src/services/WorkoutService";
 import { WorkoutService } from "@/src/services/WorkoutService";
