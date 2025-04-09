@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { createWorkoutAction } from "@/src/components/pages/home/createWorkoutAction";
+import { createWorkoutAction } from "@/src/components/pages/home/createWorkoutButton/createWorkoutAction";
 
 export default function CreateWorkoutButton({
   selectedDate,
