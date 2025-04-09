@@ -7,8 +7,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { prisma } from "@/prisma";
 import AddExerciseForm from "@/src/components/pages/workouts/AddExerciseForm";
+import DeleteExercise from "@/src/components/pages/workouts/DeleteExercise";
 import ExerciseDetail from "@/src/components/pages/workouts/ExerciseDetail";
-import DeleteExercise from "@/src/components/pages/workouts/deleteExercise";
 import { WorkoutRepository } from "@/src/repositories/WorkoutRepository";
 import type { Exercise, Workout } from "@/src/services/WorkoutService";
 import { WorkoutService } from "@/src/services/WorkoutService";
