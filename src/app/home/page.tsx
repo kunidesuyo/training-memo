@@ -1,6 +1,6 @@
 import { prisma } from "@/prisma";
-import HomeCalender from "@/src/components/pages/home/homeCalender/homeCalender";
-import SelectedWorkout from "@/src/components/pages/home/selectedWorkout/selectedWorkout";
+import HomeCalender from "@/src/components/pages/home/HomeCalender/HomeCalender";
+import SelectedWorkout from "@/src/components/pages/home/SelectedWorkout/SelectedWorkout";
 import { WorkoutRepository } from "@/src/repositories/WorkoutRepository";
 import { type Workout, WorkoutService } from "@/src/services/WorkoutService";
 import { auth } from "@clerk/nextjs/server";
