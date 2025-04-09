@@ -1,5 +1,5 @@
-import RestItemDetail from "@/src/components/pages/workouts/RestItemDetail";
-import WorkItemDetail from "@/src/components/pages/workouts/WorkItemDetail";
+import RestItemDetail from "@/src/components/pages/workouts/RestItemDetail/RestItemDetail";
+import WorkItemDetail from "@/src/components/pages/workouts/WorkItemDetail/WorkItemDetail";
 import type {
   Exercise,
   RestItem,
