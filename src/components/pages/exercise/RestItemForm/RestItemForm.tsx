@@ -1,34 +1,34 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Dumbbell, Save } from "lucide-react";
+import { Save, Timer } from "lucide-react";
 import type React from "react";
 import { useActionState } from "react";
 
 import { Button } from "@/components/ui/button";
-import DeleteWorkItemButton from "@/src/components/pages/exercise/DeleteWorkItemButton";
+import DeleteRestItemButton from "@/src/components/pages/exercise/DeleteRestItemButton/DeleteRestItemButton";
 import {
-  type WorkItemState,
-  updateWorkItemAction,
-} from "@/src/components/pages/exercise/updateWorkItemAction";
-import type { WorkItem } from "@/src/services/ExerciseService";
+  type RestItemState,
+  updateRestItemAction,
+} from "@/src/components/pages/exercise/RestItemForm/updateRestItemAction";
+import type { RestItem } from "@/src/services/ExerciseService";
 
-interface WorkItemFormProps {
-  item: WorkItem;
+interface RestItemFormProps {
+  item: RestItem;
   year: number;
   month: number;
   day: number;
   exerciseOrder: number;
 }
 
-const WorkItemForm: React.FC<WorkItemFormProps> = ({
+const RestItemForm: React.FC<RestItemFormProps> = ({
   item,
   year,
   month,
   day,
   exerciseOrder,
 }) => {
-  const initialState: WorkItemState = { message: null, errors: {} };
-  const updateExerciseItemsWithIdentifier = updateWorkItemAction.bind(
+  const initialState: RestItemState = { message: null, errors: {} };
+  const updateRestWithIdentifier = updateRestItemAction.bind(
     null,
     year,
     month,
@@ -37,39 +37,24 @@ const WorkItemForm: React.FC<WorkItemFormProps> = ({
     exerciseOrder,
   );
   const [state, formAction] = useActionState(
-    updateExerciseItemsWithIdentifier,
+    updateRestWithIdentifier,
     initialState,
   );
+
   return (
     <Card className="my-4" key={item.order}>
       <CardContent className="flex items-center p-3 gap-1">
-        <Dumbbell className="h-4 w-4 text-sky-600" />
+        <Timer className="h-4 w-4 text-sky-600" />
         <form action={formAction} className="flex items-center gap-1 flex-1">
           <Input
-            name="weight"
+            name="time"
             className="w-14 ml-2"
             type="number"
-            defaultValue={item.weight ?? ""}
-            placeholder="重さ"
+            defaultValue={item.time ?? ""}
           />
-          <p>kg</p>
-          <div id="weight-error" aria-live="polite" aria-atomic="true">
-            {state.errors?.weight?.map((error: string) => (
-              <p className="mt-2 text-sm text-red-500" key={error}>
-                {error}
-              </p>
-            ))}
-          </div>
-          <Input
-            name="rep"
-            className="w-12 ml-2"
-            type="number"
-            defaultValue={item.rep ?? ""}
-            placeholder="回数"
-          />
-          <p>回</p>
-          <div id="rep-error" aria-live="polite" aria-atomic="true">
-            {state.errors?.rep?.map((error: string) => (
+          <p>秒</p>
+          <div id="time-error" aria-live="polite" aria-atomic="true">
+            {state.errors?.time?.map((error: string) => (
               <p className="mt-2 text-sm text-red-500" key={error}>
                 {error}
               </p>
@@ -86,7 +71,7 @@ const WorkItemForm: React.FC<WorkItemFormProps> = ({
             </Button>
           </div>
         </form>
-        <DeleteWorkItemButton
+        <DeleteRestItemButton
           year={year}
           month={month}
           day={day}
@@ -98,4 +83,4 @@ const WorkItemForm: React.FC<WorkItemFormProps> = ({
   );
 };
 
-export default WorkItemForm;
+export default RestItemForm;
