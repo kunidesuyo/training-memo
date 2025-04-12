@@ -1,6 +1,7 @@
 import { execSync } from "node:child_process";
 import * as _prisma from "@/prisma";
 import * as _getCurrentUser from "@/src/app/_utils/getCurrentUser";
+import * as _clerk from "@clerk/nextjs/server";
 import { PrismaClient } from "@prisma/client";
 import {
   PostgreSqlContainer,
@@ -47,11 +48,17 @@ beforeAll(async () => {
     return prisma;
   });
 
+  console.log("Setup Clerk Client Mock");
+  const mockedClerkId = "mocked-clerk-id";
+  vi.spyOn(_clerk, "currentUser").mockImplementation(async () => {
+    return { id: mockedClerkId } as _clerk.User;
+  });
+
   console.log("Create Current User");
   const currentUser = await prisma.user.create({
     data: {
       email: "test@example.com",
-      clerkId: "test-clerk-id",
+      clerkId: mockedClerkId,
     },
   });
   console.log("Setup Get Current User Mock");
