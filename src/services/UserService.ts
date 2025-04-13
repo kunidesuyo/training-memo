@@ -1,6 +1,6 @@
 import type { UserRepository } from "@/src/repositories/UserRepository";
 import type { currentUser } from "@clerk/nextjs/server";
-
+import type { User } from "@prisma/client";
 type CurrentUser = typeof currentUser;
 
 export class UserService {
@@ -9,12 +9,12 @@ export class UserService {
     private currentUser: CurrentUser,
   ) {}
 
-  async getCurrentUser() {
+  async getCurrentUser(): Promise<User> {
     const currentClerkUser = await this.currentUser();
-    const clerkId = currentClerkUser?.id;
-    if (!clerkId) {
+    if (!currentClerkUser) {
       throw new Error("Clerkユーザーが見つかりません");
     }
+    const clerkId = currentClerkUser.id;
     const currentUser = await this.userRepository.findByClerkId(clerkId);
     if (!currentUser) {
       throw new Error("ユーザーが見つかりません");
