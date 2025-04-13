@@ -9,6 +9,7 @@ export class UserService {
     private currentUser: CurrentUser,
   ) {}
 
+  // このメソッドは他の多くのサービスから呼び出される基盤的処理のため、UserServiceに作るべきではない
   async getCurrentUser(): Promise<User> {
     const currentClerkUser = await this.currentUser();
     if (!currentClerkUser) {
