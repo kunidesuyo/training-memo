@@ -1,4 +1,5 @@
 import { prisma } from "@/prisma";
+import { ClerkRepository } from "@/src/repositories/ClerkRepository";
 import { UserRepository } from "@/src/repositories/UserRepository";
 import { UserService } from "@/src/services/UserService";
 import { currentUser as mockedCurrentUser } from "@clerk/nextjs/server";
@@ -11,7 +12,8 @@ describe("getCurrentUser test", () => {
 
     // Act
     const userRepository = new UserRepository(prisma);
-    const userService = new UserService(userRepository, mockedCurrentUser);
+    const clerkRepository = new ClerkRepository(mockedCurrentUser);
+    const userService = new UserService(userRepository, clerkRepository);
     const currentUser = await userService.getCurrentUser();
 
     // Assert
@@ -26,7 +28,8 @@ describe("getCurrentUser test", () => {
 
     // Act&Assert
     const userRepository = new UserRepository(prisma);
-    const userService = new UserService(userRepository, mockedCurrentUser);
+    const clerkRepository = new ClerkRepository(mockedCurrentUser);
+    const userService = new UserService(userRepository, clerkRepository);
     await expect(userService.getCurrentUser()).rejects.toThrow(
       "Clerkユーザーが見つかりません",
     );
@@ -41,7 +44,8 @@ describe("getCurrentUser test", () => {
 
     // Act&Assert
     const userRepository = new UserRepository(prisma);
-    const userService = new UserService(userRepository, mockedCurrentUser);
+    const clerkRepository = new ClerkRepository(mockedCurrentUser);
+    const userService = new UserService(userRepository, clerkRepository);
     await expect(userService.getCurrentUser()).rejects.toThrow(
       "ユーザーが見つかりません",
     );
