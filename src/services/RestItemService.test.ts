@@ -1,8 +1,8 @@
 import { prisma } from "@/prisma";
-import { getCurrentUser } from "@/src/app/_utils/getCurrentUser";
 import { ExerciseRepository } from "@/src/repositories/ExerciseRepository";
 import { RestItemRepository } from "@/src/repositories/RestItemRepository";
 import { RestItemService } from "@/src/services/RestItemService";
+import { getCurrentUser } from "@/src/utils/getCurrentUser";
 import { faker } from "@faker-js/faker/locale/ja";
 
 describe("addRestItemToExercise test", () => {

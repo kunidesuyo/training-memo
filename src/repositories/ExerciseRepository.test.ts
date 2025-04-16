@@ -1,6 +1,6 @@
 import { prisma } from "@/prisma";
-import { getCurrentUser } from "@/src/app/_utils/getCurrentUser";
 import { ExerciseRepository } from "@/src/repositories/ExerciseRepository";
+import { getCurrentUser } from "@/src/utils/getCurrentUser";
 
 describe("addToWorkout test", () => {
   it("exerciseが追加されること", async () => {

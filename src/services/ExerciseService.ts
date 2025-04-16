@@ -1,6 +1,6 @@
-import { getCurrentUser } from "@/src/app/_utils/getCurrentUser";
 import type { ExerciseRepository } from "@/src/repositories/ExerciseRepository";
 import type { WorkoutRepository } from "@/src/repositories/WorkoutRepository";
+import { getCurrentUser } from "@/src/utils/getCurrentUser";
 
 export type { Exercise, WorkItem, RestItem } from "@/src/types/exercise";
 

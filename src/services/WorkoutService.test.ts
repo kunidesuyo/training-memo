@@ -1,7 +1,7 @@
 import { prisma } from "@/prisma";
-import { getCurrentUser } from "@/src/app/_utils/getCurrentUser";
 import { WorkoutRepository } from "@/src/repositories/WorkoutRepository";
 import { WorkoutService } from "@/src/services/WorkoutService";
+import { getCurrentUser } from "@/src/utils/getCurrentUser";
 
 describe("getWorkout test", () => {
   it("workoutを取得できる", async () => {

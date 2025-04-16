@@ -1,8 +1,8 @@
 import { prisma } from "@/prisma";
-import { getCurrentUser } from "@/src/app/_utils/getCurrentUser";
 import { ExerciseRepository } from "@/src/repositories/ExerciseRepository";
 import { WorkItemRepository } from "@/src/repositories/WorkItemRepository";
 import { WorkItemService } from "@/src/services/WorkItemService";
+import { getCurrentUser } from "@/src/utils/getCurrentUser";
 import { faker } from "@faker-js/faker/locale/ja";
 
 describe("addWorkItemToExercise test", () => {

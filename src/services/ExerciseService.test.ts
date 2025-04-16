@@ -1,7 +1,7 @@
 import { prisma } from "@/prisma";
-import { getCurrentUser } from "@/src/app/_utils/getCurrentUser";
 import { WorkoutRepository } from "@/src/repositories/WorkoutRepository";
 import { ExerciseService } from "@/src/services/ExerciseService";
+import { getCurrentUser } from "@/src/utils/getCurrentUser";
 import { faker } from "@faker-js/faker/locale/ja";
 import { ExerciseRepository } from "./../repositories/ExerciseRepository";
 
