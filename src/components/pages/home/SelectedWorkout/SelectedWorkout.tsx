@@ -63,7 +63,7 @@ export default async function SelectedWorkout({
   // const selectedWorkout: Workout | null = await getWorkout(year, month, day);
 
   return (
-    <div className="my-2 rounded-md border p-4 mx-2 max-w-[85%] w-full">
+    <div className="my-2 rounded-md border p-4 mx-2 w-full">
       {selectedDate ? (
         renderSelectedDate(selectedDate)
       ) : (

@@ -3,7 +3,7 @@ import { Calendar } from "@/components/ui/calendar";
 import type { Workout } from "@/src/services/WorkoutService";
 import { usePathname, useRouter } from "next/navigation";
 
-export default function HomeCalender({
+export default function HomeCalendar({
   workouts,
   selectedDate,
 }: {
@@ -32,7 +32,7 @@ export default function HomeCalender({
   };
 
   return (
-    <div className="my-4 rounded-md border p-4 max-w-[85%] w-full">
+    <div className="my-4 rounded-md border p-4 w-full">
       <Calendar
         mode="single"
         selected={selectedDate}

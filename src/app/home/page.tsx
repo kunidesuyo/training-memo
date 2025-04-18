@@ -1,5 +1,5 @@
 import { prisma } from "@/prisma";
-import HomeCalender from "@/src/components/pages/home/HomeCalender/HomeCalender";
+import HomeCalendar from "@/src/components/pages/home/HomeCalendar/HomeCalendar";
 import SelectedWorkout from "@/src/components/pages/home/SelectedWorkout/SelectedWorkout";
 import { WorkoutRepository } from "@/src/repositories/WorkoutRepository";
 import { type Workout, WorkoutService } from "@/src/services/WorkoutService";
@@ -67,8 +67,8 @@ export default async function Page(props: {
   );
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
-      <HomeCalender workouts={workouts} selectedDate={selectedDate} />
+    <div className="flex flex-col items-center justify-center min-h-screen w-[85%] mx-auto">
+      <HomeCalendar workouts={workouts} selectedDate={selectedDate} />
       <SelectedWorkout
         selectedDate={selectedDate}
         selectedWorkout={selectedWorkout}
