@@ -39,7 +39,14 @@ export default function HomeCalendar({
         onSelect={showSelectedDateCalendar}
         onMonthChange={showSelectedDateCalendar}
         modifiers={{ workoutDay: workoutDays }}
-        modifiersClassNames={{ workoutDay: "bg-sky-400" }}
+        // 適応した当初は聞いていたが、どこかのタイミングで効かなくなった
+        // modifiersClassNames={{ workoutDay: "bg-sky-400" }}
+        modifiersStyles={{
+          workoutDay: {
+            backgroundColor: "rgb(125 211 252)", // sky-300の色
+            color: "white", // テキストの色
+          },
+        }}
       />
     </div>
   );
