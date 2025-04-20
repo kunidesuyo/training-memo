@@ -41,12 +41,7 @@ export default function AddExerciseForm({
             ))}
           </div>
         </div>
-        <Button
-          type="submit"
-          className="bg-sky-600 hover:bg-sky-700 active:bg-sky-800 duration-200 text-white"
-        >
-          追加
-        </Button>
+        <Button type="submit">追加</Button>
       </div>
     </form>
   );
