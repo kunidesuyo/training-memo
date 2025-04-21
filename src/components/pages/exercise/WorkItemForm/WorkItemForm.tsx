@@ -42,12 +42,17 @@ const WorkItemForm: React.FC<WorkItemFormProps> = ({
   );
   return (
     <Card className="my-4" key={item.order}>
-      <CardContent className="flex items-center p-3 gap-1">
-        <Dumbbell className="h-4 w-4 text-sky-600" />
-        <form action={formAction} className="flex items-center gap-1 flex-1">
+      <CardContent className="flex items-center p-3">
+        <div className="h-10 w-8 flex items-center justify-start">
+          <Dumbbell className="h-4 w-4 text-sky-600" />
+        </div>
+        <form
+          action={formAction}
+          className="flex items-center gap-1 grow flex-1"
+        >
           <Input
             name="weight"
-            className="w-10 ml-2"
+            className="flex-1 ml-2"
             type="number"
             defaultValue={item.weight ?? ""}
             placeholder="重さ"
@@ -62,7 +67,7 @@ const WorkItemForm: React.FC<WorkItemFormProps> = ({
           </div>
           <Input
             name="rep"
-            className="w-10 ml-2"
+            className="flex-1 ml-2"
             type="number"
             defaultValue={item.rep ?? ""}
             placeholder="回数"
