@@ -48,7 +48,7 @@ const RestItemForm: React.FC<RestItemFormProps> = ({
         <form action={formAction} className="flex items-center gap-1 flex-1">
           <Input
             name="time"
-            className="w-14 ml-2"
+            className="w-10 ml-2"
             type="number"
             defaultValue={item.time ?? ""}
           />

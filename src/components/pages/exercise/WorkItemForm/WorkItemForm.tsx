@@ -47,7 +47,7 @@ const WorkItemForm: React.FC<WorkItemFormProps> = ({
         <form action={formAction} className="flex items-center gap-1 flex-1">
           <Input
             name="weight"
-            className="w-14 ml-2"
+            className="w-10 ml-2"
             type="number"
             defaultValue={item.weight ?? ""}
             placeholder="重さ"
@@ -62,7 +62,7 @@ const WorkItemForm: React.FC<WorkItemFormProps> = ({
           </div>
           <Input
             name="rep"
-            className="w-12 ml-2"
+            className="w-10 ml-2"
             type="number"
             defaultValue={item.rep ?? ""}
             placeholder="回数"
