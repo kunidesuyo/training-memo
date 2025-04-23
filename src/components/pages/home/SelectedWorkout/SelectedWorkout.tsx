@@ -69,10 +69,11 @@ export default async function SelectedWorkout({
       ) : (
         <p>日付を選択してください。</p>
       )}
+
       {selectedWorkout ? (
         renderWorkoutDetails(selectedWorkout, year, month, day)
       ) : (
-        <div>
+        <div className="mt-2">
           <CreateWorkoutButton selectedDate={selectedDate} />
         </div>
       )}
