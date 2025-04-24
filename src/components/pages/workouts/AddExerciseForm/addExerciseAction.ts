@@ -15,7 +15,7 @@ export type State = {
 };
 
 const ExerciseFormSchema = z.object({
-  name: z.string().min(1),
+  name: z.string().min(1, { message: "エクササイズ名を入力してください" }),
 });
 
 export async function addExerciseAction(
