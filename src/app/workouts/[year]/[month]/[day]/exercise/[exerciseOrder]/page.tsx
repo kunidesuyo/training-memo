@@ -1,4 +1,5 @@
 import { prisma } from "@/prisma";
+import BeforeExercise from "@/src/components/pages/exercise/BeforeExercise/BeforeExercise";
 import ExerciseForm from "@/src/components/pages/exercise/ExerciseForm/ExerciseForm";
 import { ExerciseRepository } from "@/src/repositories/ExerciseRepository";
 import { WorkoutRepository } from "@/src/repositories/WorkoutRepository";
@@ -55,6 +56,11 @@ export default async function Page({
           day={Number.parseInt(day)}
           exerciseOrder={Number.parseInt(exerciseOrder)}
         />
+      </div>
+      <div>
+        {/* 前のエクササイズ */}
+        <BeforeExercise />
+        {/* 次のエクササイズ */}
       </div>
     </div>
   );
