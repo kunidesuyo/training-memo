@@ -1,6 +1,7 @@
 import { prisma } from "@/prisma";
 import BeforeExercise from "@/src/components/pages/exercise/BeforeExercise/BeforeExercise";
 import ExerciseForm from "@/src/components/pages/exercise/ExerciseForm/ExerciseForm";
+import NextExercise from "@/src/components/pages/exercise/NextExercise/NextExercise";
 import { ExerciseRepository } from "@/src/repositories/ExerciseRepository";
 import { WorkoutRepository } from "@/src/repositories/WorkoutRepository";
 import { ExerciseService } from "@/src/services/ExerciseService";
@@ -57,10 +58,9 @@ export default async function Page({
           exerciseOrder={Number.parseInt(exerciseOrder)}
         />
       </div>
-      <div>
-        {/* 前のエクササイズ */}
+      <div className="flex justify-between">
         <BeforeExercise />
-        {/* 次のエクササイズ */}
+        <NextExercise />
       </div>
     </div>
   );
