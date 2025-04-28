@@ -59,7 +59,14 @@ export default async function Page({
         />
       </div>
       <div className="flex justify-between">
-        <BeforeExercise />
+        <BeforeExercise
+          props={{
+            year: Number.parseInt(year),
+            month: Number.parseInt(month),
+            day: Number.parseInt(day),
+            nowExerciseOrder: Number.parseInt(exerciseOrder),
+          }}
+        />
         <NextExercise />
       </div>
     </div>

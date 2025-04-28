@@ -1,9 +1,40 @@
-// TODO: 以下仕様のコンポーネントを作成する
-// 前のエクササイズを表示する
-// コンポーネント押下時
-// L前のエクササイズが存在する場合は、前のエクササイズを表示する
-// L前のエクササイズが存在しない場合は、コンポーネントを非表示にする
+import { prisma } from "@/prisma";
+import { ExerciseRepository } from "@/src/repositories/ExerciseRepository";
+import { WorkoutRepository } from "@/src/repositories/WorkoutRepository";
+import type { Exercise } from "@/src/services/ExerciseService";
+import { ExerciseService } from "@/src/services/ExerciseService";
+import Link from "next/link";
+export default async function BeforeExercise({
+  props,
+}: {
+  props: { year: number; month: number; day: number; nowExerciseOrder: number };
+}) {
+  const { year, month, day, nowExerciseOrder } = props;
+  const beforeExerciseOrder = nowExerciseOrder - 1;
 
-export default function BeforeExercise() {
-  return <div>BeforeExercise</div>;
+  const exerciseRepository = new ExerciseRepository(prisma);
+  const workoutRepository = new WorkoutRepository(prisma);
+  const exerciseService = new ExerciseService(
+    workoutRepository,
+    exerciseRepository,
+  );
+  const exercise: Exercise | null = await exerciseService.getExerciseOrNull(
+    year,
+    month,
+    day,
+    beforeExerciseOrder,
+  );
+  return (
+    <div>
+      {exercise ? (
+        <div>
+          <Link
+            href={`/workouts/${year}/${month}/${day}/exercise/${beforeExerciseOrder}`}
+          >
+            前のエクササイズ
+          </Link>
+        </div>
+      ) : null}
+    </div>
+  );
 }

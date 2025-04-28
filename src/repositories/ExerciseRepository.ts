@@ -27,6 +27,28 @@ export class ExerciseRepository {
     return exercise;
   }
 
+  async findByDateAndOrderOrNull(
+    year: number,
+    month: number,
+    day: number,
+    order: number,
+    authorId: number,
+  ): Promise<Exercise | null> {
+    const exercise = await this.prisma.exercise.findFirst({
+      where: {
+        workout: {
+          year,
+          month,
+          day,
+          authorId,
+        },
+        order,
+      },
+      include: exerciseValidator.include,
+    });
+    return exercise;
+  }
+
   async addToWorkout(
     workoutId: number,
     exerciseData: {

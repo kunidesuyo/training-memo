@@ -26,6 +26,22 @@ export class ExerciseService {
     );
   }
 
+  async getExerciseOrNull(
+    year: number,
+    month: number,
+    day: number,
+    exerciseOrder: number,
+  ) {
+    const currentUser = await getCurrentUser();
+    return this.exerciseRepository.findByDateAndOrderOrNull(
+      year,
+      month,
+      day,
+      exerciseOrder,
+      currentUser.id,
+    );
+  }
+
   async addExerciseToWorkout(
     year: number,
     month: number,
