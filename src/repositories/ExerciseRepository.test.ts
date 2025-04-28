@@ -126,3 +126,5 @@ describe("delte test", () => {
     await expect(exerciseRepository.delete(workout.id, 1)).rejects.toThrow();
   });
 });
+
+// TODO: findByDateAndOrderOrNullのテストを書く
