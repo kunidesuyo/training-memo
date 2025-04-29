@@ -8,12 +8,21 @@ TypeScriptでのフルスタックアプリ作成についてキャッチアッ�
 
 ## 技術スタック
 言語: TypeScript
+
 フレームワーク: Next.js(App Router)
+
 データベース: PostgreSQL
+
 ORM: Prisma
+
 認証: Clerk
+
 UIコンポーネント: shadcn/ui
+
 CSS: TailwindCSS
+
 バリデーション: Zod
+
 Linter, Formatter: Biome
+
 テスト: Vitest, testcontainers
