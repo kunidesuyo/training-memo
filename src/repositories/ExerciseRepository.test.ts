@@ -127,4 +127,64 @@ describe("delte test", () => {
   });
 });
 
-// TODO: findByDateAndOrderOrNullのテストを書く
+// TODO: findByDateAndOrderのテストを書く
+
+describe("findByDateAndOrderOrNull test", () => {
+  it("exerciseが返されること", async () => {
+    // Arrange
+    const year = 2025;
+    const month = 1;
+    const day = 1;
+    const currentUser = await getCurrentUser();
+    const workout = await prisma.workout.create({
+      data: {
+        year,
+        month,
+        day,
+        authorId: currentUser.id,
+      },
+    });
+    const exercise = await prisma.exercise.create({
+      data: {
+        workoutId: workout.id,
+        name: "test",
+        order: 1,
+        authorId: currentUser.id,
+      },
+    });
+
+    // Act
+    const exerciseRepository = new ExerciseRepository(prisma);
+    const fetchedExercise = await exerciseRepository.findByDateAndOrderOrNull(
+      year,
+      month,
+      day,
+      exercise.order,
+      currentUser.id,
+    );
+
+    // Assert
+    expect(fetchedExercise?.id).toEqual(exercise.id);
+  });
+
+  it("exerciseが存在しない場合、nullが返されること", async () => {
+    // Arrange
+    const year = 2025;
+    const month = 1;
+    const day = 1;
+    const currentUser = await getCurrentUser();
+
+    // Act
+    const exerciseRepository = new ExerciseRepository(prisma);
+    const fetchedExercise = await exerciseRepository.findByDateAndOrderOrNull(
+      year,
+      month,
+      day,
+      1,
+      currentUser.id,
+    );
+
+    // Assert
+    expect(fetchedExercise).toBeNull();
+  });
+});
