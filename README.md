@@ -19,7 +19,7 @@ ORM: Prisma
 
 UIコンポーネント: shadcn/ui
 
-CSS: TailwindCSS
+CSS: Tailwind CSS
 
 バリデーション: Zod
 
