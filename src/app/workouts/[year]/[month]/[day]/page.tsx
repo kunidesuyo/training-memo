@@ -19,7 +19,7 @@ import Link from "next/link";
 export default async function Page({
   params,
 }: {
-  params: { year: string; month: string; day: string };
+  params: Promise<{ year: string; month: string; day: string }>;
 }) {
   // 認証チェック
   const { userId, redirectToSignIn } = await auth();

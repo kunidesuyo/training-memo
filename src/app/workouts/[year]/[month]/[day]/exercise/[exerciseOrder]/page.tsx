@@ -13,7 +13,12 @@ import Link from "next/link";
 export default async function Page({
   params,
 }: {
-  params: { year: string; month: string; day: string; exerciseOrder: string };
+  params: Promise<{
+    year: string;
+    month: string;
+    day: string;
+    exerciseOrder: string;
+  }>;
 }) {
   // 認証チェック
   const { userId, redirectToSignIn } = await auth();
