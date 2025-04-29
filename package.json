@@ -11,7 +11,8 @@
     "check": "biome check --write .",
     "test": "vitest",
     "testrun": "vitest run",
-    "prepare": "husky"
+    "prepare": "husky",
+    "vercel-build": "prisma generate && prisma migrate deploy && next build"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
