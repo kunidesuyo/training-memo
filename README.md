@@ -26,3 +26,6 @@ CSS: TailwindCSS
 Linter, Formatter: Biome
 
 テスト: Vitest, testcontainers
+
+## TODO
+TODOや検証したいことは[こちら](https://github.com/users/kunidesuyo/projects/1)
