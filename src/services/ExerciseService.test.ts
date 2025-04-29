@@ -70,4 +70,6 @@ describe("addExerciseToWorkout test", () => {
   });
 });
 
+// TODO: getExerciseのテストを書く
 // TODO: getExerciseOrNullのテストを書く
+// TODO: deleteExerciseのテストを書く
