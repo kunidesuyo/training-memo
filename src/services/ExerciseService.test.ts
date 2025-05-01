@@ -70,6 +70,76 @@ describe("addExerciseToWorkout test", () => {
   });
 });
 
-// TODO: getExerciseのテストを書く
+describe("getExercise test", () => {
+  it("Exerciseが存在する場合、Exerciseを返す", async () => {
+    // Arrange
+    const year = faker.date.anytime().getFullYear();
+    const month = faker.date.future().getMonth();
+    const day = faker.date.future().getDate();
+    const currentUser = await getCurrentUser();
+    const workout = await prisma.workout.create({
+      data: {
+        year,
+        month,
+        day,
+        authorId: currentUser.id,
+      },
+    });
+    const exercise = await prisma.exercise.create({
+      data: {
+        workoutId: workout.id,
+        name: "test",
+        order: 1,
+        authorId: currentUser.id,
+      },
+    });
+
+    // Act
+    const exerciseRepository = new ExerciseRepository(prisma);
+    const workoutRepository = new WorkoutRepository(prisma);
+    const exerciseService = new ExerciseService(
+      workoutRepository,
+      exerciseRepository,
+    );
+    const fetchedExercise = await exerciseService.getExercise(
+      year,
+      month,
+      day,
+      exercise.order,
+    );
+
+    // Assert
+    expect(fetchedExercise.id).toBe(exercise.id);
+  });
+
+  it("Exerciseが存在しない場合、例外を返す", async () => {
+    // Arrange
+    const year = faker.date.anytime().getFullYear();
+    const month = faker.date.future().getMonth();
+    const day = faker.date.future().getDate();
+    const currentUser = await getCurrentUser();
+    const workout = await prisma.workout.create({
+      data: {
+        year,
+        month,
+        day,
+        authorId: currentUser.id,
+      },
+    });
+
+    // Act & Assert
+    const exerciseRepository = new ExerciseRepository(prisma);
+    const workoutRepository = new WorkoutRepository(prisma);
+    const exerciseService = new ExerciseService(
+      workoutRepository,
+      exerciseRepository,
+    );
+
+    await expect(
+      exerciseService.getExercise(year, month, day, 1),
+    ).rejects.toThrow();
+  });
+});
+
 // TODO: getExerciseOrNullのテストを書く
 // TODO: deleteExerciseのテストを書く
