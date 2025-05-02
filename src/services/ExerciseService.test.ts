@@ -118,7 +118,7 @@ describe("getExercise test", () => {
     const month = faker.date.future().getMonth();
     const day = faker.date.future().getDate();
     const currentUser = await getCurrentUser();
-    const workout = await prisma.workout.create({
+    await prisma.workout.create({
       data: {
         year,
         month,
@@ -192,7 +192,7 @@ describe("getExerciseOrNull test", () => {
     const day = faker.date.future().getDate();
     const currentUser = await getCurrentUser();
     const exerciseOrder = 1;
-    const workout = await prisma.workout.create({
+    await prisma.workout.create({
       data: {
         year,
         month,
