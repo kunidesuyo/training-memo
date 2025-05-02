@@ -142,4 +142,81 @@ describe("getExercise test", () => {
 });
 
 // TODO: getExerciseOrNullのテストを書く
+describe("getExerciseOrNull test", () => {
+  it("Exerciseが存在する場合、Exerciseを返す", async () => {
+    // Arrange
+    const year = faker.date.anytime().getFullYear();
+    const month = faker.date.future().getMonth();
+    const day = faker.date.future().getDate();
+    const currentUser = await getCurrentUser();
+    const exerciseOrder = 1;
+    const workout = await prisma.workout.create({
+      data: {
+        year,
+        month,
+        day,
+        authorId: currentUser.id,
+      },
+    });
+    const exercise = await prisma.exercise.create({
+      data: {
+        workoutId: workout.id,
+        name: "test",
+        order: exerciseOrder,
+        authorId: currentUser.id,
+      },
+    });
+
+    // Act
+    const exerciseRepository = new ExerciseRepository(prisma);
+    const workoutRepository = new WorkoutRepository(prisma);
+    const exerciseService = new ExerciseService(
+      workoutRepository,
+      exerciseRepository,
+    );
+    const fetchedExercise = await exerciseService.getExerciseOrNull(
+      year,
+      month,
+      day,
+      exerciseOrder,
+    );
+
+    // Assert
+    expect(fetchedExercise?.id).toBe(exercise.id);
+  });
+
+  it("Exerciseが存在しない場合、nullを返す", async () => {
+    // Arrange
+    const year = faker.date.anytime().getFullYear();
+    const month = faker.date.future().getMonth();
+    const day = faker.date.future().getDate();
+    const currentUser = await getCurrentUser();
+    const exerciseOrder = 1;
+    const workout = await prisma.workout.create({
+      data: {
+        year,
+        month,
+        day,
+        authorId: currentUser.id,
+      },
+    });
+
+    // Act
+    const exerciseRepository = new ExerciseRepository(prisma);
+    const workoutRepository = new WorkoutRepository(prisma);
+    const exerciseService = new ExerciseService(
+      workoutRepository,
+      exerciseRepository,
+    );
+    const fetchedExercise = await exerciseService.getExerciseOrNull(
+      year,
+      month,
+      day,
+      exerciseOrder,
+    );
+
+    // Assert
+    expect(fetchedExercise).toBeNull();
+  });
+});
 // TODO: deleteExerciseのテストを書く
