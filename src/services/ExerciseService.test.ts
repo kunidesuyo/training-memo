@@ -220,3 +220,75 @@ describe("getExerciseOrNull test", () => {
   });
 });
 // TODO: deleteExerciseのテストを書く
+describe("deleteExercise test", () => {
+  it("Exerciseが存在する場合、Exerciseを削除できる", async () => {
+    // Arrange
+    const year = faker.date.anytime().getFullYear();
+    const month = faker.date.future().getMonth();
+    const day = faker.date.future().getDate();
+    const currentUser = await getCurrentUser();
+    const exerciseOrder = 1;
+    const workout = await prisma.workout.create({
+      data: {
+        year,
+        month,
+        day,
+        authorId: currentUser.id,
+      },
+    });
+    await prisma.exercise.create({
+      data: {
+        workoutId: workout.id,
+        name: "test",
+        order: exerciseOrder,
+        authorId: currentUser.id,
+      },
+    });
+
+    // Act
+    const exerciseRepository = new ExerciseRepository(prisma);
+    const workoutRepository = new WorkoutRepository(prisma);
+    const exerciseService = new ExerciseService(
+      workoutRepository,
+      exerciseRepository,
+    );
+    await exerciseService.deleteExercise(year, month, day, exerciseOrder);
+
+    // Assert
+    const exercises = await prisma.exercise.findMany({
+      where: {
+        workoutId: workout.id,
+      },
+    });
+    expect(exercises).toHaveLength(0);
+  });
+
+  it("Exerciseが存在しない場合、例外を返す", async () => {
+    // Arrange
+    const year = faker.date.anytime().getFullYear();
+    const month = faker.date.future().getMonth();
+    const day = faker.date.future().getDate();
+    const exerciseOrder = 1;
+    const currentUser = await getCurrentUser();
+    await prisma.workout.create({
+      data: {
+        year,
+        month,
+        day,
+        authorId: currentUser.id,
+      },
+    });
+
+    // Act & Assert
+    const exerciseRepository = new ExerciseRepository(prisma);
+    const workoutRepository = new WorkoutRepository(prisma);
+    const exerciseService = new ExerciseService(
+      workoutRepository,
+      exerciseRepository,
+    );
+
+    await expect(
+      exerciseService.deleteExercise(year, month, day, exerciseOrder),
+    ).rejects.toThrow();
+  });
+});
