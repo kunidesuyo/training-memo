@@ -14,7 +14,7 @@ export async function createWorkoutAction(
   const workoutRepository = new WorkoutRepository(prisma);
   const workoutService = new WorkoutService(workoutRepository);
 
-  workoutService.createWorkout(year, month, day);
+  await workoutService.createWorkout(year, month, day);
 
   revalidatePath(`/workouts/${year}/${month}/${day}`);
   redirect(`/workouts/${year}/${month}/${day}`);
