@@ -141,7 +141,6 @@ describe("getExercise test", () => {
   });
 });
 
-// TODO: getExerciseOrNullのテストを書く
 describe("getExerciseOrNull test", () => {
   it("Exerciseが存在する場合、Exerciseを返す", async () => {
     // Arrange
@@ -219,7 +218,7 @@ describe("getExerciseOrNull test", () => {
     expect(fetchedExercise).toBeNull();
   });
 });
-// TODO: deleteExerciseのテストを書く
+
 describe("deleteExercise test", () => {
   it("Exerciseが存在する場合、Exerciseを削除できる", async () => {
     // Arrange
