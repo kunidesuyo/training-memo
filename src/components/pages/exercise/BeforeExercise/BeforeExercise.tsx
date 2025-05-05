@@ -3,6 +3,7 @@ import { ExerciseRepository } from "@/src/repositories/ExerciseRepository";
 import { WorkoutRepository } from "@/src/repositories/WorkoutRepository";
 import type { Exercise } from "@/src/services/ExerciseService";
 import { ExerciseService } from "@/src/services/ExerciseService";
+import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 export default async function BeforeExercise({
   props,
@@ -30,8 +31,9 @@ export default async function BeforeExercise({
         <div>
           <Link
             href={`/workouts/${year}/${month}/${day}/exercise/${beforeExerciseOrder}`}
+            className="inline-flex items-center gap-1 text-blue-500 hover:text-blue-600"
           >
-            前のエクササイズ
+            <ChevronLeft className="w-5 h-5" />
           </Link>
         </div>
       ) : null}
