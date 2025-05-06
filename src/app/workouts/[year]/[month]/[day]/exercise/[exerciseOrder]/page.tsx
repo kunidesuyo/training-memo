@@ -72,7 +72,14 @@ export default async function Page({
             nowExerciseOrder: Number.parseInt(exerciseOrder),
           }}
         />
-        <NextExercise />
+        <NextExercise
+          props={{
+            year: Number.parseInt(year),
+            month: Number.parseInt(month),
+            day: Number.parseInt(day),
+            nowExerciseOrder: Number.parseInt(exerciseOrder),
+          }}
+        />
       </div>
     </div>
   );
