@@ -81,7 +81,10 @@ export default async function Page({
         />
         <NextExercise
           props={{
-            nextExercise,
+            year: Number.parseInt(year),
+            month: Number.parseInt(month),
+            day: Number.parseInt(day),
+            nextExercise: nextExercise,
           }}
         />
       </div>
