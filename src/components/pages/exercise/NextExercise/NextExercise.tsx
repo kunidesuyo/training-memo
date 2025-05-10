@@ -9,6 +9,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
 import type { Exercise } from "@/src/services/ExerciseService";
 import { ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -55,7 +56,28 @@ export default function NextExercise({
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Button type="submit">作成する</Button>
+            <form
+            // action={formAction}
+            >
+              <div className="flex items-center gap-4 p-4">
+                <div className="w-full">
+                  <Input
+                    type="text"
+                    name="name"
+                    placeholder="エクササイズ名"
+                    defaultValue={""}
+                  />
+                  <div id="name-error" aria-live="polite" aria-atomic="true">
+                    {/* {state.errors?.name?.map((error: string) => (
+                      <p className="mt-2 text-sm text-red-500" key={error}>
+                        {error}
+                      </p>
+                    ))} */}
+                  </div>
+                </div>
+                <Button type="submit">作成</Button>
+              </div>
+            </form>
           </DialogFooter>
         </DialogContent>
       </Dialog>
