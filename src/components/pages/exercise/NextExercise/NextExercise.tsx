@@ -10,11 +10,14 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import {
+  type State,
+  addExerciseAction,
+} from "@/src/components/pages/exercise/NextExercise/addExerciseAction";
 import type { Exercise } from "@/src/services/ExerciseService";
 import { ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-
+import { useActionState, useState } from "react";
 export default function NextExercise({
   props,
 }: {
@@ -28,6 +31,10 @@ export default function NextExercise({
   const [open, setOpen] = useState(false);
   const { year, month, day, nextExercise } = props;
   const router = useRouter();
+
+  const initialState: State = { message: null, errors: {} };
+  const addExercise_ = addExerciseAction.bind(null, year, month, day);
+  const [state, formAction] = useActionState(addExercise_, initialState);
 
   const handleClick = () => {
     if (nextExercise) {
@@ -56,9 +63,7 @@ export default function NextExercise({
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <form
-            // action={formAction}
-            >
+            <form action={formAction}>
               <div className="flex items-center gap-4 p-4">
                 <div className="w-full">
                   <Input
@@ -68,11 +73,11 @@ export default function NextExercise({
                     defaultValue={""}
                   />
                   <div id="name-error" aria-live="polite" aria-atomic="true">
-                    {/* {state.errors?.name?.map((error: string) => (
+                    {state.errors?.name?.map((error: string) => (
                       <p className="mt-2 text-sm text-red-500" key={error}>
                         {error}
                       </p>
-                    ))} */}
+                    ))}
                   </div>
                 </div>
                 <Button type="submit">作成</Button>
