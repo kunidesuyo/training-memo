@@ -18,6 +18,8 @@ import type { Exercise } from "@/src/services/ExerciseService";
 import { ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useActionState, useState } from "react";
+
+// TODO: 次のエクササイズがある場合とない場合でコンポーネントを分ける
 export default function NextExercise({
   props,
 }: {
