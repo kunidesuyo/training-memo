@@ -32,9 +32,8 @@ export default function CreateNextExerciseButton({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        {/* 見た目をエクササイズがある時と同じにする */}
-        <Button size="icon">
-          <ChevronRight className="w-5 h-5" />
+        <Button variant="ghost" className="hover:bg-transparent">
+          <ChevronRight className="w-5 h-5 text-sky-500" />
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">

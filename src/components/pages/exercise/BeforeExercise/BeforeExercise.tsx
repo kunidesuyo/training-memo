@@ -31,7 +31,7 @@ export default async function BeforeExercise({
         <div>
           <Link
             href={`/workouts/${year}/${month}/${day}/exercise/${beforeExerciseOrder}`}
-            className="inline-flex items-center gap-1 text-blue-500 hover:text-blue-600"
+            className="inline-flex items-center gap-1 text-sky-500 hover:text-sky-600"
           >
             <ChevronLeft className="w-5 h-5" />
           </Link>

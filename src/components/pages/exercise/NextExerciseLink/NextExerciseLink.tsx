@@ -16,7 +16,7 @@ export default function NextExerciseLink({
   return (
     <Link
       href={`/workouts/${year}/${month}/${day}/exercise/${order}`}
-      className="text-blue-500 hover:text-blue-600"
+      className="text-sky-500 hover:text-sky-600"
     >
       <ChevronRight className="w-5 h-5" />
     </Link>
