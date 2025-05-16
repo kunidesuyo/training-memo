@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { prisma } from "@/prisma";
 import { ExerciseRepository } from "@/src/repositories/ExerciseRepository";
 import { WorkoutRepository } from "@/src/repositories/WorkoutRepository";
@@ -5,6 +6,7 @@ import type { Exercise } from "@/src/services/ExerciseService";
 import { ExerciseService } from "@/src/services/ExerciseService";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
+
 export default async function BeforeExercise({
   props,
 }: {
@@ -31,9 +33,10 @@ export default async function BeforeExercise({
         <div>
           <Link
             href={`/workouts/${year}/${month}/${day}/exercise/${beforeExerciseOrder}`}
-            className="inline-flex items-center gap-1 text-sky-500 hover:text-sky-600"
           >
-            <ChevronLeft className="w-5 h-5" />
+            <Button variant="ghost" className="hover:bg-transparent">
+              <ChevronLeft className="w-5 h-5 text-sky-500" />
+            </Button>
           </Link>
         </div>
       ) : null}

@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 
@@ -14,11 +15,10 @@ export default function NextExerciseLink({
   const { year, month, day, order } = props;
 
   return (
-    <Link
-      href={`/workouts/${year}/${month}/${day}/exercise/${order}`}
-      className="text-sky-500 hover:text-sky-600"
-    >
-      <ChevronRight className="w-5 h-5" />
+    <Link href={`/workouts/${year}/${month}/${day}/exercise/${order}`}>
+      <Button variant="ghost" className="hover:bg-transparent">
+        <ChevronRight className="w-5 h-5 text-sky-500" />
+      </Button>
     </Link>
   );
 }
