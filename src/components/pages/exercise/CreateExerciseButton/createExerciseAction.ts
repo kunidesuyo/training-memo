@@ -19,10 +19,11 @@ const ExerciseFormSchema = z.object({
   name: z.string().min(1, { message: "エクササイズ名を入力してください" }),
 });
 
-export async function createNextExerciseAction(
+export async function createExerciseAction(
   year: number,
   month: number,
   day: number,
+  order: number,
   _prevState: State,
   formData: FormData,
 ) {
@@ -38,7 +39,7 @@ export async function createNextExerciseAction(
   }
   const { name } = validatedFields.data;
 
-  // orderを指定してエクササイズを作成
+  // TODO: orderを指定してエクササイズを作成
   const workoutRepository = new WorkoutRepository(prisma);
   const exerciseRepository = new ExerciseRepository(prisma);
   const exerciseService = new ExerciseService(
@@ -48,6 +49,6 @@ export async function createNextExerciseAction(
   exerciseService.addExerciseToWorkout(year, month, day, name);
 
   // リダイレクト先は作成したエクササイズのページ
-  revalidatePath(`/workouts/${year}/${month}/${day}`);
-  redirect(`/workouts/${year}/${month}/${day}`);
+  revalidatePath(`/workouts/${year}/${month}/${day}/exercise/${order}`);
+  redirect(`/workouts/${year}/${month}/${day}/exercise/${order}`);
 }

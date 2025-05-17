@@ -1,24 +1,35 @@
-"use client";
-
-import {} from "@/components/ui/dialog";
-import CreateNextExerciseButton from "@/src/components/pages/exercise/CreateNextExerciseButton/CreateNextExerciseButton";
-import {} from "@/src/components/pages/exercise/NextExercise/addExerciseAction";
+import { prisma } from "@/prisma";
+import CreateExerciseButton from "@/src/components/pages/exercise/CreateExerciseButton/CreateExerciseButton";
 import NextExerciseLink from "@/src/components/pages/exercise/NextExerciseLink/NextExerciseLink";
+import { ExerciseRepository } from "@/src/repositories/ExerciseRepository";
+import { WorkoutRepository } from "@/src/repositories/WorkoutRepository";
+import { ExerciseService } from "@/src/services/ExerciseService";
 import type { Exercise } from "@/src/services/ExerciseService";
-import {} from "react";
 
-// TODO: 次のエクササイズがある場合とない場合でコンポーネントを分ける
-export default function NextExercise({
+export default async function NextExercise({
   props,
 }: {
   props: {
     year: number;
     month: number;
     day: number;
-    nextExercise: Exercise | null;
+    nowExercise: Exercise;
   };
 }) {
-  const { year, month, day, nextExercise } = props;
+  const { year, month, day, nowExercise } = props;
+
+  const exerciseRepository = new ExerciseRepository(prisma);
+  const workoutRepository = new WorkoutRepository(prisma);
+  const exerciseService = new ExerciseService(
+    workoutRepository,
+    exerciseRepository,
+  );
+  const nextExercise: Exercise | null = await exerciseService.getExerciseOrNull(
+    year,
+    month,
+    day,
+    nowExercise.order + 1,
+  );
 
   return (
     <div>
@@ -27,7 +38,9 @@ export default function NextExercise({
           props={{ year, month, day, order: nextExercise.order }}
         />
       ) : (
-        <CreateNextExerciseButton props={{ year, month, day }} />
+        <CreateExerciseButton
+          props={{ year, month, day, order: nowExercise.order + 1 }}
+        />
       )}
     </div>
   );

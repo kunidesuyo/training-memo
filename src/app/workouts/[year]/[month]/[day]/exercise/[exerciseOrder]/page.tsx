@@ -40,13 +40,6 @@ export default async function Page({
     Number.parseInt(exerciseOrder),
   );
 
-  const nextExercise: Exercise | null = await exerciseService.getExerciseOrNull(
-    Number.parseInt(year),
-    Number.parseInt(month),
-    Number.parseInt(day),
-    Number.parseInt(exerciseOrder) + 1,
-  );
-
   return (
     <div className="m-4">
       <div className="flex items-center gap-2 m-4">
@@ -84,7 +77,7 @@ export default async function Page({
             year: Number.parseInt(year),
             month: Number.parseInt(month),
             day: Number.parseInt(day),
-            nextExercise: nextExercise,
+            nowExercise: exercise,
           }}
         />
       </div>

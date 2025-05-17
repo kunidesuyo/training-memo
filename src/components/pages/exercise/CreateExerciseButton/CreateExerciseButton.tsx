@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -11,22 +13,23 @@ import {
 import { Input } from "@/components/ui/input";
 import {
   type State,
-  createNextExerciseAction,
-} from "@/src/components/pages/exercise/CreateNextExerciseButton/createNextExerciseAction";
+  createExerciseAction,
+} from "@/src/components/pages/exercise/CreateExerciseButton/createExerciseAction";
 import { ChevronRight } from "lucide-react";
 import { useActionState } from "react";
-export default function CreateNextExerciseButton({
+export default function CreateExerciseButton({
   props,
 }: {
   props: {
     year: number;
     month: number;
     day: number;
+    order: number;
   };
 }) {
-  const { year, month, day } = props;
+  const { year, month, day, order } = props;
   const initialState: State = { message: null, errors: {} };
-  const addExercise_ = createNextExerciseAction.bind(null, year, month, day);
+  const addExercise_ = createExerciseAction.bind(null, year, month, day, order);
   const [state, formAction] = useActionState(addExercise_, initialState);
 
   return (
