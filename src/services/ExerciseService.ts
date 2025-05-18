@@ -70,6 +70,30 @@ export class ExerciseService {
     await this.exerciseRepository.addToWorkout(targetWorkout.id, exerciseData);
   }
 
+  async createExerciseToWorkout(
+    year: number,
+    month: number,
+    day: number,
+    order: number,
+    name: string,
+  ) {
+    const currentUser = await getCurrentUser();
+    const targetWorkout = await this.workoutRepository.findByDate(
+      year,
+      month,
+      day,
+      currentUser.id,
+    );
+
+    const exerciseData = {
+      name,
+      order,
+      authorId: currentUser.id,
+    };
+
+    await this.exerciseRepository.addToWorkout(targetWorkout.id, exerciseData);
+  }
+
   async deleteExercise(
     year: number,
     month: number,

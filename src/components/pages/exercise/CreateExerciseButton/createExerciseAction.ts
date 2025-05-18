@@ -46,7 +46,7 @@ export async function createExerciseAction(
     workoutRepository,
     exerciseRepository,
   );
-  exerciseService.addExerciseToWorkout(year, month, day, name);
+  exerciseService.createExerciseToWorkout(year, month, day, order, name);
 
   // リダイレクト先は作成したエクササイズのページ
   revalidatePath(`/workouts/${year}/${month}/${day}/exercise/${order}`);
